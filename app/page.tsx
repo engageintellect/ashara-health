@@ -1,0 +1,610 @@
+"use client";
+
+import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { PhoneIcon, MailIcon } from "@/components/icons";
+import site from "@/content/site.json";
+
+const NAV = [
+  { label: "Home", href: "#home" },
+  { label: "What We Treat", href: "#services" },
+  { label: "Memberships", href: "#pricing" },
+  { label: "FAQ", href: "#faq" },
+  { label: "Contact", href: "#contact" },
+];
+
+export default function Page() {
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  // Load dark mode preference from localStorage on mount
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("darkMode");
+    if (savedTheme) {
+      const darkMode = savedTheme === "true";
+      setIsDarkMode(darkMode);
+      if (darkMode) {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
+    } else {
+      // Check system preference
+      const systemDark = window.matchMedia(
+        "(prefers-color-scheme: dark)"
+      ).matches;
+      setIsDarkMode(systemDark);
+      if (systemDark) {
+        document.documentElement.classList.add("dark");
+      }
+    }
+  }, []);
+
+  // Update localStorage and document class when dark mode changes
+  useEffect(() => {
+    localStorage.setItem("darkMode", isDarkMode.toString());
+    if (isDarkMode) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [isDarkMode]);
+
+  const toggleDarkMode = () => {
+    setIsDarkMode(!isDarkMode);
+  };
+
+  return (
+    <>
+      <header
+        id="home"
+        role="banner"
+        className="sticky top-0 z-40 bg-white/80 dark:bg-stone-900/80 backdrop-blur supports-[backdrop-filter]:bg-white/60 dark:supports-[backdrop-filter]:bg-stone-900/60 border-b border-stone-200 dark:border-stone-700"
+      >
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="flex h-16 items-center justify-between">
+            <a
+              href="#home"
+              aria-label={`${site.brand} — Home`}
+              className="flex items-center gap-2 font-semibold tracking-tight text-stone-900 dark:text-stone-100"
+            >
+              <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-teal-800 dark:bg-teal-700 text-white font-bold">
+                A
+              </span>
+              <span className="text-lg">{site.brand.split(" ")[0]} Health</span>
+            </a>
+            <nav
+              className="hidden md:flex items-center gap-6"
+              aria-label="Primary"
+            >
+              {NAV.map((item) => (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  className="text-sm font-medium text-stone-700 dark:text-stone-300 hover:text-stone-900 dark:hover:text-stone-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700 focus-visible:ring-offset-2 focus-visible:rounded"
+                >
+                  {item.label}
+                </a>
+              ))}
+              <button
+                onClick={toggleDarkMode}
+                className="inline-flex items-center justify-center rounded-xl border border-stone-300 dark:border-stone-600 bg-white dark:bg-stone-800 px-3 py-2 text-sm font-semibold text-stone-900 dark:text-stone-100 hover:bg-stone-50 dark:hover:bg-stone-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700 focus-visible:ring-offset-2"
+                aria-label="Toggle dark mode"
+              >
+                {isDarkMode ? (
+                  <svg
+                    className="h-4 w-4"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+                    />
+                  </svg>
+                ) : (
+                  <svg
+                    className="h-4 w-4"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+                    />
+                  </svg>
+                )}
+              </button>
+              <a
+                href="#contact"
+                className="inline-flex items-center justify-center rounded-xl bg-teal-800 dark:bg-teal-700 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-teal-900 dark:hover:bg-teal-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700 focus-visible:ring-offset-2"
+              >
+                Start Journey
+              </a>
+            </nav>
+            <div className="md:hidden">
+              {/* TODO: add Sheet-based mobile menu if desired */}
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main id="main" className="relative bg-white dark:bg-stone-900">
+        <section className="relative isolate overflow-hidden bg-gradient-to-b from-stone-50 dark:from-stone-900 to-white dark:to-stone-900">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 sm:py-28">
+            <div className="grid items-center gap-10 md:grid-cols-2">
+              <div>
+                <h1 className="text-4xl font-bold tracking-tight text-stone-900 dark:text-stone-100 sm:text-5xl">
+                  Whole-person preventive care
+                </h1>
+                <p className="mt-4 text-lg text-stone-700 dark:text-stone-300 max-w-prose">
+                  Compassionate, precision-guided wellness that blends modern
+                  diagnostics and time‑honored therapies.
+                  {/* Replace this paragraph with your approved brand copy. */}
+                </p>
+                <div className="mt-8 flex flex-wrap gap-3">
+                  <a href="#contact">
+                    <Button className="px-5 py-3">Start Journey</Button>
+                  </a>
+                  <a
+                    href="#services"
+                    className="inline-flex items-center justify-center rounded-xl border border-stone-300 dark:border-stone-600 bg-white dark:bg-stone-800 px-5 py-3 text-sm font-semibold text-stone-900 dark:text-stone-100 hover:bg-stone-50 dark:hover:bg-stone-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700 focus-visible:ring-offset-2"
+                  >
+                    Learn more
+                  </a>
+                </div>
+                <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-stone-700 dark:text-stone-300">
+                  <a
+                    href={`tel:${site.phone_href}`}
+                    className="inline-flex items-center gap-2 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700 rounded"
+                  >
+                    <PhoneIcon className="h-4 w-4" /> {site.phone_display}
+                  </a>
+                  <a
+                    href={`mailto:${site.email}`}
+                    className="inline-flex items-center gap-2 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700 rounded"
+                  >
+                    <MailIcon className="h-4 w-4" /> {site.email}
+                  </a>
+                </div>
+              </div>
+              <div
+                className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl bg-teal-900/10 dark:bg-teal-700/10 shadow-inner"
+                aria-hidden
+              >
+                <svg viewBox="0 0 600 450" className="h-full w-full">
+                  <defs>
+                    <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+                      <stop offset="0%" stopColor="#0f3d36" />
+                      <stop offset="100%" stopColor="#96c3b0" />
+                    </linearGradient>
+                  </defs>
+                  <rect
+                    width="600"
+                    height="450"
+                    fill="url(#g)"
+                    opacity="0.25"
+                  />
+                  <circle
+                    cx="140"
+                    cy="120"
+                    r="70"
+                    fill="#0f3d36"
+                    opacity="0.5"
+                  />
+                  <circle
+                    cx="480"
+                    cy="260"
+                    r="110"
+                    fill="#96c3b0"
+                    opacity="0.5"
+                  />
+                  <rect
+                    x="220"
+                    y="180"
+                    width="160"
+                    height="100"
+                    rx="16"
+                    fill="#0f3d36"
+                    opacity="0.35"
+                  />
+                  <path
+                    d="M120 300c60 40 180 40 300 0"
+                    stroke="#0f3d36"
+                    strokeWidth="10"
+                    fill="none"
+                    opacity="0.3"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="services" className="scroll-mt-24 py-20 sm:py-24">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="mx-auto max-w-2xl text-center">
+              <h2 className="text-3xl font-bold tracking-tight text-stone-900 dark:text-stone-100 sm:text-4xl">
+                What we treat & offer
+              </h2>
+              <p className="mt-3 text-stone-700 dark:text-stone-300">
+                A high-level overview of your focus areas and services.
+              </p>
+            </div>
+            <ul
+              className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+              role="list"
+            >
+              {site.services.map((name) => {
+                return (
+                  <li key={name} className="group">
+                    <a
+                      href="#contact"
+                      className="block h-full rounded-2xl border border-stone-200 dark:border-stone-700 bg-white dark:bg-stone-800 shadow-sm transition group-hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700 overflow-hidden"
+                      aria-describedby={`svc-${name}`}
+                    >
+                      <div className="aspect-[4/3] w-full overflow-hidden bg-teal-900/10 dark:bg-teal-700/10">
+                        <svg viewBox="0 0 600 450" className="h-full w-full">
+                          <defs>
+                            <linearGradient
+                              id={`g-${name}`}
+                              x1="0"
+                              x2="1"
+                              y1="0"
+                              y2="1"
+                            >
+                              <stop offset="0%" stopColor="#0f3d36" />
+                              <stop offset="100%" stopColor="#96c3b0" />
+                            </linearGradient>
+                          </defs>
+                          <rect
+                            width="600"
+                            height="450"
+                            fill={`url(#g-${name})`}
+                            opacity="0.25"
+                          />
+                          <circle
+                            cx="140"
+                            cy="120"
+                            r="70"
+                            fill="#0f3d36"
+                            opacity="0.5"
+                          />
+                          <circle
+                            cx="480"
+                            cy="260"
+                            r="110"
+                            fill="#96c3b0"
+                            opacity="0.5"
+                          />
+                          <rect
+                            x="220"
+                            y="180"
+                            width="160"
+                            height="100"
+                            rx="16"
+                            fill="#0f3d36"
+                            opacity="0.35"
+                          />
+                          <path
+                            d="M120 300c60 40 180 40 300 0"
+                            stroke="#0f3d36"
+                            strokeWidth="10"
+                            fill="none"
+                            opacity="0.3"
+                          />
+                        </svg>
+                      </div>
+                      <div className="p-6">
+                        <div className="flex items-start justify-between">
+                          <h3 className="text-lg font-semibold text-stone-900 dark:text-stone-100">
+                            {name}
+                          </h3>
+                          <span
+                            aria-hidden
+                            className="rounded-full border border-stone-200 dark:border-stone-700 px-2 py-0.5 text-xs text-stone-600 dark:text-stone-400"
+                          >
+                            Inquire
+                          </span>
+                        </div>
+                        <p
+                          id={`svc-${name}`}
+                          className="mt-2 text-sm text-stone-700 dark:text-stone-300"
+                        >
+                          {/* Brief summary about {name}. Replace with approved copy. */}
+                          Tailored care and guidance based on your goals.
+                        </p>
+                      </div>
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        </section>
+
+        <section
+          id="pricing"
+          className="scroll-mt-24 bg-stone-100/60 dark:bg-stone-900/60 py-20 sm:py-24"
+        >
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="mx-auto max-w-2xl text-center">
+              <h2 className="text-3xl font-bold tracking-tight text-stone-900 dark:text-stone-100 sm:text-4xl">
+                Memberships
+              </h2>
+              <p className="mt-3 text-stone-700 dark:text-stone-300">
+                Clear options for how to engage—virtual, on-site, or in-clinic.
+              </p>
+            </div>
+            <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {site.memberships.map((m) => (
+                <Card key={m.name} className="flex flex-col">
+                  <CardHeader>
+                    <CardTitle>{m.name}</CardTitle>
+                    <CardDescription>{m.note}</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <ul
+                      className="space-y-2 text-sm text-stone-800 dark:text-stone-200"
+                      role="list"
+                    >
+                      <li className="flex items-start gap-2">
+                        <span className="mt-1 h-2 w-2 rounded-full bg-teal-800 dark:bg-teal-700" />
+                        <span>Personalized plan</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="mt-1 h-2 w-2 rounded-full bg-teal-800 dark:bg-teal-700" />
+                        <span>Access to priority scheduling</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="mt-1 h-2 w-2 rounded-full bg-teal-800 dark:bg-teal-700" />
+                        <span>Messaging between visits</span>
+                      </li>
+                    </ul>
+                  </CardContent>
+                  <CardFooter>
+                    <a href="#contact">
+                      <Button className="w-full">Start Journey</Button>
+                    </a>
+                  </CardFooter>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="faq" className="scroll-mt-24 py-20 sm:py-24">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="mx-auto max-w-2xl text-center">
+              <h2 className="text-3xl font-bold tracking-tight text-stone-900 dark:text-stone-100 sm:text-4xl">
+                Frequently asked questions
+              </h2>
+              <p className="mt-3 text-stone-700 dark:text-stone-300">
+                Short answers to common questions. Replace with your actual FAQ.
+              </p>
+            </div>
+            <div className="mt-10 grid gap-6 md:grid-cols-2">
+              {[
+                {
+                  q: "Do you accept insurance?",
+                  a: "We operate out-of-network and can provide superbills for reimbursement.",
+                },
+                {
+                  q: "Are telehealth visits available?",
+                  a: "Yes—virtual consults are available for eligible services.",
+                },
+                {
+                  q: "Can you order labs and imaging?",
+                  a: "Yes. We coordinate with lab and radiology partners as indicated.",
+                },
+                {
+                  q: "What ages do you see?",
+                  a: "Primarily adults; please contact us for specifics.",
+                },
+              ].map((item) => (
+                <Card key={item.q}>
+                  <div className="font-semibold text-stone-900 dark:text-stone-100">
+                    {item.q}
+                  </div>
+                  <div className="mt-2 text-stone-700 dark:text-stone-300">
+                    {item.a}
+                  </div>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section
+          id="contact"
+          className="scroll-mt-24 bg-stone-100/60 dark:bg-stone-900/60 py-20 sm:py-24"
+        >
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="grid gap-10 md:grid-cols-2">
+              <div>
+                <h2 className="text-3xl font-bold tracking-tight text-stone-900 dark:text-stone-100 sm:text-4xl">
+                  Contact us
+                </h2>
+                <p className="mt-3 text-stone-700 dark:text-stone-300">
+                  Send a note and our team will follow up.
+                </p>
+                <div className="mt-6 space-y-3 text-stone-800 dark:text-stone-200">
+                  <a
+                    href={`https://maps.google.com/?q=${encodeURIComponent(
+                      site.address
+                    )}`}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="block w-fit hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700"
+                  >
+                    {site.address}
+                  </a>
+                  <a
+                    href={`tel:${site.phone_href}`}
+                    className="block w-fit hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700"
+                  >
+                    {site.phone_display}
+                  </a>
+                  <a
+                    href={`mailto:${site.email}`}
+                    className="block w-fit hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700"
+                  >
+                    {site.email}
+                  </a>
+                  <div className="pt-2 text-sm text-stone-700 dark:text-stone-300">
+                    <div className="font-semibold">Opening hours</div>
+                    <ul className="mt-1 space-y-1">
+                      {site.hours.map((h) => (
+                        <li key={h.label}>
+                          <span className="inline-block w-20">{h.label}:</span>{" "}
+                          {h.value}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <form
+                className="rounded-2xl border border-stone-200 dark:border-stone-700 bg-white dark:bg-stone-800 p-6 shadow-sm"
+                aria-describedby="form-status"
+                onSubmit={(e) => e.preventDefault()}
+              >
+                <div className="grid gap-4">
+                  <div>
+                    <Label htmlFor="name">Full name</Label>
+                    <Input
+                      id="name"
+                      name="name"
+                      type="text"
+                      required
+                      placeholder="Alex Morgan"
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="email">Email</Label>
+                    <Input
+                      id="email"
+                      name="email"
+                      type="email"
+                      required
+                      placeholder="you@domain.com"
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="message">How can we help?</Label>
+                    <Textarea
+                      id="message"
+                      name="message"
+                      rows={5}
+                      required
+                      placeholder="Tell us a bit about your goals…"
+                    />
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <div
+                      id="form-status"
+                      role="status"
+                      aria-live="polite"
+                      className="text-sm text-stone-600 dark:text-stone-400"
+                    >
+                      We usually respond within one business day.
+                    </div>
+                    <Button type="submit">Send message</Button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer className="border-t border-stone-200 dark:border-stone-700 bg-white dark:bg-stone-900">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10">
+          <div className="grid gap-8 md:grid-cols-3">
+            <div>
+              <div className="flex items-center gap-2 font-semibold tracking-tight text-stone-900 dark:text-stone-100">
+                <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-teal-800 dark:bg-teal-700 text-white font-bold">
+                  A
+                </span>
+                <span>{site.brand}</span>
+              </div>
+              <p className="mt-2 text-sm text-stone-600 dark:text-stone-400 max-w-sm">
+                {/* Replace with your approved tagline/copy */}
+                Thoughtful, root‑cause care delivered with empathy.
+              </p>
+            </div>
+            <nav aria-label="Footer" className="grid grid-cols-2 gap-2 text-sm">
+              {NAV.map((item) => (
+                <a
+                  key={`f-${item.href}`}
+                  href={item.href}
+                  className="w-fit rounded text-stone-700 dark:text-stone-300 hover:text-stone-900 dark:hover:text-stone-100 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700"
+                >
+                  {item.label}
+                </a>
+              ))}
+              <a
+                href="/privacy"
+                className="w-fit rounded text-stone-700 dark:text-stone-300 hover:text-stone-900 dark:hover:text-stone-100 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700"
+              >
+                Privacy Policy
+              </a>
+              <a
+                href="/terms"
+                className="w-fit rounded text-stone-700 dark:text-stone-300 hover:text-stone-900 dark:hover:text-stone-100 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700"
+              >
+                Terms & Conditions
+              </a>
+            </nav>
+            <div className="text-sm text-stone-600 dark:text-stone-400 space-y-2">
+              <p>
+                &copy; {new Date().getFullYear()} {site.brand}. All rights
+                reserved.
+              </p>
+              <div className="space-y-1">
+                <a
+                  href={`https://maps.google.com/?q=${encodeURIComponent(
+                    site.address
+                  )}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="block w-fit hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700"
+                >
+                  {site.address}
+                </a>
+                <a
+                  href={`tel:${site.phone_href}`}
+                  className="block w-fit hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700"
+                >
+                  {site.phone_display}
+                </a>
+                <a
+                  href={`mailto:${site.email}`}
+                  className="block w-fit hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700"
+                >
+                  {site.email}
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </>
+  );
+}

@@ -1,0 +1,56 @@
+{
+  "brand": "Ashara Health & Wellness",
+  "nav": [
+    "Home",
+    "What We Treat",
+    "Memberships",
+    "FAQ",
+    "Contact"
+  ],
+  "address": "32406 S Coast Hwy, Laguna Beach, CA",
+  "phone_display": "(949) 464-4770",
+  "phone_href": "+19494644770",
+  "email": "hello@ashara.health",
+  "hours": [
+    {
+      "label": "Mon–Fri",
+      "value": "9 AM – 5 PM"
+    },
+    {
+      "label": "Sat",
+      "value": "By appointment"
+    },
+    {
+      "label": "Sun",
+      "value": "Closed"
+    }
+  ],
+  "services": [
+    "Naturopathic Medicine",
+    "Acupuncture",
+    "Lifestyle Audit & Detoxification",
+    "IV Therapy",
+    "Hyperbaric Oxygen & Light/Frequency Tech",
+    "Peptide Optimization",
+    "Regenerative Medicine",
+    "Functional Wellness & Specialty Labs",
+    "Classical Hydrotherapy",
+    "Ozone Therapy",
+    "Hormone Optimization",
+    "Concierge & In‑Office Blood Draws"
+  ],
+  "memberships": [
+    {
+      "name": "Telehealth",
+      "note": "Virtual care membership"
+    },
+    {
+      "name": "Mobile",
+      "note": "Concierge care at your location"
+    },
+    {
+      "name": "In‑Clinic",
+      "note": "In‑person membership"
+    }
+  ]
+}
