@@ -191,54 +191,38 @@ export default function Page() {
                   </a>
                 </div>
               </div>
-              <div
-                className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl bg-teal-900/10 dark:bg-teal-700/10 shadow-inner"
-                aria-hidden
-              >
-                <svg viewBox="0 0 600 450" className="h-full w-full">
-                  <defs>
-                    <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
-                      <stop offset="0%" stopColor="#0f3d36" />
-                      <stop offset="100%" stopColor="#96c3b0" />
-                    </linearGradient>
-                  </defs>
-                  <rect
-                    width="600"
-                    height="450"
-                    fill="url(#g)"
-                    opacity="0.25"
+              <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl shadow-2xl">
+                {/* Video Background */}
+                <video
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  className="absolute inset-0 w-full h-full object-cover"
+                >
+                  <source
+                    src="https://framerusercontent.com/assets/LC72yH1kyWJtP9FpdD978RzVHys.mp4"
+                    type="video/mp4"
                   />
-                  <circle
-                    cx="140"
-                    cy="120"
-                    r="70"
-                    fill="#0f3d36"
-                    opacity="0.5"
-                  />
-                  <circle
-                    cx="480"
-                    cy="260"
-                    r="110"
-                    fill="#96c3b0"
-                    opacity="0.5"
-                  />
-                  <rect
-                    x="220"
-                    y="180"
-                    width="160"
-                    height="100"
-                    rx="16"
-                    fill="#0f3d36"
-                    opacity="0.35"
-                  />
-                  <path
-                    d="M120 300c60 40 180 40 300 0"
-                    stroke="#0f3d36"
-                    strokeWidth="10"
-                    fill="none"
-                    opacity="0.3"
-                  />
-                </svg>
+                </video>
+
+                {/* Overlay Card */}
+                <div className="absolute inset-0 bg-gradient-to-br from-teal-900/80 via-teal-800/60 to-stone-900/80"></div>
+
+                {/* Content Overlay */}
+                <div className="relative z-10 flex items-center justify-center h-full p-8">
+                  <div className="text-center text-white">
+                    <div className="inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-white/20 backdrop-blur-sm mb-4">
+                      <span className="text-2xl font-bold">A</span>
+                    </div>
+                    <h3 className="text-xl font-semibold mb-2">
+                      Whole-Body Restoration
+                    </h3>
+                    <p className="text-sm opacity-90 max-w-xs">
+                      Rooted in precision, guided by presence
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -573,6 +557,70 @@ export default function Page() {
                   </div>
                 </Card>
               ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="py-20 sm:py-24 bg-white dark:bg-stone-900">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="mx-auto max-w-2xl text-center mb-10">
+              <h2 className="text-3xl font-bold tracking-tight text-stone-900 dark:text-stone-100 sm:text-4xl">
+                Visit Our Clinic
+              </h2>
+              <p className="mt-3 text-stone-700 dark:text-stone-300">
+                Located in the heart of Laguna Beach, California
+              </p>
+            </div>
+
+            <div className="relative overflow-hidden rounded-2xl shadow-lg">
+              <div className="aspect-[16/9] w-full">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3318.8234567890123!2d-117.7831234567890!3d33.5423456789012!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80dcf2a1b2c3d4e5%3A0x1234567890abcdef!2s32406%20S%20Coast%20Hwy%2C%20Laguna%20Beach%2C%20CA%2092651!5e0!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  className="w-full h-full"
+                ></iframe>
+              </div>
+
+              {/* Custom overlay with address and directions button */}
+              <div className="absolute bottom-4 left-4 right-4">
+                <div className="bg-white dark:bg-stone-800 rounded-xl p-4 shadow-lg border border-stone-200 dark:border-stone-700">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <div className="flex items-center gap-2 mb-1">
+                        <div className="w-3 h-3 rounded-full bg-teal-800 dark:bg-teal-700"></div>
+                        <span className="font-semibold text-stone-900 dark:text-stone-100">
+                          Ashara Health & Wellness
+                        </span>
+                      </div>
+                      <p className="text-sm text-stone-600 dark:text-stone-400">
+                        32406 S Coast Hwy, Laguna Beach, CA 92651
+                      </p>
+                    </div>
+                    <a
+                      href={`https://maps.google.com/?q=${encodeURIComponent(
+                        site.address
+                      )}&navigate=yes`}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center justify-center rounded-xl bg-teal-800 dark:bg-teal-700 px-4 py-2 text-sm font-semibold text-white hover:bg-teal-900 dark:hover:bg-teal-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700 focus-visible:ring-offset-2"
+                    >
+                      Get Directions
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-8 text-center">
+              <p className="text-stone-600 dark:text-stone-400">
+                Convenient parking available • Easy access from Pacific Coast
+                Highway
+              </p>
             </div>
           </div>
         </section>
