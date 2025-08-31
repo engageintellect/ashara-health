@@ -151,7 +151,7 @@ export default function Page() {
             <div className="grid items-center gap-10 md:grid-cols-2">
               <div>
                 <h1 className="text-4xl font-bold tracking-tight text-stone-900 dark:text-stone-100 sm:text-5xl">
-                  Whole-person preventive care
+                  michelle is bae
                 </h1>
                 <p className="mt-4 text-lg text-stone-700 dark:text-stone-300 max-w-prose">
                   Compassionate, precision-guided wellness that blends modern
