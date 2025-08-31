@@ -39,6 +39,16 @@
     "Hormone Optimization",
     "Concierge & In‑Office Blood Draws"
   ],
+  "conditions": [
+    "Metabolism & Heart Health",
+    "Autoimmune & Inflammation", 
+    "Digestive Issues",
+    "Brain Fog & Fatigue",
+    "Mold & Heavy Metal Toxicity",
+    "Joint & Spine Pain",
+    "Hair & Skin Health",
+    "Weight Management"
+  ],
   "memberships": [
     {
       "name": "Telehealth",
@@ -51,6 +61,38 @@
     {
       "name": "In‑Clinic",
       "note": "In‑person membership"
+    }
+  ],
+  "testimonials": [
+    {
+      "name": "Lauren DeVoy",
+      "timeAgo": "10 months ago",
+      "text": "What an awesome place overall. The staff, the services, everything is top tier quality. I just received a B12 shot and feel so refreshed and reenergized!! If you need a little pick me up for an overall boost this is definitely for you! Dr. Francis is the best out there and actually cares about your health goals! Highly recommend!"
+    },
+    {
+      "name": "Vivien Mejia", 
+      "timeAgo": "9 months ago",
+      "text": "Dr. Francis has been amazing! He's so hands on and genuinely caring it feels totally concierge. I've already recommended him to family and friends and would happily recommend him here. So hard to find kind medical professionals in SoCal these days, but Dr.Francis is OG nice. :)"
+    },
+    {
+      "name": "Gilda Tavoussi",
+      "timeAgo": "2 months ago", 
+      "text": "Beautiful and calming space and super friendly staff! Dr. Doko and Dr. Francis are wonderful and offer cutting edge treatments. I love their historic approach and looking forward to continuing my wellness journey with their help."
+    },
+    {
+      "name": "Lauren Porras",
+      "timeAgo": "1 month ago",
+      "text": "Ashara Health has been such a lucky find in Laguna. I was looking for a whole-body form of care for my thyroid and hormonal challenges, and I found it with Blue Aura. Dr. Klea really listens to your concerns, and uses her extensive knowledge to come up with a plan that suits your needs, availability, and budget. All of the other practitioners here are very kind and helpful, as well as the front desk staff. I recommend looking into their monthly plans, as you get a lot of perks including weekly hyperbaric oxygen chamber sessions and some red light therapy. They genuinely care here at Ashara Health, and it shows."
+    },
+    {
+      "name": "Virginia Van Ness",
+      "timeAgo": "10 months ago",
+      "text": "Dr. Francis and his team of equally \"relaxed\" professionals makes you comfortable from the very first visit. It's not just about comfortability, they are a team of highly dedicated and caring doctors. Physical wellness is really important to me at this time in my life, I believe they can, and will, help me in my quest. They have an amazing hyperbaric oxygen chamber in their offices (Laguna Beach) and it is accelerating my wound healing post operatively. While I'm just starting out with them, I believe that I am receiving positive results to their approach to my wellness. More will be revealed. Remember it's the journey, not the destination. Contact them and see for yourself!"
+    },
+    {
+      "name": "Nick Hood",
+      "timeAgo": "4 months ago",
+      "text": "I had a wonderfully informative and successful experience at Ashara Health & Wellness with Dr. RD Marquiss. I came to Dr. Marquiss with a partially torn meniscus that was limiting my mobility and causing immense pain. He recommended and informed me about the benefits of a Wharton's Jelly (stem cell) injection. I was thoroughly impressed by his bed side manner, and vast knowledge of the process prior to administering the injection. I am an avid exercise enthusiast that runs, cycles, hikes, and lifts weights. After my meniscus tear, I went to an orthopedic surgeon who recommended surgery to repair or remove the affected portion of the meniscus. I opted for the holistic approach. Prior to the injection, I was unable to participate in my typical exercises and was limping at times. After the injection, I was back to light exercising and leg strengthening exercises within 2 weeks. I was back to comfortably running without pain after 1 month. I am extremely pleased with my experience and am thrilled I was able to avoid surgery. Thanks Dr. RD!"
     }
   ]
 }
