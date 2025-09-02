@@ -64,10 +64,10 @@ export default function CustomMap({ address, className = "" }: CustomMapProps) {
     const customIcon = L.divIcon({
       html: `
         <div class="relative">
-          <div class="w-8 h-8 bg-teal-800 rounded-full border-4 border-white shadow-lg flex items-center justify-center">
+          <div class="w-8 h-8 bg-teal-600 rounded-full border-4 border-white shadow-lg flex items-center justify-center">
             <div class="w-3 h-3 bg-white rounded-full"></div>
           </div>
-          <div class="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-teal-800"></div>
+          <div class="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-teal-600"></div>
         </div>
       `,
       className: "custom-marker",
@@ -89,7 +89,7 @@ export default function CustomMap({ address, className = "" }: CustomMapProps) {
           )}&navigate=yes" 
           target="_blank" 
           rel="noreferrer"
-          class="inline-block bg-teal-800 text-white px-3 py-1 rounded text-sm hover:bg-teal-900 transition-colors"
+          class="inline-block bg-teal-600 text-white px-3 py-1 rounded text-sm hover:bg-teal-700 transition-colors"
         >
           Get Directions
         </a>

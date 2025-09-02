@@ -51,19 +51,19 @@
   ],
   "memberships": [
     {
-      "name": "Telehealth",
-      "note": "Virtual care membership",
-      "price": "from $299"
+      "name": "Deep Dive",
+      "note": "90 min visit with focused 30 min follow-up visit",
+      "price": "$444.00"
     },
     {
-      "name": "Mobile",
-      "note": "Concierge care at your location",
-      "price": "from $799"
+      "name": "Foundations Visit",
+      "note": "45 min visit", 
+      "price": "$222.00"
     },
     {
-      "name": "In‑Clinic",
-      "note": "In‑person membership",
-      "price": "from $499"
+      "name": "Follow-Up Visit",
+      "note": "Ongoing support to refine your treatment plan",
+      "price": "$99.00"
     }
   ],
   "testimonials": [

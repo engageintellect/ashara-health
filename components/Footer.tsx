@@ -18,7 +18,7 @@ export default function Footer() {
         <div className="grid gap-8 md:grid-cols-3">
           <div>
             <div className="flex items-center gap-2 font-semibold tracking-tight text-stone-900 dark:text-stone-100">
-              <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-teal-800 dark:bg-teal-700 text-white font-bold">
+              <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-teal-600 dark:bg-teal-700 text-white font-bold">
                 A
               </span>
               <span>{site.brand}</span>
@@ -32,7 +32,7 @@ export default function Footer() {
                 href="https://instagram.com/asharahealth"
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center justify-center w-8 h-8 rounded-lg bg-stone-100 dark:bg-stone-800 text-stone-600 dark:text-stone-400 hover:bg-teal-100 dark:hover:bg-teal-900/30 hover:text-teal-800 dark:hover:text-teal-300 transition-colors"
+                className="flex items-center justify-center w-8 h-8 rounded-lg bg-stone-100 dark:bg-stone-800 text-stone-600 dark:text-stone-400 hover:bg-teal-100 dark:hover:bg-teal-900/30 hover:text-teal-600 dark:hover:text-teal-300 transition-colors"
                 aria-label="Follow us on Instagram"
               >
                 <Icon icon="mdi:instagram" className="w-5 h-5" />
@@ -41,7 +41,7 @@ export default function Footer() {
                 href="https://facebook.com/asharahealth"
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center justify-center w-8 h-8 rounded-lg bg-stone-100 dark:bg-stone-800 text-stone-600 dark:text-stone-400 hover:bg-teal-100 dark:hover:bg-teal-900/30 hover:text-teal-800 dark:hover:text-teal-300 transition-colors"
+                className="flex items-center justify-center w-8 h-8 rounded-lg bg-stone-100 dark:bg-stone-800 text-stone-600 dark:text-stone-400 hover:bg-teal-100 dark:hover:bg-teal-900/30 hover:text-teal-600 dark:hover:text-teal-300 transition-colors"
                 aria-label="Follow us on Facebook"
               >
                 <Icon icon="mdi:facebook" className="w-5 h-5" />

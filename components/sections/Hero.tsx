@@ -97,7 +97,7 @@ export default function Hero() {
                   href="https://instagram.com/asharahealth"
                   target="_blank"
                   rel="noreferrer"
-                  className="flex items-center justify-center w-10 h-10 rounded-xl bg-stone-100 dark:bg-stone-800 text-stone-600 dark:text-stone-400 hover:bg-teal-100 dark:hover:bg-teal-900/30 hover:text-teal-800 dark:hover:text-teal-300 transition-colors"
+                  className="flex items-center justify-center w-10 h-10 rounded-xl bg-stone-100 dark:bg-stone-800 text-stone-600 dark:text-stone-400 hover:bg-teal-100 dark:hover:bg-teal-900/30 hover:text-teal-600 dark:hover:text-teal-300 transition-colors"
                   aria-label="Follow us on Instagram"
                 >
                   <Icon icon="mdi:instagram" className="w-5 h-5" />
@@ -106,7 +106,7 @@ export default function Hero() {
                   href="https://facebook.com/asharahealth"
                   target="_blank"
                   rel="noreferrer"
-                  className="flex items-center justify-center w-10 h-10 rounded-xl bg-stone-100 dark:bg-stone-800 text-stone-600 dark:text-stone-400 hover:bg-teal-100 dark:hover:bg-teal-900/30 hover:text-teal-800 dark:hover:text-teal-300 transition-colors"
+                  className="flex items-center justify-center w-10 h-10 rounded-xl bg-stone-100 dark:bg-stone-800 text-stone-600 dark:text-stone-400 hover:bg-teal-100 dark:hover:bg-teal-900/30 hover:text-teal-600 dark:hover:text-teal-300 transition-colors"
                   aria-label="Follow us on Facebook"
                 >
                   <Icon icon="mdi:facebook" className="w-5 h-5" />
@@ -152,7 +152,7 @@ export default function Hero() {
             </video>
 
             {/* Overlay Card */}
-            <div className="absolute inset-0 bg-teal-900/80 dark:bg-teal-800/80"></div>
+            <div className="absolute inset-0 bg-teal-800/80 dark:bg-teal-800/80"></div>
 
             {/* Content Overlay */}
             <div className="relative z-10 flex items-center justify-center h-full p-8">

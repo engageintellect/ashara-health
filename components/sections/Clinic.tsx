@@ -48,7 +48,7 @@ export default function Clinic() {
                     )}&navigate=yes`}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center justify-center rounded-xl bg-teal-800 dark:bg-teal-700 px-4 py-2 text-sm font-semibold text-white hover:bg-teal-900 dark:hover:bg-teal-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700 focus-visible:ring-offset-2 transition-colors"
+                    className="inline-flex items-center justify-center rounded-xl bg-teal-600 dark:bg-teal-700 px-4 py-2 text-sm font-semibold text-white hover:bg-teal-700 dark:hover:bg-teal-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700 focus-visible:ring-offset-2 transition-colors"
                   >
                     Directions
                   </a>

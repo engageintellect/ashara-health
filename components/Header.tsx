@@ -204,7 +204,7 @@ export default function Header({ id, role, className, children }: HeaderProps) {
             aria-label={`${site.brand} — Home`}
             className="flex items-center gap-2 font-semibold tracking-tight text-stone-900 dark:text-stone-100"
           >
-            <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-teal-800 dark:bg-teal-700 text-white font-bold">
+            <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-teal-600 dark:bg-teal-700 text-white font-bold">
               A
             </span>
             <span className="text-lg">{site.brand.split(" ")[0]} Health</span>
@@ -268,7 +268,7 @@ export default function Header({ id, role, className, children }: HeaderProps) {
             <motion.a
               variants={navItemVariants}
               href="#contact"
-              className="inline-flex items-center justify-center rounded-xl bg-teal-800 dark:bg-teal-700 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-teal-900 dark:hover:bg-teal-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700 focus-visible:ring-offset-2"
+              className="inline-flex items-center justify-center rounded-xl bg-teal-600 dark:bg-teal-700 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-teal-700 dark:hover:bg-teal-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700 focus-visible:ring-offset-2"
             >
               Start Journey
             </motion.a>
@@ -374,7 +374,7 @@ export default function Header({ id, role, className, children }: HeaderProps) {
               <a
                 href="#contact"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="block w-full text-center mt-4 rounded-xl bg-teal-800 dark:bg-teal-700 px-4 py-3 text-base font-semibold text-white hover:bg-teal-900 dark:hover:bg-teal-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700 focus-visible:ring-offset-2"
+                className="block w-full text-center mt-4 rounded-xl bg-teal-600 dark:bg-teal-700 px-4 py-3 text-base font-semibold text-white hover:bg-teal-700 dark:hover:bg-teal-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700 focus-visible:ring-offset-2"
               >
                 Start Journey
               </a>
