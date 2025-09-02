@@ -141,11 +141,11 @@ export default function Contact() {
 
   return (
     <ScrollReveal>
-      <section
-        id="contact"
-        className="scroll-mt-24 bg-stone-100/60 dark:bg-stone-900/60 py-20 sm:py-24"
-      >
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <section className="scroll-mt-24 bg-stone-100/60 dark:bg-stone-900/60 py-20 sm:py-24">
+        <div
+          id="contact"
+          className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-5"
+        >
           <div className="grid gap-10 md:grid-cols-2">
             <div>
               <h2 className="text-3xl font-bold tracking-tight text-stone-900 dark:text-stone-100 sm:text-4xl">

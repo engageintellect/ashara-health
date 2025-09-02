@@ -5,5 +5,5 @@
 /* Add scroll padding to account for sticky navbar and smooth scrolling */
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: calc(4rem + 5px); /* 64px + 5px for extra spacing */
+  scroll-padding-top: calc(4rem); /* 64px + 5px for extra spacing */
 }

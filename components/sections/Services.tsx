@@ -44,42 +44,95 @@ export default function Services() {
   return (
     <section
       id="services"
-      className="scroll-mt-24 py-20 sm:py-24 bg-white dark:bg-stone-800"
+      className="relative py-24 sm:py-32 bg-gradient-to-br from-white via-stone-50 to-white dark:from-stone-900 dark:via-stone-800 dark:to-stone-900 overflow-hidden"
     >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <ScrollReveal className="mx-auto max-w-2xl text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-stone-900 dark:text-stone-100 sm:text-4xl">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 opacity-[0.02] dark:opacity-[0.05]">
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='1'%3E%3Cpath d='M20 20c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10zm10 0c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10z' opacity='0.1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+          }}
+        />
+      </div>
+
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <ScrollReveal className="mx-auto max-w-3xl text-center">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-teal-500 to-teal-600 shadow-lg shadow-teal-500/25 mb-6">
+            <Icon icon="mdi:stethoscope" className="w-8 h-8 text-white" />
+          </div>
+          <h2 className="text-4xl font-bold tracking-tight text-stone-900 dark:text-stone-100 sm:text-5xl mb-4">
             Services
           </h2>
-          <p className="mt-3 text-stone-700 dark:text-stone-300">
-            Where ancient rituals meet modern healing
+          <p className="text-lg text-stone-600 dark:text-stone-400 font-medium">
+            Where ancient rituals meet modern healing through evidence-based
+            integrative medicine
           </p>
+          <div className="mt-6 h-1 w-24 bg-gradient-to-r from-teal-500 to-teal-600 rounded-full mx-auto" />
         </ScrollReveal>
+
         <ScrollReveal
-          className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3"
+          className="mt-20 grid gap-8 sm:grid-cols-2 lg:grid-cols-3"
           delay={0.2}
         >
           {site.services.map((service, index) => (
-            <a
+            <div
               key={service}
-              href="#contact-form"
-              className="group relative overflow-hidden rounded-2xl bg-white dark:bg-stone-800 p-6 shadow-sm transition-all hover:shadow-md border border-stone-200 dark:border-stone-700 block"
+              className="group relative overflow-hidden rounded-3xl bg-white/70 dark:bg-stone-800/70 backdrop-blur-sm border border-stone-200/50 dark:border-stone-700/50 shadow-xl shadow-stone-900/5 dark:shadow-stone-900/20 hover:shadow-2xl hover:shadow-stone-900/10 dark:hover:shadow-stone-900/30 transition-all duration-500 hover:-translate-y-2"
             >
-              <div className="flex items-center justify-center w-16 h-16 rounded-xl bg-teal-100 dark:bg-teal-900/30 mb-4">
-                <Icon
-                  icon={serviceIcons[service]}
-                  className="w-8 h-8 text-teal-600 dark:text-teal-400"
-                />
-              </div>
-              <h3 className="text-lg font-semibold text-stone-900 dark:text-stone-100 mb-2">
-                {service}
-              </h3>
-              <p className="text-sm text-stone-700 dark:text-stone-300">
-                {serviceDescriptions[service] ||
-                  "Evidence-based approach tailored to your needs"}
-              </p>
-            </a>
+              {/* Gradient Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-br from-teal-500/5 via-transparent to-stone-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+              {/* Subtle Border Glow */}
+              <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-teal-500/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm" />
+
+              <a href="#contact" className="relative block p-8 h-72">
+                {/* Icon Container */}
+                <div className="relative mb-6">
+                  <div className="flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-teal-50 to-teal-100 dark:from-teal-900/30 dark:to-teal-800/30 border border-teal-200/50 dark:border-teal-700/50 group-hover:scale-110 transition-transform duration-300">
+                    <Icon
+                      icon={serviceIcons[service]}
+                      className="w-8 h-8 text-teal-600 dark:text-teal-400 group-hover:text-teal-700 dark:group-hover:text-teal-300 transition-colors duration-300"
+                    />
+                  </div>
+                  {/* Pulse Effect */}
+                  <div className="absolute inset-0 rounded-2xl bg-teal-500/20 opacity-0 group-hover:opacity-100 group-hover:animate-ping" />
+                </div>
+
+                {/* Content */}
+                <div className="space-y-4">
+                  <h3 className="text-xl font-bold text-stone-900 dark:text-stone-100 leading-tight group-hover:text-teal-700 dark:group-hover:text-teal-300 transition-colors duration-300">
+                    {service}
+                  </h3>
+                  <p className="text-sm text-stone-600 dark:text-stone-400 leading-relaxed font-medium">
+                    {serviceDescriptions[service] ||
+                      "Evidence-based approach tailored to your needs"}
+                  </p>
+                </div>
+
+                {/* Arrow Indicator */}
+                <div className="absolute bottom-6 right-6 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-2 group-hover:translate-x-0">
+                  <Icon
+                    icon="mdi:arrow-right"
+                    className="w-5 h-5 text-teal-600 dark:text-teal-400"
+                  />
+                </div>
+              </a>
+            </div>
           ))}
+        </ScrollReveal>
+
+        {/* Call to Action */}
+        <ScrollReveal className="mt-16 text-center" delay={0.4}>
+          <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-stone-100/80 dark:bg-stone-800/80 backdrop-blur-sm border border-stone-200/50 dark:border-stone-700/50">
+            <Icon
+              icon="mdi:leaf"
+              className="w-5 h-5 text-teal-600 dark:text-teal-400"
+            />
+            <span className="text-sm font-medium text-stone-700 dark:text-stone-300">
+              Integrative therapies combining ancient wisdom with modern science
+            </span>
+          </div>
         </ScrollReveal>
       </div>
     </section>
