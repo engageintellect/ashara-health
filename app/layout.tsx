@@ -16,13 +16,14 @@ export const metadata: Metadata = {
     "Whole-person preventive care with compassionate, precision-guided wellness",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   // Read theme cookie on the server to set initial class and avoid flash on refresh
-  const themeCookie = cookies().get("theme")?.value;
+  const cookieStore = await cookies();
+  const themeCookie = cookieStore.get("theme")?.value;
   const initialHtmlClass = themeCookie === "dark" ? "dark" : undefined;
 
   return (
