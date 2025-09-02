@@ -1,20 +1,21 @@
 import { Card, CardContent } from "@/components/ui/card";
 import site from "@/content/site.json";
+import ScrollReveal from "@/components/ScrollReveal";
 
 export default function Clinic() {
   return (
     <section className="py-20 sm:py-24 bg-stone-50 dark:bg-stone-900/50">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-2xl text-center mb-10">
+        <ScrollReveal className="mx-auto max-w-2xl text-center mb-10">
           <h2 className="text-3xl font-bold tracking-tight text-stone-900 dark:text-stone-100 sm:text-4xl">
             Visit Our Clinic
           </h2>
           <p className="mt-3 text-stone-700 dark:text-stone-300">
             Located in the heart of Laguna Beach, California
           </p>
-        </div>
+        </ScrollReveal>
 
-        <div className="mx-auto max-w-4xl">
+        <ScrollReveal className="mx-auto max-w-4xl" delay={0.2}>
           <Card className="overflow-hidden shadow-xl border-0">
             <div className="aspect-[16/9] w-full relative">
               <iframe
@@ -60,7 +61,7 @@ export default function Clinic() {
               </div>
             </CardContent>
           </Card>
-        </div>
+        </ScrollReveal>
       </div>
     </section>
   );

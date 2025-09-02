@@ -18,7 +18,7 @@ export default function ScrollReveal({
   delay = 0,
   direction = "up",
   distance = 20,
-  duration = 0.6,
+  duration = 0.4,
 }: ScrollRevealProps) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });

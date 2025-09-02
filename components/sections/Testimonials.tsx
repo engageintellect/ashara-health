@@ -1,19 +1,23 @@
 import { Card, CardContent } from "@/components/ui/card";
 import site from "@/content/site.json";
+import ScrollReveal from "@/components/ScrollReveal";
 
 export default function Testimonials() {
   return (
     <section className="py-20 sm:py-24 bg-stone-50 dark:bg-stone-900/50">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-2xl text-center">
+        <ScrollReveal className="mx-auto max-w-2xl text-center">
           <h2 className="text-3xl font-bold tracking-tight text-stone-900 dark:text-stone-100 sm:text-4xl">
             Testimonials
           </h2>
           <p className="mt-3 text-stone-700 dark:text-stone-300">
             What our patients are saying about their healing journey
           </p>
-        </div>
-        <div className="mt-10 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        </ScrollReveal>
+        <ScrollReveal
+          className="mt-10 grid gap-8 md:grid-cols-2 lg:grid-cols-3"
+          delay={0.2}
+        >
           {site.testimonials.map((testimonial, index) => (
             <Card key={index} className="h-full">
               <CardContent className="p-6">
@@ -42,7 +46,7 @@ export default function Testimonials() {
               </CardContent>
             </Card>
           ))}
-        </div>
+        </ScrollReveal>
       </div>
     </section>
   );

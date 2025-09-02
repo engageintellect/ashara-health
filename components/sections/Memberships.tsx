@@ -8,6 +8,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import site from "@/content/site.json";
+import ScrollReveal from "@/components/ScrollReveal";
 
 export default function Memberships() {
   return (
@@ -16,16 +17,19 @@ export default function Memberships() {
       className="scroll-mt-24 bg-stone-100/60 dark:bg-stone-900/60 py-20 sm:py-24"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-2xl text-center">
+        <ScrollReveal className="mx-auto max-w-2xl text-center">
           <h2 className="text-3xl font-bold tracking-tight text-stone-900 dark:text-stone-100 sm:text-4xl">
             Memberships
           </h2>
           <p className="mt-3 text-stone-700 dark:text-stone-300">
             Clear options for how to engage—virtual, on-site, or in-clinic.
           </p>
-        </div>
-        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {site.memberships.map((m) => (
+        </ScrollReveal>
+        <ScrollReveal
+          className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+          delay={0.2}
+        >
+          {site.memberships.map((m, index) => (
             <Card key={m.name} className="flex flex-col">
               <CardHeader>
                 <CardTitle>{m.name}</CardTitle>
@@ -57,7 +61,7 @@ export default function Memberships() {
               </CardFooter>
             </Card>
           ))}
-        </div>
+        </ScrollReveal>
       </div>
     </section>
   );

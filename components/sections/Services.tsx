@@ -1,5 +1,6 @@
 import site from "@/content/site.json";
 import { Icon } from "@iconify/react";
+import ScrollReveal from "@/components/ScrollReveal";
 
 const serviceIcons: Record<string, string> = {
   "Naturopathic Medicine": "mdi:leaf",
@@ -23,48 +24,38 @@ export default function Services() {
       className="scroll-mt-24 py-20 sm:py-24 bg-white dark:bg-stone-800"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-2xl text-center">
+        <ScrollReveal className="mx-auto max-w-2xl text-center">
           <h2 className="text-3xl font-bold tracking-tight text-stone-900 dark:text-stone-100 sm:text-4xl">
             Services
           </h2>
           <p className="mt-3 text-stone-700 dark:text-stone-300">
             Where ancient rituals meet modern healing
           </p>
-        </div>
-        <ul
-          className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
-          role="list"
+        </ScrollReveal>
+        <ScrollReveal
+          className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3"
+          delay={0.2}
         >
-          {site.services.map((name) => (
-            <li key={name} className="group">
-              <a
-                href="#contact"
-                className="block h-full rounded-2xl border border-stone-200 dark:border-stone-700 bg-white dark:bg-stone-800 shadow-sm transition group-hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700 overflow-hidden"
-                aria-describedby={`svc-${name}`}
-              >
-                <div className="h-52 w-full flex items-center justify-center bg-teal-50 dark:bg-teal-900/20">
-                  <Icon
-                    icon={serviceIcons[name]}
-                    className="w-16 h-16 text-teal-700 dark:text-teal-300"
-                  />
-                </div>
-                <div className="p-6">
-                  <div className="flex items-start justify-between">
-                    <h3 className="text-lg font-semibold text-stone-900 dark:text-stone-100">
-                      {name}
-                    </h3>
-                  </div>
-                  <p
-                    id={`svc-${name}`}
-                    className="mt-2 text-sm text-stone-700 dark:text-stone-300"
-                  >
-                    Tailored care and guidance based on your goals.
-                  </p>
-                </div>
-              </a>
-            </li>
+          {site.services.map((service, index) => (
+            <div
+              key={service}
+              className="group relative overflow-hidden rounded-2xl bg-white dark:bg-stone-800 p-6 shadow-sm transition-all hover:shadow-md border border-stone-200 dark:border-stone-700"
+            >
+              <div className="flex items-center justify-center w-16 h-16 rounded-xl bg-teal-100 dark:bg-teal-900/30 mb-4">
+                <Icon
+                  icon={serviceIcons[service]}
+                  className="w-8 h-8 text-teal-800 dark:text-teal-300"
+                />
+              </div>
+              <h3 className="text-lg font-semibold text-stone-900 dark:text-stone-100 mb-2">
+                {service}
+              </h3>
+              <p className="text-sm text-stone-700 dark:text-stone-300">
+                Evidence-based approach tailored to your needs
+              </p>
+            </div>
           ))}
-        </ul>
+        </ScrollReveal>
       </div>
     </section>
   );
