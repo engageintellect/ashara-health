@@ -11,9 +11,10 @@ export default function Vision() {
           </h2>
           <p className="mt-6 text-lg text-stone-700 dark:text-stone-300 leading-relaxed">
             Our approach emphasizes recognizing clients as unique beings, not
-            just cases. Ashara represents a harmonious blend of East Meets West,
-            integrating practices like Ayurveda and Chinese Medicine with modern
-            therapies. We are a Mobile Sanctuary, bringing healing to where you
+            just cases. Ashara represents a harmonious blend of{" "}
+            <strong>East Meets West</strong>, integrating practices like
+            Ayurveda and Chinese Medicine with modern therapies. We are a{" "}
+            <strong>Mobile Sanctuary</strong>, bringing healing to where you
             are.
           </p>
         </ScrollReveal>

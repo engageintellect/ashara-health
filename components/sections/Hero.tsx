@@ -60,24 +60,9 @@ export default function Hero() {
             </motion.h1>
             <motion.p
               variants={itemVariants}
-              className="mt-4 text-lg text-stone-700 dark:text-stone-300 max-w-prose"
+              className="mt-6 text-xl text-stone-600 dark:text-stone-400 max-w-prose"
             >
               Root-cause healing. Delivered with reverence.
-            </motion.p>
-            <motion.p
-              variants={itemVariants}
-              className="mt-2 text-base text-stone-600 dark:text-stone-400 max-w-prose"
-            >
-              Burnout. Hormonal shifts. Chronic symptoms. Fatigue that won't
-              lift. At Ashara, we don't silence your body—we listen.
-            </motion.p>
-            <motion.p
-              variants={itemVariants}
-              className="mt-2 text-base text-stone-600 dark:text-stone-400 max-w-prose"
-            >
-              Our concierge wellness model blends regenerative therapies,
-              advanced diagnostics, IV infusions, and ancient healing
-              rituals—delivered wherever you are.
             </motion.p>
             <motion.div
               variants={itemVariants}
@@ -155,6 +140,7 @@ export default function Hero() {
             <div className="absolute inset-0 bg-teal-800/80 dark:bg-teal-800/80"></div>
 
             {/* Content Overlay */}
+            {/*
             <div className="relative z-10 flex items-center justify-center h-full p-8">
               <motion.div
                 className="text-center text-white"
@@ -173,6 +159,7 @@ export default function Hero() {
                 </p>
               </motion.div>
             </div>
+            */}
 
             {/* Glass Reflection Effect */}
             <div className="absolute -bottom-[75%] left-0 right-0 h-[75%] overflow-hidden rounded-2xl opacity-30">
