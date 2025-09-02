@@ -10,27 +10,20 @@ import Memberships from "@/components/sections/Memberships";
 import Faq from "@/components/sections/Faq";
 import Clinic from "@/components/sections/Clinic";
 import Contact from "@/components/sections/Contact";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
 
 export default function Page() {
   return (
-    <>
-      <Header id="home" role="banner" />
-      <main id="main" className="relative bg-white dark:bg-stone-900">
-        <Hero />
-        <Vision />
-        <Conditions />
-        <Approach />
-        <Services />
-        <Testimonials />
-        <Memberships />
-        <Faq />
-        <Clinic />
-        <Contact />
-      </main>
-
-      <Footer />
-    </>
+    <div id="main" className="relative bg-white dark:bg-stone-900">
+      <Hero />
+      <Vision />
+      <Conditions />
+      <Approach />
+      <Services />
+      <Testimonials />
+      <Memberships />
+      <Faq />
+      <Clinic />
+      <Contact />
+    </div>
   );
 }

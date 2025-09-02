@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Script from "next/script";
 import { cookies } from "next/headers";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import BackButton from "@/components/BackButton";
 import "./globals.css";
 
 export const dynamic = "force-dynamic";
@@ -45,7 +48,10 @@ export default async function RootLayout({
           "min-h-screen bg-white text-stone-900 dark:bg-stone-900 dark:text-stone-100 antialiased",
         ].join(" ")}
       >
-        {children}
+        <Header />
+        <BackButton />
+        <main>{children}</main>
+        <Footer />
       </body>
     </html>
   );

@@ -16,7 +16,10 @@ const conditionIcons: Record<string, string> = {
 
 export default function Conditions() {
   return (
-    <section className="py-20 sm:py-24 bg-stone-100 dark:bg-stone-800">
+    <section
+      id="conditions"
+      className="py-20 sm:py-24 bg-stone-50 dark:bg-stone-900"
+    >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <ScrollReveal className="mx-auto max-w-2xl text-center">
           <h2 className="text-3xl font-bold tracking-tight text-stone-900 dark:text-stone-100 sm:text-4xl">

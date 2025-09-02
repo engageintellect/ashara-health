@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -6,7 +9,136 @@ import { MailIcon, PhoneIcon } from "@/components/icons";
 import site from "@/content/site.json";
 import ScrollReveal from "@/components/ScrollReveal";
 
+interface FormData {
+  name: string;
+  email: string;
+  phone: string;
+  message: string;
+}
+
+interface FormErrors {
+  name?: string;
+  email?: string;
+  phone?: string;
+  message?: string;
+  general?: string;
+}
+
+interface FormStatus {
+  type: "idle" | "loading" | "success" | "error";
+  message?: string;
+}
+
 export default function Contact() {
+  const [formData, setFormData] = useState<FormData>({
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
+  });
+  const [errors, setErrors] = useState<FormErrors>({});
+  const [status, setStatus] = useState<FormStatus>({ type: "idle" });
+
+  const validateField = (
+    name: keyof FormData,
+    value: string
+  ): string | undefined => {
+    switch (name) {
+      case "name":
+        if (!value.trim()) return "Full name is required";
+        if (value.trim().length < 2)
+          return "Name must be at least 2 characters";
+        break;
+      case "email":
+        if (!value.trim()) return "Email is required";
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(value))
+          return "Please enter a valid email address";
+        break;
+      case "phone":
+        if (!value.trim()) return "Phone number is required";
+        const phoneRegex = /^[\+]?[1-9][\d]{0,15}$/;
+        const cleanPhone = value.replace(/[\s\-\(\)\.]/g, "");
+        if (!phoneRegex.test(cleanPhone) || cleanPhone.length < 10) {
+          return "Please enter a valid phone number";
+        }
+        break;
+      case "message":
+        if (!value.trim()) return "Message is required";
+        if (value.trim().length < 10)
+          return "Message must be at least 10 characters";
+        break;
+    }
+    return undefined;
+  };
+
+  const validateForm = (): boolean => {
+    const newErrors: FormErrors = {};
+    let isValid = true;
+
+    (Object.keys(formData) as Array<keyof FormData>).forEach((field) => {
+      const error = validateField(field, formData[field]);
+      if (error) {
+        newErrors[field] = error;
+        isValid = false;
+      }
+    });
+
+    setErrors(newErrors);
+    return isValid;
+  };
+
+  const handleInputChange = (field: keyof FormData, value: string) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
+
+    // Clear field error on change
+    if (errors[field]) {
+      setErrors((prev) => ({ ...prev, [field]: undefined }));
+    }
+
+    // Clear general status on change
+    if (status.type !== "idle") {
+      setStatus({ type: "idle" });
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!validateForm()) {
+      setStatus({ type: "error", message: "Please fix the errors above" });
+      return;
+    }
+
+    setStatus({ type: "loading" });
+    setErrors({});
+
+    try {
+      // Simulate API call - replace with actual endpoint
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to send message");
+      }
+
+      setStatus({
+        type: "success",
+        message: "Message sent successfully! We'll get back to you soon.",
+      });
+      setFormData({ name: "", email: "", phone: "", message: "" });
+    } catch (error) {
+      setStatus({
+        type: "error",
+        message:
+          "Failed to send message. Please try again or contact us directly.",
+      });
+    }
+  };
+
   return (
     <ScrollReveal>
       <section
@@ -61,60 +193,117 @@ export default function Contact() {
             <form
               id="contact-form"
               className="rounded-2xl border border-stone-200 dark:border-stone-600 bg-white dark:bg-stone-800/50 p-4 sm:p-8 shadow-lg"
-              aria-describedby="form-status"
-              onSubmit={(e) => e.preventDefault()}
+              onSubmit={handleSubmit}
             >
               <div className="grid gap-6">
                 <div className="space-y-2">
                   <Label htmlFor="name" className="text-sm font-medium">
-                    Full name
+                    Full name *
                   </Label>
                   <Input
                     id="name"
                     name="name"
                     type="text"
-                    required
+                    value={formData.name}
+                    onChange={(e) => handleInputChange("name", e.target.value)}
                     placeholder="Alex Morgan"
-                    className="h-12"
+                    className={`h-12 ${
+                      errors.name ? "border-red-500 dark:border-red-400" : ""
+                    }`}
                   />
+                  {errors.name && (
+                    <p className="text-sm text-red-600 dark:text-red-400">
+                      {errors.name}
+                    </p>
+                  )}
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="email" className="text-sm font-medium">
-                    Email
+                    Email *
                   </Label>
                   <Input
                     id="email"
                     name="email"
                     type="email"
-                    required
+                    value={formData.email}
+                    onChange={(e) => handleInputChange("email", e.target.value)}
                     placeholder="you@domain.com"
-                    className="h-12"
+                    className={`h-12 ${
+                      errors.email ? "border-red-500 dark:border-red-400" : ""
+                    }`}
                   />
+                  {errors.email && (
+                    <p className="text-sm text-red-600 dark:text-red-400">
+                      {errors.email}
+                    </p>
+                  )}
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="phone" className="text-sm font-medium">
+                    Phone number *
+                  </Label>
+                  <Input
+                    id="phone"
+                    name="phone"
+                    type="tel"
+                    value={formData.phone}
+                    onChange={(e) => handleInputChange("phone", e.target.value)}
+                    placeholder="(555) 123-4567"
+                    className={`h-12 ${
+                      errors.phone ? "border-red-500 dark:border-red-400" : ""
+                    }`}
+                  />
+                  {errors.phone && (
+                    <p className="text-sm text-red-600 dark:text-red-400">
+                      {errors.phone}
+                    </p>
+                  )}
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="message" className="text-sm font-medium">
-                    How can we help?
+                    How can we help? *
                   </Label>
                   <Textarea
                     id="message"
                     name="message"
                     rows={6}
-                    required
+                    value={formData.message}
+                    onChange={(e) =>
+                      handleInputChange("message", e.target.value)
+                    }
                     placeholder="Tell us a bit about your goals…"
-                    className="min-h-[120px] resize-none"
+                    className={`min-h-[120px] resize-none ${
+                      errors.message ? "border-red-500 dark:border-red-400" : ""
+                    }`}
                   />
+                  {errors.message && (
+                    <p className="text-sm text-red-600 dark:text-red-400">
+                      {errors.message}
+                    </p>
+                  )}
                 </div>
-                <div className="flex items-start justify-between pt-2">
-                  <div
-                    id="form-status"
-                    role="status"
-                    aria-live="polite"
-                    className="text-sm text-stone-600 dark:text-stone-400 max-w-xs"
+                <div className="space-y-3 pt-2">
+                  {status.type === "success" && (
+                    <div className="text-sm text-green-600 dark:text-green-400 text-center bg-green-50 dark:bg-green-900/20 p-3 rounded-lg">
+                      {status.message}
+                    </div>
+                  )}
+                  {status.type === "error" && (
+                    <div className="text-sm text-red-600 dark:text-red-400 text-center bg-red-50 dark:bg-red-900/20 p-3 rounded-lg">
+                      {status.message}
+                    </div>
+                  )}
+                  {status.type === "idle" && (
+                    <div className="text-sm text-stone-600 dark:text-stone-400 text-center">
+                      We usually respond within one business day.
+                    </div>
+                  )}
+                  <Button
+                    type="submit"
+                    className="w-full px-8 py-3 h-auto"
+                    disabled={status.type === "loading"}
                   >
-                    We usually respond within one business day.
-                  </div>
-                  <Button type="submit" className="px-8 py-3 h-auto">
-                    Send message
+                    {status.type === "loading" ? "Sending..." : "Send message"}
                   </Button>
                 </div>
               </div>

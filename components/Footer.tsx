@@ -1,4 +1,7 @@
+"use client";
+
 import site from "@/content/site.json";
+import { Icon } from "@iconify/react";
 
 const NAV = [
   { label: "Home", href: "#home" },
@@ -24,6 +27,26 @@ export default function Footer() {
               Transforming healthcare through prevention-first approach. East
               meets West, integrating ancient wisdom with modern therapies.
             </p>
+            <div className="flex items-center gap-3 mt-4">
+              <a
+                href="https://instagram.com/asharahealth"
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center justify-center w-8 h-8 rounded-lg bg-stone-100 dark:bg-stone-800 text-stone-600 dark:text-stone-400 hover:bg-teal-100 dark:hover:bg-teal-900/30 hover:text-teal-800 dark:hover:text-teal-300 transition-colors"
+                aria-label="Follow us on Instagram"
+              >
+                <Icon icon="mdi:instagram" className="w-5 h-5" />
+              </a>
+              <a
+                href="https://facebook.com/asharahealth"
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center justify-center w-8 h-8 rounded-lg bg-stone-100 dark:bg-stone-800 text-stone-600 dark:text-stone-400 hover:bg-teal-100 dark:hover:bg-teal-900/30 hover:text-teal-800 dark:hover:text-teal-300 transition-colors"
+                aria-label="Follow us on Facebook"
+              >
+                <Icon icon="mdi:facebook" className="w-5 h-5" />
+              </a>
+            </div>
           </div>
           <nav aria-label="Footer" className="grid grid-cols-2 gap-2 text-sm">
             {NAV.map((item) => (

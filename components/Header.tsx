@@ -8,7 +8,7 @@ import { motion } from "framer-motion";
 
 const NAV = [
   { label: "Home", href: "/" },
-  { label: "What We Treat", href: "#services" },
+  { label: "What We Treat", href: "#conditions" },
   { label: "Memberships", href: "#pricing" },
   { label: "FAQ", href: "#faq" },
   { label: "Contact", href: "#contact" },
@@ -85,10 +85,30 @@ function setCookie(
 export default function Header({ id, role, className, children }: HeaderProps) {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [hasAnimated, setHasAnimated] = useState(true); // Default to true to prevent animations
   const router = useRouter();
 
   // Load theme preference on mount: cookie -> localStorage -> system
   useEffect(() => {
+    // Check if header has already animated in this session
+    const headerAnimated =
+      typeof window !== "undefined"
+        ? localStorage.getItem("headerAnimated")
+        : null;
+
+    if (headerAnimated === "true") {
+      setHasAnimated(true);
+    } else {
+      setHasAnimated(false);
+      // Mark as animated after initial load
+      setTimeout(() => {
+        setHasAnimated(true);
+        if (typeof window !== "undefined") {
+          localStorage.setItem("headerAnimated", "true");
+        }
+      }, 1500);
+    }
+
     const cookieTheme = getCookie("theme");
     if (cookieTheme === "dark" || cookieTheme === "light") {
       const dark = cookieTheme === "dark";
@@ -173,7 +193,7 @@ export default function Header({ id, role, className, children }: HeaderProps) {
     >
       <motion.div
         variants={containerVariants}
-        initial="hidden"
+        initial={hasAnimated ? "visible" : "hidden"}
         animate="visible"
         className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"
       >
@@ -193,7 +213,7 @@ export default function Header({ id, role, className, children }: HeaderProps) {
           {/* Desktop Navigation */}
           <motion.nav
             variants={containerVariants}
-            initial="hidden"
+            initial={hasAnimated ? "visible" : "hidden"}
             animate="visible"
             className="hidden md:flex items-center gap-6"
             aria-label="Primary"

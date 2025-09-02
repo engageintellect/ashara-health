@@ -37,9 +37,10 @@ export default function Services() {
           delay={0.2}
         >
           {site.services.map((service, index) => (
-            <div
+            <a
               key={service}
-              className="group relative overflow-hidden rounded-2xl bg-white dark:bg-stone-800 p-6 shadow-sm transition-all hover:shadow-md border border-stone-200 dark:border-stone-700"
+              href="#contact-form"
+              className="group relative overflow-hidden rounded-2xl bg-white dark:bg-stone-800 p-6 shadow-sm transition-all hover:shadow-md border border-stone-200 dark:border-stone-700 block"
             >
               <div className="flex items-center justify-center w-16 h-16 rounded-xl bg-teal-100 dark:bg-teal-900/30 mb-4">
                 <Icon
@@ -53,7 +54,7 @@ export default function Services() {
               <p className="text-sm text-stone-700 dark:text-stone-300">
                 Evidence-based approach tailored to your needs
               </p>
-            </div>
+            </a>
           ))}
         </ScrollReveal>
       </div>

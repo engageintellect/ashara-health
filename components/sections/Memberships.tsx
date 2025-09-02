@@ -32,7 +32,12 @@ export default function Memberships() {
           {site.memberships.map((m, index) => (
             <Card key={m.name} className="flex flex-col">
               <CardHeader>
-                <CardTitle>{m.name}</CardTitle>
+                <CardTitle className="flex items-center justify-between">
+                  <span>{m.name}</span>
+                  <span className="text-lg font-bold text-teal-800 dark:text-teal-300">
+                    {m?.price}
+                  </span>
+                </CardTitle>
                 <CardDescription>{m.note}</CardDescription>
               </CardHeader>
               <CardContent>

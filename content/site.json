@@ -52,15 +52,18 @@
   "memberships": [
     {
       "name": "Telehealth",
-      "note": "Virtual care membership"
+      "note": "Virtual care membership",
+      "price": "from $299"
     },
     {
       "name": "Mobile",
-      "note": "Concierge care at your location"
+      "note": "Concierge care at your location",
+      "price": "from $799"
     },
     {
       "name": "In‑Clinic",
-      "note": "In‑person membership"
+      "note": "In‑person membership",
+      "price": "from $499"
     }
   ],
   "testimonials": [

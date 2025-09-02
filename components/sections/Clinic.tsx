@@ -1,6 +1,16 @@
 import { Card, CardContent } from "@/components/ui/card";
 import site from "@/content/site.json";
 import ScrollReveal from "@/components/ScrollReveal";
+import dynamic from "next/dynamic";
+
+const CustomMap = dynamic(() => import("@/components/CustomMap"), {
+  ssr: false,
+  loading: () => (
+    <div className="w-full h-full bg-stone-100 dark:bg-stone-800 rounded-t-xl flex items-center justify-center">
+      <div className="text-stone-500 dark:text-stone-400">Loading map...</div>
+    </div>
+  ),
+});
 
 export default function Clinic() {
   return (
@@ -18,16 +28,7 @@ export default function Clinic() {
         <ScrollReveal className="mx-auto max-w-4xl" delay={0.2}>
           <Card className="overflow-hidden shadow-xl border-0">
             <div className="aspect-[16/9] w-full relative">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3318.2!2d-117.7831!3d33.5423!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80dcf0a1a2b3c4d5%3A0x123456789abcdef0!2s32406%20S%20Coast%20Hwy%2C%20Laguna%20Beach%2C%20CA%2092651!5e0!3m2!1sen!2sus!4v1693123456789!5m2!1sen!2sus"
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                className="w-full h-full"
-              ></iframe>
+              <CustomMap address={site.address} />
             </div>
 
             <CardContent className="p-6">

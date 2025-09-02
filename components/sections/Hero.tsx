@@ -1,9 +1,10 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { PhoneIcon, MailIcon } from "@/components/icons";
+import { Icon } from "@iconify/react";
 import site from "@/content/site.json";
 import { motion } from "framer-motion";
+import { PhoneIcon, MailIcon } from "@/components/icons";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -91,6 +92,26 @@ export default function Hero() {
               >
                 Learn more
               </a>
+              <div className="flex items-center gap-2 ml-2">
+                <a
+                  href="https://instagram.com/asharahealth"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex items-center justify-center w-10 h-10 rounded-xl bg-stone-100 dark:bg-stone-800 text-stone-600 dark:text-stone-400 hover:bg-teal-100 dark:hover:bg-teal-900/30 hover:text-teal-800 dark:hover:text-teal-300 transition-colors"
+                  aria-label="Follow us on Instagram"
+                >
+                  <Icon icon="mdi:instagram" className="w-5 h-5" />
+                </a>
+                <a
+                  href="https://facebook.com/asharahealth"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex items-center justify-center w-10 h-10 rounded-xl bg-stone-100 dark:bg-stone-800 text-stone-600 dark:text-stone-400 hover:bg-teal-100 dark:hover:bg-teal-900/30 hover:text-teal-800 dark:hover:text-teal-300 transition-colors"
+                  aria-label="Follow us on Facebook"
+                >
+                  <Icon icon="mdi:facebook" className="w-5 h-5" />
+                </a>
+              </div>
             </motion.div>
             <motion.div
               variants={itemVariants}
