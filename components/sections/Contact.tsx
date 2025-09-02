@@ -56,51 +56,63 @@ export default function Contact() {
             </div>
           </div>
           <form
-            className="rounded-2xl border border-stone-200 dark:border-stone-700 bg-white dark:bg-stone-800 p-6 shadow-sm"
+            id="contact-form"
+            className="rounded-2xl border border-stone-200 dark:border-stone-600 bg-white dark:bg-stone-800/50 p-4 sm:p-8 shadow-lg"
             aria-describedby="form-status"
             onSubmit={(e) => e.preventDefault()}
           >
-            <div className="grid gap-4">
-              <div>
-                <Label htmlFor="name">Full name</Label>
+            <div className="grid gap-6">
+              <div className="space-y-2">
+                <Label htmlFor="name" className="text-sm font-medium">
+                  Full name
+                </Label>
                 <Input
                   id="name"
                   name="name"
                   type="text"
                   required
                   placeholder="Alex Morgan"
+                  className="h-12"
                 />
               </div>
-              <div>
-                <Label htmlFor="email">Email</Label>
+              <div className="space-y-2">
+                <Label htmlFor="email" className="text-sm font-medium">
+                  Email
+                </Label>
                 <Input
                   id="email"
                   name="email"
                   type="email"
                   required
                   placeholder="you@domain.com"
+                  className="h-12"
                 />
               </div>
-              <div>
-                <Label htmlFor="message">How can we help?</Label>
+              <div className="space-y-2">
+                <Label htmlFor="message" className="text-sm font-medium">
+                  How can we help?
+                </Label>
                 <Textarea
                   id="message"
                   name="message"
-                  rows={5}
+                  rows={6}
                   required
                   placeholder="Tell us a bit about your goals…"
+                  className="min-h-[120px] resize-none"
                 />
               </div>
-              <div className="flex items-center justify-between">
+              <div className="flex items-start justify-between pt-2">
                 <div
                   id="form-status"
                   role="status"
                   aria-live="polite"
-                  className="text-sm text-stone-600 dark:text-stone-400"
+                  className="text-sm text-stone-600 dark:text-stone-400 max-w-xs"
                 >
                   We usually respond within one business day.
                 </div>
-                <Button type="submit">Send message</Button>
+                <Button type="submit" className="px-8 py-3 h-auto">
+                  Send message
+                </Button>
               </div>
             </div>
           </form>

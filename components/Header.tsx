@@ -4,14 +4,51 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import site from "@/content/site.json";
+import { motion } from "framer-motion";
 
 const NAV = [
-  { label: "Home", href: "#home" },
+  { label: "Home", href: "/" },
   { label: "What We Treat", href: "#services" },
   { label: "Memberships", href: "#pricing" },
   { label: "FAQ", href: "#faq" },
   { label: "Contact", href: "#contact" },
 ];
+
+const headerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      duration: 0.2,
+      ease: "easeOut",
+      delay: 0.5,
+    },
+  },
+};
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      duration: 0.8,
+      ease: "easeOut",
+      delay: 0.5,
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const navItemVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      duration: 0.6,
+      ease: "easeOut",
+    },
+  },
+};
 
 interface HeaderProps {
   id?: string;
@@ -127,17 +164,23 @@ export default function Header({ id, role, className, children }: HeaderProps) {
       role={role}
       className={[
         "sticky top-0 z-50 w-full border-b border-stone-200/80 dark:border-stone-800/60",
-        "bg-white/80 dark:bg-stone-900/70 backdrop-blur",
-        "supports-[backdrop-filter]:bg-white/60 dark:supports-[backdrop-filter]:bg-stone-900/60",
+        "bg-gradient-to-b from-stone-50/90 to-white/90 dark:from-stone-900/90 dark:to-stone-900/90 backdrop-blur",
+        "supports-[backdrop-filter]:bg-gradient-to-b supports-[backdrop-filter]:from-stone-50/60 supports-[backdrop-filter]:to-white/60 dark:supports-[backdrop-filter]:from-stone-900/60 dark:supports-[backdrop-filter]:to-stone-900/60",
         className,
       ]
         .filter(Boolean)
         .join(" ")}
     >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"
+      >
         <div className="flex h-16 items-center justify-between">
-          <a
-            href="#home"
+          <motion.a
+            variants={navItemVariants}
+            href="/"
             aria-label={`${site.brand} — Home`}
             className="flex items-center gap-2 font-semibold tracking-tight text-stone-900 dark:text-stone-100"
           >
@@ -145,23 +188,29 @@ export default function Header({ id, role, className, children }: HeaderProps) {
               A
             </span>
             <span className="text-lg">{site.brand.split(" ")[0]} Health</span>
-          </a>
+          </motion.a>
 
           {/* Desktop Navigation */}
-          <nav
+          <motion.nav
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
             className="hidden md:flex items-center gap-6"
             aria-label="Primary"
           >
-            {NAV.map((item) => (
-              <a
+            {NAV.map((item, index) => (
+              <motion.a
                 key={item.href}
+                variants={navItemVariants}
+                custom={index}
                 href={item.href}
                 className="text-sm font-medium text-stone-700 dark:text-stone-300 hover:text-stone-900 dark:hover:text-stone-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700 focus-visible:ring-offset-2 focus-visible:rounded"
               >
                 {item.label}
-              </a>
+              </motion.a>
             ))}
-            <button
+            <motion.button
+              variants={navItemVariants}
               onClick={toggleDarkMode}
               className="inline-flex items-center justify-center rounded-xl border border-stone-300 dark:border-stone-600 bg-white dark:bg-stone-800 px-3 py-2 text-sm font-semibold text-stone-900 dark:text-stone-100 hover:bg-stone-50 dark:hover:bg-stone-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700 focus-visible:ring-offset-2"
               aria-label="Toggle dark mode"
@@ -195,18 +244,20 @@ export default function Header({ id, role, className, children }: HeaderProps) {
                   />
                 </svg>
               )}
-            </button>
-            <a
+            </motion.button>
+            <motion.a
+              variants={navItemVariants}
               href="#contact"
               className="inline-flex items-center justify-center rounded-xl bg-teal-800 dark:bg-teal-700 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-teal-900 dark:hover:bg-teal-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700 focus-visible:ring-offset-2"
             >
               Start Journey
-            </a>
-          </nav>
+            </motion.a>
+          </motion.nav>
 
           {/* Mobile Menu Button */}
           <div className="md:hidden flex items-center gap-2">
-            <button
+            <motion.button
+              variants={navItemVariants}
               onClick={toggleDarkMode}
               className="inline-flex items-center justify-center rounded-xl border border-stone-300 dark:border-stone-600 bg-white dark:bg-stone-800 p-2 text-stone-900 dark:text-stone-100 hover:bg-stone-50 dark:hover:bg-stone-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700 focus-visible:ring-offset-2"
               aria-label="Toggle dark mode"
@@ -240,8 +291,9 @@ export default function Header({ id, role, className, children }: HeaderProps) {
                   />
                 </svg>
               )}
-            </button>
-            <button
+            </motion.button>
+            <motion.button
+              variants={navItemVariants}
               onClick={toggleMobileMenu}
               className="inline-flex items-center justify-center rounded-xl border border-stone-300 dark:border-stone-600 bg-white dark:bg-stone-800 p-2 text-stone-900 dark:text-stone-100 hover:bg-stone-50 dark:hover:bg-stone-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700 focus-visible:ring-offset-2"
               aria-label="Toggle mobile menu"
@@ -275,13 +327,19 @@ export default function Header({ id, role, className, children }: HeaderProps) {
                   />
                 </svg>
               )}
-            </button>
+            </motion.button>
           </div>
         </div>
 
         {/* Mobile Menu Dropdown */}
         {isMobileMenuOpen && (
-          <div className="md:hidden border-t border-stone-200 dark:border-stone-700 bg-white/95 dark:bg-stone-900/95 backdrop-blur-sm">
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
+            className="md:hidden border-t border-stone-200 dark:border-stone-700 bg-white/95 dark:bg-stone-900/95 backdrop-blur-sm"
+          >
             <nav className="px-4 py-4 space-y-3" aria-label="Mobile">
               {NAV.map((item) => (
                 <a
@@ -301,10 +359,10 @@ export default function Header({ id, role, className, children }: HeaderProps) {
                 Start Journey
               </a>
             </nav>
-          </div>
+          </motion.div>
         )}
         {children}
-      </div>
+      </motion.div>
     </header>
   );
 }

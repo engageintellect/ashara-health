@@ -2,7 +2,7 @@ import site from "@/content/site.json";
 
 export default function Vision() {
   return (
-    <section className="py-20 sm:py-24 bg-white dark:bg-stone-900">
+    <section id="vision" className="py-20 sm:py-24 bg-white dark:bg-stone-800">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="text-3xl font-bold tracking-tight text-stone-900 dark:text-stone-100 sm:text-4xl">

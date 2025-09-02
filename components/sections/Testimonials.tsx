@@ -28,7 +28,7 @@ export default function Testimonials() {
                     </svg>
                   ))}
                 </div>
-                <blockquote className="text-stone-700 dark:text-stone-300 mb-4 leading-relaxed">
+                <blockquote className="text-stone-700 dark:text-stone-300 mb-4 leading-relaxed text-sm">
                   "{testimonial.text}"
                 </blockquote>
                 <div className="flex items-center justify-between text-sm">

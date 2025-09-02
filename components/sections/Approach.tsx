@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 
 export default function Approach() {
   return (
-    <section className="py-20 sm:py-28 bg-white dark:bg-stone-900">
+    <section className="py-20 sm:py-28 bg-stone-50 dark:bg-stone-900">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-3xl">
           <div className="text-center mb-8">
