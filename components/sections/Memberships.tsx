@@ -47,19 +47,39 @@ export default function Memberships() {
   };
 
   return (
-    <section id="pricing" className="scroll-mt-24 py-20 sm:py-24">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <ScrollReveal className="mx-auto max-w-2xl text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-stone-900 dark:text-stone-100 sm:text-4xl">
+    <section
+      id="pricing"
+      className="relative py-24 sm:py-32 bg-gradient-to-br from-stone-50 via-white to-stone-100 dark:from-stone-950 dark:via-stone-900 dark:to-stone-800 overflow-hidden"
+    >
+      {/* Background Pattern */}
+      <div className="absolute inset-0 opacity-[0.02] dark:opacity-[0.05]">
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='1'%3E%3Cpath d='M30 30m-1.5 0a1.5 1.5 0 1 1 3 0a1.5 1.5 0 1 1 -3 0'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+          }}
+        />
+      </div>
+
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <ScrollReveal className="mx-auto max-w-3xl text-center">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-teal-500 to-teal-600 shadow-lg shadow-teal-500/25 mb-6">
+            <Icon
+              icon="mdi:card-account-details"
+              className="w-8 h-8 text-white"
+            />
+          </div>
+          <h2 className="text-4xl font-bold tracking-tight text-stone-900 dark:text-stone-100 sm:text-5xl mb-4">
             Memberships
           </h2>
-          <p className="mt-4 text-lg text-stone-600 dark:text-stone-400">
+          <p className="text-lg text-stone-600 dark:text-stone-400 font-medium">
             Choose the right level of care for your wellness journey
           </p>
+          <div className="mt-6 h-1 w-24 bg-gradient-to-r from-teal-500 to-teal-600 rounded-full mx-auto" />
         </ScrollReveal>
 
         <ScrollReveal
-          className="mt-16 grid gap-8 lg:grid-cols-3 lg:gap-6"
+          className="mt-20 grid gap-8 lg:grid-cols-3 lg:gap-6"
           delay={0.2}
         >
           {site.memberships.map((m, index) => {
@@ -69,55 +89,63 @@ export default function Memberships() {
             return (
               <div
                 key={m.name}
-                className={`relative rounded-xl border ${
+                className={`relative group overflow-hidden rounded-3xl ${
                   details?.popular
-                    ? "border-teal-200 dark:border-teal-800 bg-white dark:bg-stone-900 shadow-xl"
-                    : "border-stone-200 dark:border-stone-700 bg-white dark:bg-stone-900 shadow-lg"
-                } hover:shadow-xl transition-all duration-300 overflow-hidden`}
+                    ? "bg-gradient-to-br from-teal-50/80 to-teal-100/80 dark:from-teal-900/40 dark:to-teal-800/40 border-2 border-teal-200 dark:border-teal-700 shadow-xl shadow-teal-500/10"
+                    : "bg-white/70 dark:bg-stone-900/70 border border-stone-200/50 dark:border-stone-700/50 shadow-xl shadow-stone-900/5 dark:shadow-stone-900/20"
+                } backdrop-blur-sm hover:shadow-2xl hover:-translate-y-1 transition-all duration-500`}
               >
                 {details?.popular && (
                   <div className="absolute top-4 right-4 z-10">
-                    <span className="inline-flex items-center rounded-full bg-teal-600 px-3 py-1 text-xs font-semibold text-white">
+                    <span className="inline-flex items-center rounded-full bg-gradient-to-r from-teal-500 to-teal-600 px-3 py-1 text-xs font-semibold text-white shadow-lg">
                       Most Popular
                     </span>
                   </div>
                 )}
 
-                <div className="p-8">
+                {/* Gradient Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-br from-teal-500/5 via-transparent to-stone-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                <div className="relative p-8">
                   {/* Header */}
-                  <div className="text-center">
-                    <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-xl bg-teal-50 dark:bg-teal-900/30">
+                  <div className="text-center mb-8">
+                    <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-teal-50 to-teal-100 dark:from-teal-900/30 dark:to-teal-800/30 border border-teal-200/50 dark:border-teal-700/50 group-hover:scale-110 transition-transform duration-300">
                       <Icon
                         icon={details?.icon || "mdi:medical-bag"}
-                        className="h-8 w-8 text-teal-600 dark:text-teal-400"
+                        className="h-8 w-8 text-teal-600 dark:text-teal-400 group-hover:text-teal-700 dark:group-hover:text-teal-300 transition-colors duration-300"
                       />
                     </div>
-                    <h3 className="text-xl font-semibold text-stone-900 dark:text-stone-100">
+                    <h3 className="text-2xl font-bold text-stone-900 dark:text-stone-100 mb-2">
                       {details?.title || m.name}
                     </h3>
-                    <p className="mt-2 text-sm text-stone-600 dark:text-stone-400">
+                    <p className="text-sm text-stone-600 dark:text-stone-400 font-medium">
                       {details?.note || m.note}
                     </p>
                   </div>
 
                   {/* Price */}
-                  <div className="mt-6 text-center">
-                    <div className="flex items-baseline justify-center">
-                      <span className="text-4xl font-bold text-stone-900 dark:text-stone-100">
+                  <div className="text-center mb-8">
+                    <div className="flex items-baseline justify-center mb-2">
+                      <span className="text-5xl font-bold bg-gradient-to-r from-stone-900 to-stone-700 dark:from-stone-100 dark:to-stone-300 bg-clip-text text-transparent">
                         {details?.price || m.price}
                       </span>
                     </div>
+                    <p className="text-xs text-stone-500 dark:text-stone-500 uppercase tracking-wide font-semibold">
+                      Per Session
+                    </p>
                   </div>
 
                   {/* Features */}
-                  <ul className="mt-8 space-y-3">
+                  <ul className="space-y-4 mb-8">
                     {details?.features?.map((feature, featureIndex) => (
                       <li key={featureIndex} className="flex items-start">
-                        <Icon
-                          icon="mdi:check"
-                          className="mt-0.5 h-5 w-5 flex-shrink-0 text-teal-600 dark:text-teal-400"
-                        />
-                        <span className="ml-3 text-sm text-stone-700 dark:text-stone-300">
+                        <div className="flex-shrink-0 w-5 h-5 rounded-full bg-gradient-to-r from-teal-500 to-teal-600 flex items-center justify-center mt-0.5">
+                          <Icon
+                            icon="mdi:check"
+                            className="h-3 w-3 text-white"
+                          />
+                        </div>
+                        <span className="ml-3 text-sm text-stone-700 dark:text-stone-300 leading-relaxed">
                           {feature}
                         </span>
                       </li>
@@ -125,12 +153,12 @@ export default function Memberships() {
                   </ul>
 
                   {/* CTA Button */}
-                  <div className="mt-8">
+                  <div>
                     <a href="#contact" className="block">
                       <Button
-                        className={`w-full rounded-xl py-3 font-semibold ${
+                        className={`w-full rounded-xl py-3 font-semibold transition-all duration-300 ${
                           details?.popular
-                            ? "bg-teal-600 hover:bg-teal-700 text-white"
+                            ? "bg-gradient-to-r from-teal-500 to-teal-600 hover:from-teal-600 hover:to-teal-700 text-white shadow-lg hover:shadow-xl"
                             : "bg-stone-100 hover:bg-stone-200 text-stone-900 dark:bg-stone-800 dark:hover:bg-stone-700 dark:text-stone-100"
                         }`}
                         variant={details?.popular ? "default" : "secondary"}
@@ -143,6 +171,20 @@ export default function Memberships() {
               </div>
             );
           })}
+        </ScrollReveal>
+
+        {/* Call to Action */}
+        <ScrollReveal className="mt-16 text-center" delay={0.4}>
+          <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-stone-100/80 dark:bg-stone-800/80 backdrop-blur-sm border border-stone-200/50 dark:border-stone-700/50">
+            <Icon
+              icon="mdi:shield-check"
+              className="w-5 h-5 text-teal-600 dark:text-teal-400"
+            />
+            <span className="text-sm font-medium text-stone-700 dark:text-stone-300">
+              All sessions include personalized treatment plans and follow-up
+              support
+            </span>
+          </div>
         </ScrollReveal>
       </div>
     </section>

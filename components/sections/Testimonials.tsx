@@ -1,51 +1,112 @@
 import { Card, CardContent } from "@/components/ui/card";
 import site from "@/content/site.json";
 import ScrollReveal from "@/components/ScrollReveal";
+import { Icon } from "@iconify/react";
 
 export default function Testimonials() {
   return (
-    <section className="py-20 sm:py-24 bg-stone-50 dark:bg-stone-900/50">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <ScrollReveal className="mx-auto max-w-2xl text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-stone-900 dark:text-stone-100 sm:text-4xl">
-            Testimonials
+    <section className="relative py-24 sm:py-32 bg-gradient-to-br from-stone-50 via-white to-stone-100 dark:from-stone-950 dark:via-stone-900 dark:to-stone-800 overflow-hidden">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 opacity-[0.02] dark:opacity-[0.05]">
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='1'%3E%3Cpath d='M30 30m-2 0a2 2 0 1 1 4 0a2 2 0 1 1 -4 0'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+          }}
+        />
+      </div>
+
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <ScrollReveal className="mx-auto max-w-3xl text-center mb-16">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-teal-500 to-teal-600 shadow-lg shadow-teal-500/25 mb-6">
+            <Icon icon="mdi:account-heart" className="w-8 h-8 text-white" />
+          </div>
+          <h2 className="text-4xl font-bold tracking-tight text-stone-900 dark:text-stone-100 sm:text-5xl mb-4">
+            Patient Stories
           </h2>
-          <p className="mt-3 text-stone-700 dark:text-stone-300">
-            What our patients are saying about their healing journey
+          <p className="text-xl text-stone-600 dark:text-stone-400 leading-relaxed">
+            Real healing journeys from our community
           </p>
+          <div className="mt-6 h-1 w-24 bg-gradient-to-r from-teal-500 to-teal-600 rounded-full mx-auto" />
         </ScrollReveal>
+
         <ScrollReveal
-          className="mt-10 grid gap-8 md:grid-cols-2 lg:grid-cols-3"
+          className="grid gap-8 md:grid-cols-2 lg:grid-cols-3"
           delay={0.2}
         >
           {site.testimonials.map((testimonial, index) => (
-            <Card key={index} className="h-full">
-              <CardContent className="p-6">
-                <div className="flex items-center gap-1 mb-4">
+            <div
+              key={index}
+              className="group relative overflow-hidden rounded-3xl bg-white/70 dark:bg-stone-900/70 backdrop-blur-sm border border-stone-200/50 dark:border-stone-700/50 shadow-xl shadow-stone-900/5 dark:shadow-stone-900/20 hover:shadow-2xl hover:shadow-stone-900/10 dark:hover:shadow-stone-900/30 transition-all duration-500 hover:-translate-y-2"
+            >
+              {/* Gradient Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-br from-teal-500/5 via-transparent to-stone-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+              <div className="relative p-8">
+                {/* Quote Icon */}
+                <div className="absolute top-6 right-6 w-12 h-12 rounded-full bg-gradient-to-br from-teal-50 to-teal-100 dark:from-teal-900/30 dark:to-teal-800/30 border border-teal-200/50 dark:border-teal-700/50 flex items-center justify-center opacity-60 group-hover:opacity-100 transition-opacity duration-300">
+                  <Icon
+                    icon="mdi:format-quote-open"
+                    className="w-6 h-6 text-teal-600 dark:text-teal-400"
+                  />
+                </div>
+
+                {/* Star Rating */}
+                <div className="flex items-center gap-1 mb-6">
                   {[...Array(5)].map((_, i) => (
-                    <svg
+                    <Icon
                       key={i}
-                      className="w-4 h-4 fill-current text-yellow-400"
-                      viewBox="0 0 20 20"
-                    >
-                      <path d="M9.049 2.927c.3-.921 1.602-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                    </svg>
+                      icon="mdi:star"
+                      className="w-5 h-5 text-yellow-400 drop-shadow-sm"
+                    />
                   ))}
                 </div>
-                <blockquote className="text-stone-700 dark:text-stone-300 mb-4 leading-relaxed text-sm">
+
+                {/* Testimonial Text */}
+                <blockquote className="text-stone-700 dark:text-stone-300 mb-6 leading-relaxed text-sm font-medium italic">
                   "{testimonial.text}"
                 </blockquote>
-                <div className="flex items-center justify-between text-sm">
-                  <cite className="font-semibold text-stone-900 dark:text-stone-100 not-italic">
-                    {testimonial.name}
-                  </cite>
-                  <span className="text-stone-500 dark:text-stone-400">
-                    {testimonial.timeAgo}
-                  </span>
+
+                {/* Author Info */}
+                <div className="flex items-center justify-between pt-4 border-t border-stone-200/50 dark:border-stone-700/50">
+                  <div>
+                    <cite className="font-bold text-stone-900 dark:text-stone-100 not-italic text-lg">
+                      {testimonial.name}
+                    </cite>
+                  </div>
+                  <div className="flex items-center gap-2 text-sm text-stone-500 dark:text-stone-400">
+                    <Icon icon="mdi:clock-outline" className="w-4 h-4" />
+                    <span>{testimonial.timeAgo}</span>
+                  </div>
                 </div>
-              </CardContent>
-            </Card>
+
+                {/* Hover Accent Line */}
+                <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-teal-500 to-teal-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+              </div>
+            </div>
           ))}
+        </ScrollReveal>
+
+        {/* Call to Action */}
+        <ScrollReveal delay={0.4} className="text-center mt-16">
+          <div className="relative overflow-hidden rounded-2xl bg-white/70 dark:bg-stone-900/70 backdrop-blur-sm border border-stone-200/50 dark:border-stone-700/50 shadow-xl shadow-stone-900/5 dark:shadow-stone-900/20 p-8 max-w-2xl mx-auto">
+            <div className="absolute inset-0 bg-gradient-to-br from-teal-500/5 via-transparent to-stone-500/5" />
+            <div className="relative">
+              <p className="text-lg text-stone-600 dark:text-stone-400 mb-6">
+                Ready to begin your own healing journey?
+              </p>
+              <a
+                href="#contact-form"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-teal-500 to-teal-600 hover:from-teal-600 hover:to-teal-700 text-white font-semibold rounded-xl shadow-lg shadow-teal-500/25 hover:shadow-teal-500/40 transition-all duration-300 hover:-translate-y-1 group"
+              >
+                <span>Start Your Journey</span>
+                <Icon
+                  icon="mdi:arrow-right"
+                  className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300"
+                />
+              </a>
+            </div>
+          </div>
         </ScrollReveal>
       </div>
     </section>

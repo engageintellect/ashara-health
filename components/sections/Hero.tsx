@@ -137,7 +137,7 @@ export default function Hero() {
             </video>
 
             {/* Overlay Card */}
-            <div className="absolute inset-0 bg-teal-800/80 dark:bg-teal-800/80"></div>
+            <div className="absolute inset-0 bg-teal-800/60 dark:bg-teal-800/60"></div>
 
             {/* Content Overlay */}
             {/*
