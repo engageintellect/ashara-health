@@ -98,14 +98,14 @@ export default function Approach() {
             {/* Quote Card */}
             <ScrollReveal delay={0.4}>
               <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-teal-50 to-teal-100 dark:from-teal-900/30 dark:to-teal-800/30 border border-teal-200/50 dark:border-teal-700/50 shadow-xl shadow-teal-500/10 p-8">
-                <div className="absolute top-6 left-6 w-12 h-12 rounded-full bg-teal-500/20 flex items-center justify-center">
+                {/* <div className="absolute top-6 left-6 w-12 h-12 rounded-full bg-teal-500/20 flex items-center justify-center">
                   <Icon
                     icon="mdi:format-quote-open"
                     className="w-6 h-6 text-teal-600 dark:text-teal-400"
                   />
-                </div>
+                </div> */}
 
-                <div className="pt-8">
+                <div className="">
                   <blockquote className="text-xl font-medium text-stone-900 dark:text-stone-100 leading-relaxed italic mb-6">
                     "Whole-body restoration—rooted in precision, guided by
                     presence."
