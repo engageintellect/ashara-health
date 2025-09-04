@@ -42,9 +42,44 @@ const videoVariants = {
   },
 };
 
+const floatingVariants = {
+  animate: {
+    y: [-10, 10, -10],
+    rotate: [0, 5, 0],
+    transition: {
+      duration: 6,
+      repeat: Infinity,
+      ease: "easeInOut",
+    },
+  },
+};
+
 export default function Hero() {
   return (
     <section className="relative isolate overflow-hidden bg-stone-50 dark:bg-stone-900">
+      {/* Top Right Gradient */}
+      <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-teal-100/30 via-teal-50/20 to-transparent dark:from-teal-900/20 dark:via-teal-950/10 dark:to-transparent rounded-full blur-3xl" />
+
+      {/* Floating Geometric Shapes */}
+      <motion.div
+        variants={floatingVariants}
+        animate="animate"
+        className="absolute top-20 left-10 w-20 h-20 bg-gradient-to-br from-teal-200/20 to-teal-300/30 dark:from-teal-800/20 dark:to-teal-700/30 rounded-2xl rotate-12 blur-sm"
+        style={{ animationDelay: "0s" }}
+      />
+      <motion.div
+        variants={floatingVariants}
+        animate="animate"
+        className="absolute bottom-32 left-20 w-12 h-12 bg-gradient-to-br from-stone-200/30 to-stone-300/40 dark:from-stone-700/30 dark:to-stone-600/40 rounded-full blur-sm"
+        style={{ animationDelay: "2s" }}
+      />
+      <motion.div
+        variants={floatingVariants}
+        animate="animate"
+        className="absolute top-40 right-20 w-8 h-8 bg-gradient-to-br from-teal-300/40 to-teal-400/50 dark:from-teal-600/40 dark:to-teal-500/50 rounded-lg rotate-45 blur-sm"
+        style={{ animationDelay: "4s" }}
+      />
+
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 sm:py-28">
         <div className="grid items-center gap-10 md:grid-cols-2">
           <motion.div
@@ -56,7 +91,10 @@ export default function Hero() {
               variants={itemVariants}
               className="text-4xl font-bold tracking-tight text-stone-900 dark:text-stone-100 sm:text-5xl"
             >
-              Elevating Preventive Care
+              <span className="block">Elevating</span>
+              <span className="block bg-gradient-to-r from-teal-600 via-teal-500 to-teal-600 bg-clip-text text-transparent">
+                Preventive Care
+              </span>
             </motion.h1>
             <motion.p
               variants={itemVariants}
@@ -116,70 +154,109 @@ export default function Hero() {
               </a>
             </motion.div>
           </motion.div>
+
+          {/* Video Section with Enhanced Design */}
           <motion.div
             variants={videoVariants}
             initial="hidden"
             animate="visible"
-            className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl shadow-2xl"
+            className="relative"
           >
-            {/* Video Background */}
-            <video
-              autoPlay
-              muted
-              loop
-              playsInline
-              className="absolute inset-0 w-full h-full object-cover"
-            >
-              <source
-                src="https://framerusercontent.com/assets/LC72yH1kyWJtP9FpdD978RzVHys.mp4"
-                type="video/mp4"
-              />
-            </video>
+            {/* Skewed Teal Card Background */}
+            <div className="absolute -inset-4 bg-gradient-to-br from-teal-500/20 to-teal-600/30 dark:from-teal-600/20 dark:to-teal-700/30 rounded-3xl transform rotate-2 blur-sm" />
+            <div className="absolute -inset-2 bg-gradient-to-br from-teal-400/10 to-teal-500/20 dark:from-teal-500/10 dark:to-teal-600/20 rounded-3xl transform -rotate-1" />
 
-            {/* Overlay Card */}
-            <div className="absolute inset-0 bg-teal-800/60 dark:bg-teal-800/60"></div>
-
-            {/* Content Overlay */}
-            {/*
-            <div className="relative z-10 flex items-center justify-center h-full p-8">
-              <motion.div
-                className="text-center text-white"
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
+            {/* Main Video Container */}
+            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl shadow-2xl shadow-teal-900/20 dark:shadow-teal-900/40 transform hover:scale-[1.02] transition-transform duration-500">
+              {/* Video Background */}
+              <video
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="absolute inset-0 w-full h-full object-cover"
               >
-                <div className="inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-white/20 backdrop-blur-sm mb-4">
-                  <span className="text-2xl font-bold">A</span>
-                </div>
-                <h3 className="text-xl font-semibold mb-2">
-                  Whole-Body Restoration
-                </h3>
-                <p className="text-sm opacity-90 max-w-xs">
-                  Rooted in precision, guided by presence
-                </p>
-              </motion.div>
-            </div>
-            */}
+                <source
+                  src="https://framerusercontent.com/assets/LC72yH1kyWJtP9FpdD978RzVHys.mp4"
+                  type="video/mp4"
+                />
+              </video>
 
-            {/* Glass Reflection Effect */}
-            <div className="absolute -bottom-[75%] left-0 right-0 h-[75%] overflow-hidden rounded-2xl opacity-30">
-              <div className="relative h-full transform scale-y-[-1]">
-                <video
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  className="absolute inset-0 w-full h-full object-cover"
+              {/* Enhanced Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-br from-teal-900/50 via-teal-800/40 to-stone-900/60" />
+
+              {/* Content Overlay */}
+              {/* <div className="absolute inset-0 flex items-center justify-center p-8">
+                <motion.div
+                  className="text-center text-white"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.8, ease: "easeOut" }}
                 >
-                  <source
-                    src="https://framerusercontent.com/assets/LC72yH1kyWJtP9FpdD978RzVHys.mp4"
-                    type="video/mp4"
-                  />
-                </video>
-                <div className="absolute inset-0 bg-teal-900/80 dark:bg-teal-800/80"></div>
-                <div className="absolute inset-0 bg-stone-50 dark:bg-stone-900"></div>
-              </div>
+                  <div className="inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-white/20 backdrop-blur-sm border border-white/30 mb-4 shadow-lg">
+                    <Icon
+                      icon="mdi:heart-pulse"
+                      className="w-8 h-8 text-white"
+                    />
+                  </div>
+                  <h3 className="text-xl font-bold mb-2 leading-tight">
+                    Whole-Body Restoration
+                  </h3>
+                  <p className="text-white/90 text-sm max-w-xs leading-relaxed">
+                    Rooted in precision, guided by presence
+                  </p>
+                </motion.div>
+              </div> */}
+
+              {/* Decorative Border */}
+              <div className="absolute inset-0 rounded-2xl ring-1 ring-white/10" />
+
+              {/* Corner Accent */}
+              <div className="absolute top-4 right-4 w-3 h-3 bg-teal-400 rounded-full shadow-lg animate-pulse" />
+              <div
+                className="absolute bottom-4 left-4 w-2 h-2 bg-white/60 rounded-full shadow-md animate-pulse"
+                style={{ animationDelay: "1s" }}
+              />
             </div>
+
+            {/* Floating Particles around Video */}
+            <motion.div
+              animate={{
+                y: [-5, 5, -5],
+                x: [-2, 2, -2],
+              }}
+              transition={{
+                duration: 4,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+              className="absolute -top-2 -right-2 w-4 h-4 bg-gradient-to-br from-teal-400 to-teal-500 rounded-full shadow-lg"
+            />
+            <motion.div
+              animate={{
+                y: [5, -5, 5],
+                x: [2, -2, 2],
+              }}
+              transition={{
+                duration: 5,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: 1,
+              }}
+              className="absolute -bottom-3 -left-3 w-3 h-3 bg-gradient-to-br from-stone-400 to-stone-500 rounded-full shadow-md"
+            />
+            <motion.div
+              animate={{
+                y: [-3, 3, -3],
+                rotate: [0, 180, 360],
+              }}
+              transition={{
+                duration: 8,
+                repeat: Infinity,
+                ease: "linear",
+              }}
+              className="absolute top-1/2 -right-4 w-2 h-2 bg-teal-300 rounded-sm shadow-sm"
+            />
           </motion.div>
         </div>
       </div>

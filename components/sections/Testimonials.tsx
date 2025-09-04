@@ -96,7 +96,7 @@ export default function Testimonials() {
                 Ready to begin your own healing journey?
               </p>
               <a
-                href="#contact-form"
+                href="#contact"
                 className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-teal-500 to-teal-600 hover:from-teal-600 hover:to-teal-700 text-white font-semibold rounded-xl shadow-lg shadow-teal-500/25 hover:shadow-teal-500/40 transition-all duration-300 hover:-translate-y-1 group"
               >
                 <span>Start Your Journey</span>
