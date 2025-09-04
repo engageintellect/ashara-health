@@ -89,7 +89,7 @@ export default function Hero() {
           >
             <motion.h1
               variants={itemVariants}
-              className="text-4xl font-bold tracking-tight text-stone-900 dark:text-stone-100 sm:text-5xl"
+              className="text-5xl font-bold tracking-tight text-stone-900 dark:text-stone-100 sm:text-5xl lg:text-7xl"
             >
               <span className="block">Elevating</span>
               <span className="block bg-gradient-to-r from-teal-600 via-teal-500 to-teal-600 bg-clip-text text-transparent">

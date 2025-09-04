@@ -211,15 +211,21 @@ export default function AppointmentPicker({
   const availableSlots = selectedDateSlots.filter((slot) => slot.available);
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
-      <div className="relative w-full max-w-4xl bg-white dark:bg-stone-900 rounded-2xl shadow-2xl overflow-hidden">
-        {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b border-stone-200 dark:border-stone-700">
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center p-1 sm:p-4 bg-black/50 backdrop-blur-sm"
+      onClick={onClose}
+    >
+      <div
+        className="relative w-full sm:max-w-4xl mx-2 sm:mx-0 bg-white dark:bg-stone-900 rounded-2xl shadow-2xl overflow-hidden max-h-[90vh] sm:max-h-none flex flex-col"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Header - Sticky */}
+        <div className="sticky top-0 z-10 flex items-center justify-between p-4 sm:p-6 border-b border-stone-200 dark:border-stone-700 bg-white dark:bg-stone-900">
           <div>
-            <h2 className="text-2xl font-bold text-stone-900 dark:text-stone-100">
+            <h2 className="text-xl sm:text-2xl font-bold text-stone-900 dark:text-stone-100">
               Schedule Your Consultation
             </h2>
-            <p className="text-stone-600 dark:text-stone-400 mt-1">
+            <p className="text-stone-600 dark:text-stone-400 mt-1 text-sm sm:text-base">
               Select a date and time that works for you
             </p>
           </div>
@@ -234,9 +240,9 @@ export default function AppointmentPicker({
           </button>
         </div>
 
-        <div className="flex">
+        <div className="flex flex-col lg:flex-row flex-1 overflow-hidden">
           {/* Calendar Section */}
-          <div className="flex-1 p-6 border-r border-stone-200 dark:border-stone-700">
+          <div className="flex-1 p-4 sm:p-6 lg:border-r border-stone-200 dark:border-stone-700 overflow-y-auto">
             {/* Calendar Header */}
             <div className="flex items-center justify-between mb-6">
               <h3 className="text-lg font-semibold text-stone-900 dark:text-stone-100">
@@ -269,7 +275,7 @@ export default function AppointmentPicker({
               {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (
                 <div
                   key={day}
-                  className="h-10 flex items-center justify-center"
+                  className="h-8 sm:h-10 flex items-center justify-center"
                 >
                   <span className="text-xs font-medium text-stone-500 dark:text-stone-400">
                     {day}
@@ -295,7 +301,7 @@ export default function AppointmentPicker({
           </div>
 
           {/* Time Slots Section */}
-          <div className="w-80 p-6">
+          <div className="w-full lg:w-80 p-4 sm:p-6 border-t lg:border-t-0 border-stone-200 dark:border-stone-700 overflow-y-auto">
             {selectedDateState ? (
               <>
                 <h3 className="text-lg font-semibold text-stone-900 dark:text-stone-100 mb-4">
@@ -313,7 +319,7 @@ export default function AppointmentPicker({
                 </p>
 
                 {availableSlots.length > 0 ? (
-                  <div className="space-y-2 max-h-96 overflow-y-auto">
+                  <div className="space-y-2 max-h-64 sm:max-h-96 overflow-y-auto">
                     {availableSlots.map((slot) => (
                       <button
                         key={slot.time}
@@ -347,10 +353,10 @@ export default function AppointmentPicker({
                 )}
               </>
             ) : (
-              <div className="text-center py-12">
+              <div className="text-center py-8 sm:py-12">
                 <Icon
                   icon="mdi:calendar-clock"
-                  className="w-16 h-16 text-stone-400 dark:text-stone-600 mx-auto mb-4"
+                  className="w-12 sm:w-16 h-12 sm:h-16 text-stone-400 dark:text-stone-600 mx-auto mb-4"
                 />
                 <h3 className="text-lg font-semibold text-stone-900 dark:text-stone-100 mb-2">
                   Select a Date
