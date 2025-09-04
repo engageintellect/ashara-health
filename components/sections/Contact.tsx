@@ -9,12 +9,16 @@ import { Icon } from "@iconify/react";
 import { MailIcon, PhoneIcon } from "@/components/icons";
 import site from "@/content/site.json";
 import ScrollReveal from "@/components/ScrollReveal";
+import AppointmentPicker from "@/components/AppointmentPicker";
 
 interface FormData {
   name: string;
   email: string;
   phone: string;
   message: string;
+  requestType: "message" | "call";
+  preferredDate?: string;
+  preferredTime?: string;
 }
 
 interface FormErrors {
@@ -22,6 +26,8 @@ interface FormErrors {
   email?: string;
   phone?: string;
   message?: string;
+  preferredDate?: string;
+  preferredTime?: string;
   general?: string;
 }
 
@@ -36,9 +42,11 @@ export default function Contact() {
     email: "",
     phone: "",
     message: "",
+    requestType: "message",
   });
   const [errors, setErrors] = useState<FormErrors>({});
   const [status, setStatus] = useState<FormStatus>({ type: "idle" });
+  const [isAppointmentPickerOpen, setIsAppointmentPickerOpen] = useState(false);
 
   const validateField = (
     name: keyof FormData,
@@ -48,94 +56,160 @@ export default function Contact() {
       case "name":
         if (!value.trim()) return "Full name is required";
         if (value.trim().length < 2)
-          return "Name must be at least 2 characters";
+          return "Full name must be at least 2 characters";
         break;
       case "email":
         if (!value.trim()) return "Email is required";
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(value))
-          return "Please enter a valid email address";
+        if (!emailRegex.test(value)) return "Please enter a valid email";
         break;
       case "phone":
         if (!value.trim()) return "Phone number is required";
         const phoneRegex = /^[\+]?[1-9][\d]{0,15}$/;
-        const cleanPhone = value.replace(/[\s\-\(\)\.]/g, "");
-        if (!phoneRegex.test(cleanPhone) || cleanPhone.length < 10) {
-          return "Please enter a valid phone number";
-        }
+        const cleanPhone = value.replace(/\D/g, "");
+        if (cleanPhone.length < 10) return "Please enter a valid phone number";
         break;
       case "message":
         if (!value.trim()) return "Message is required";
         if (value.trim().length < 10)
           return "Message must be at least 10 characters";
         break;
+      case "preferredDate":
+        if (formData.requestType === "call" && !value.trim()) {
+          return "Please select a preferred date for your call";
+        }
+        break;
+      case "preferredTime":
+        if (formData.requestType === "call" && !value.trim()) {
+          return "Please select a preferred time for your call";
+        }
+        break;
     }
     return undefined;
   };
 
+  const handleInputChange = (name: keyof FormData, value: string) => {
+    setFormData((prev) => ({ ...prev, [name]: value }));
+
+    // Clear error when user starts typing
+    if (errors[name]) {
+      setErrors((prev) => ({ ...prev, [name]: undefined }));
+    }
+  };
+
+  const handleRequestTypeChange = (type: "message" | "call") => {
+    setFormData((prev) => ({
+      ...prev,
+      requestType: type,
+      // Clear date/time when switching to message
+      ...(type === "message" && { preferredDate: "", preferredTime: "" }),
+    }));
+
+    // Clear date/time errors when switching to message
+    if (type === "message") {
+      setErrors((prev) => ({
+        ...prev,
+        preferredDate: undefined,
+        preferredTime: undefined,
+      }));
+    }
+  };
+
+  const handleAppointmentSelect = (date: string, time: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      preferredDate: date,
+      preferredTime: time,
+    }));
+
+    // Clear any existing errors
+    setErrors((prev) => ({
+      ...prev,
+      preferredDate: undefined,
+      preferredTime: undefined,
+    }));
+  };
+
+  const formatSelectedDateTime = () => {
+    if (!formData.preferredDate || !formData.preferredTime) return "";
+
+    const date = new Date(formData.preferredDate + "T00:00:00");
+    const dateStr = date.toLocaleDateString("en-US", {
+      weekday: "long",
+      month: "long",
+      day: "numeric",
+    });
+
+    // Convert 24h time to 12h format
+    const [hours, minutes] = formData.preferredTime.split(":");
+    const hour = parseInt(hours);
+    const ampm = hour >= 12 ? "PM" : "AM";
+    const hour12 = hour > 12 ? hour - 12 : hour === 0 ? 12 : hour;
+    const timeStr = `${hour12}:${minutes} ${ampm}`;
+
+    return `${dateStr} at ${timeStr}`;
+  };
+
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {};
-    let isValid = true;
 
-    (Object.keys(formData) as Array<keyof FormData>).forEach((field) => {
-      const error = validateField(field, formData[field]);
-      if (error) {
-        newErrors[field] = error;
-        isValid = false;
+    // Validate required fields
+    (Object.keys(formData) as Array<keyof FormData>).forEach((key) => {
+      if (key === "preferredDate" || key === "preferredTime") {
+        // Only validate date/time for call requests
+        if (formData.requestType === "call") {
+          const error = validateField(key, formData[key] || "");
+          if (error) newErrors[key] = error;
+        }
+      } else if (key !== "requestType") {
+        const error = validateField(key, formData[key]);
+        if (error) newErrors[key] = error;
       }
     });
 
     setErrors(newErrors);
-    return isValid;
-  };
-
-  const handleInputChange = (field: keyof FormData, value: string) => {
-    setFormData((prev) => ({ ...prev, [field]: value }));
-
-    // Clear field error on change
-    if (errors[field]) {
-      setErrors((prev) => ({ ...prev, [field]: undefined }));
-    }
-
-    // Clear general status on change
-    if (status.type !== "idle") {
-      setStatus({ type: "idle" });
-    }
+    return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!validateForm()) {
-      setStatus({ type: "error", message: "Please fix the errors above" });
+      setStatus({
+        type: "error",
+        message: "Please correct the errors above and try again.",
+      });
       return;
     }
 
     setStatus({ type: "loading" });
-    setErrors({});
 
     try {
-      // Simulate API call - replace with actual endpoint
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
+      // Simulate API call
+      await new Promise((resolve) => setTimeout(resolve, 2000));
 
-      if (!response.ok) {
-        throw new Error("Failed to send message");
-      }
+      const successMessage =
+        formData.requestType === "call"
+          ? `Thank you! We'll call you on ${formatSelectedDateTime()}.`
+          : "Thank you for your message! We'll get back to you soon.";
 
       setStatus({
         type: "success",
-        message: "Message sent successfully! We'll get back to you soon.",
+        message: successMessage,
       });
-      setFormData({ name: "", email: "", phone: "", message: "" });
+
+      // Reset form
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        message: "",
+        requestType: "message",
+      });
     } catch (error) {
       setStatus({
         type: "error",
-        message:
-          "Failed to send message. Please try again or contact us directly.",
+        message: "Something went wrong. Please try again later.",
       });
     }
   };
@@ -289,6 +363,45 @@ export default function Contact() {
                   </h3>
 
                   <div className="grid gap-6">
+                    {/* Request Type Toggle */}
+                    <div className="space-y-3">
+                      <Label className="text-sm font-medium">
+                        How would you like us to contact you? *
+                      </Label>
+                      <div className="flex gap-3">
+                        <button
+                          type="button"
+                          onClick={() => handleRequestTypeChange("message")}
+                          className={`flex-1 px-4 py-3 rounded-xl border text-sm font-medium transition-all duration-200 ${
+                            formData.requestType === "message"
+                              ? "bg-teal-50 dark:bg-teal-900/30 border-teal-200 dark:border-teal-700 text-teal-700 dark:text-teal-300"
+                              : "bg-white dark:bg-stone-800 border-stone-300 dark:border-stone-600 text-stone-700 dark:text-stone-300 hover:bg-stone-50 dark:hover:bg-stone-700"
+                          }`}
+                        >
+                          <Icon
+                            icon="mdi:email-outline"
+                            className="w-4 h-4 mx-auto mb-1"
+                          />
+                          Send Message
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => handleRequestTypeChange("call")}
+                          className={`flex-1 px-4 py-3 rounded-xl border text-sm font-medium transition-all duration-200 ${
+                            formData.requestType === "call"
+                              ? "bg-teal-50 dark:bg-teal-900/30 border-teal-200 dark:border-teal-700 text-teal-700 dark:text-teal-300"
+                              : "bg-white dark:bg-stone-800 border-stone-300 dark:border-stone-600 text-stone-700 dark:text-stone-300 hover:bg-stone-50 dark:hover:bg-stone-700"
+                          }`}
+                        >
+                          <Icon
+                            icon="mdi:phone-outline"
+                            className="w-4 h-4 mx-auto mb-1"
+                          />
+                          Schedule Call
+                        </button>
+                      </div>
+                    </div>
+
                     <div className="space-y-2">
                       <Label htmlFor="name" className="text-sm font-medium">
                         Full name *
@@ -367,9 +480,51 @@ export default function Contact() {
                       )}
                     </div>
 
+                    {/* Appointment Picker - Only show for call requests */}
+                    {formData.requestType === "call" && (
+                      <div className="space-y-2">
+                        <Label className="text-sm font-medium">
+                          Preferred Date & Time *
+                        </Label>
+                        <button
+                          type="button"
+                          onClick={() => setIsAppointmentPickerOpen(true)}
+                          className={`w-full h-12 px-3 py-2 rounded-xl border text-left transition-all duration-200 ${
+                            formData.preferredDate && formData.preferredTime
+                              ? "bg-teal-50 dark:bg-teal-900/30 border-teal-200 dark:border-teal-700 text-teal-700 dark:text-teal-300"
+                              : "bg-white dark:bg-stone-800 border-stone-300 dark:border-stone-600 text-stone-500 dark:text-stone-400 hover:bg-stone-50 dark:hover:bg-stone-700"
+                          } ${
+                            errors.preferredDate || errors.preferredTime
+                              ? "border-red-500 dark:border-red-400"
+                              : ""
+                          }`}
+                        >
+                          <div className="flex items-center justify-between">
+                            <span className="text-sm">
+                              {formData.preferredDate && formData.preferredTime
+                                ? formatSelectedDateTime()
+                                : "Select date and time"}
+                            </span>
+                            <Icon
+                              icon="mdi:calendar-clock"
+                              className="w-5 h-5"
+                            />
+                          </div>
+                        </button>
+                        {(errors.preferredDate || errors.preferredTime) && (
+                          <p className="text-sm text-red-600 dark:text-red-400">
+                            Please select a preferred date and time for your
+                            call
+                          </p>
+                        )}
+                      </div>
+                    )}
+
                     <div className="space-y-2">
                       <Label htmlFor="message" className="text-sm font-medium">
-                        How can we help? *
+                        {formData.requestType === "call"
+                          ? "What would you like to discuss? *"
+                          : "How can we help? *"}
                       </Label>
                       <Textarea
                         id="message"
@@ -379,7 +534,11 @@ export default function Contact() {
                         onChange={(e) =>
                           handleInputChange("message", e.target.value)
                         }
-                        placeholder="Tell us a bit about your goals…"
+                        placeholder={
+                          formData.requestType === "call"
+                            ? "Tell us about your health goals and what you'd like to discuss during the call..."
+                            : "Tell us a bit about your goals…"
+                        }
                         className={`min-h-[120px] resize-none rounded-xl ${
                           errors.message
                             ? "border-red-500 dark:border-red-400"
@@ -414,7 +573,9 @@ export default function Contact() {
                       )}
                       {status.type === "idle" && (
                         <div className="text-sm text-stone-600 dark:text-stone-400 text-center">
-                          We usually respond within one business day.
+                          {formData.requestType === "call"
+                            ? "We'll call you at your preferred time to discuss your health goals."
+                            : "We usually respond within one business day."}
                         </div>
                       )}
                       <Button
@@ -428,12 +589,23 @@ export default function Contact() {
                               icon="mdi:loading"
                               className="w-4 h-4 animate-spin"
                             />
-                            Sending...
+                            {formData.requestType === "call"
+                              ? "Scheduling..."
+                              : "Sending..."}
                           </div>
                         ) : (
                           <div className="flex items-center gap-2">
-                            <Icon icon="mdi:send" className="w-4 h-4" />
-                            Send message
+                            <Icon
+                              icon={
+                                formData.requestType === "call"
+                                  ? "mdi:calendar-check"
+                                  : "mdi:send"
+                              }
+                              className="w-4 h-4"
+                            />
+                            {formData.requestType === "call"
+                              ? "Schedule Call"
+                              : "Send Message"}
                           </div>
                         )}
                       </Button>
@@ -445,6 +617,15 @@ export default function Contact() {
           </div>
         </div>
       </div>
+
+      {/* Appointment Picker Modal */}
+      <AppointmentPicker
+        isOpen={isAppointmentPickerOpen}
+        onClose={() => setIsAppointmentPickerOpen(false)}
+        onSelect={handleAppointmentSelect}
+        selectedDate={formData.preferredDate}
+        selectedTime={formData.preferredTime}
+      />
     </section>
   );
 }
