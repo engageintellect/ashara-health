@@ -211,16 +211,10 @@ export default function AppointmentPicker({
   const availableSlots = selectedDateSlots.filter((slot) => slot.available);
 
   return (
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-1 sm:p-4 bg-black/50 backdrop-blur-sm"
-      onClick={onClose}
-    >
-      <div
-        className="relative w-full sm:max-w-4xl mx-2 sm:mx-0 bg-white dark:bg-stone-900 rounded-2xl shadow-2xl overflow-hidden max-h-[90vh] sm:max-h-none flex flex-col"
-        onClick={(e) => e.stopPropagation()}
-      >
-        {/* Header - Sticky */}
-        <div className="sticky top-0 z-10 flex items-center justify-between p-4 sm:p-6 border-b border-stone-200 dark:border-stone-700 bg-white dark:bg-stone-900">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/50 backdrop-blur-sm">
+      <div className="relative w-full max-w-sm sm:max-w-4xl bg-white dark:bg-stone-900 rounded-2xl shadow-2xl overflow-hidden max-h-[90vh] sm:max-h-none overflow-y-auto">
+        {/* Header */}
+        <div className="flex items-center justify-between p-4 sm:p-6 border-b border-stone-200 dark:border-stone-700">
           <div>
             <h2 className="text-xl sm:text-2xl font-bold text-stone-900 dark:text-stone-100">
               Schedule Your Consultation
@@ -240,9 +234,9 @@ export default function AppointmentPicker({
           </button>
         </div>
 
-        <div className="flex flex-col lg:flex-row flex-1 overflow-hidden">
+        <div className="flex flex-col lg:flex-row">
           {/* Calendar Section */}
-          <div className="flex-1 p-4 sm:p-6 lg:border-r border-stone-200 dark:border-stone-700 overflow-y-auto">
+          <div className="flex-1 p-4 sm:p-6 lg:border-r border-stone-200 dark:border-stone-700">
             {/* Calendar Header */}
             <div className="flex items-center justify-between mb-6">
               <h3 className="text-lg font-semibold text-stone-900 dark:text-stone-100">
@@ -301,7 +295,7 @@ export default function AppointmentPicker({
           </div>
 
           {/* Time Slots Section */}
-          <div className="w-full lg:w-80 p-4 sm:p-6 border-t lg:border-t-0 border-stone-200 dark:border-stone-700 overflow-y-auto">
+          <div className="w-full lg:w-80 p-4 sm:p-6 border-t lg:border-t-0 border-stone-200 dark:border-stone-700">
             {selectedDateState ? (
               <>
                 <h3 className="text-lg font-semibold text-stone-900 dark:text-stone-100 mb-4">

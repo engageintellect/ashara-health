@@ -26,6 +26,7 @@ interface FormErrors {
   email?: string;
   phone?: string;
   message?: string;
+  requestType?: string;
   preferredDate?: string;
   preferredTime?: string;
   general?: string;
