@@ -44,6 +44,45 @@ export default function Memberships() {
       ],
       popular: false,
     },
+    "Telehealth Basic": {
+      title: "Telehealth Basic",
+      price: "$150",
+      note: "30 min virtual consultation",
+      icon: "mdi:video",
+      features: [
+        "30-minute video consultation",
+        "General health questions",
+        "Basic wellness advice",
+        "Prescription refills",
+      ],
+      popular: false,
+    },
+    "Telehealth Premium": {
+      title: "Telehealth Premium",
+      price: "$275",
+      note: "60 min comprehensive virtual visit",
+      icon: "mdi:video-account",
+      features: [
+        "60-minute in-depth consultation",
+        "Comprehensive health review",
+        "Personalized recommendations",
+        "Follow-up plan",
+      ],
+      popular: false,
+    },
+    "Telehealth Elite": {
+      title: "Telehealth Elite",
+      price: "$375",
+      note: "90 min in-depth virtual consultation with treatment plan",
+      icon: "mdi:video-plus",
+      features: [
+        "90-minute comprehensive evaluation",
+        "Detailed health assessment",
+        "Customized treatment plan",
+        "30-day follow-up message support",
+      ],
+      popular: false,
+    },
   };
 
   return (
@@ -79,7 +118,7 @@ export default function Memberships() {
         </ScrollReveal>
 
         <ScrollReveal
-          className="mt-20 grid gap-8 lg:grid-cols-3 lg:gap-6"
+          className="mt-20 grid gap-2 sm:gap-5 lg:grid-cols-3"
           delay={0.2}
         >
           {site.memberships.map((m, index) => {
@@ -93,7 +132,7 @@ export default function Memberships() {
                   details?.popular
                     ? "bg-gradient-to-br from-teal-50/80 to-teal-100/80 dark:from-teal-900/40 dark:to-teal-800/40 border-2 border-teal-200 dark:border-teal-700 shadow-xl shadow-teal-500/10"
                     : "bg-white/70 dark:bg-stone-900/70 border border-stone-200/50 dark:border-stone-700/50 shadow-xl shadow-stone-900/5 dark:shadow-stone-900/20"
-                } backdrop-blur-sm hover:shadow-2xl hover:-translate-y-1 transition-all duration-500`}
+                } backdrop-blur-sm hover:shadow-2xl lg:hover:-translate-y-1 transition-all duration-500`}
               >
                 {details?.popular && (
                   <div className="absolute top-4 right-4 z-10">
@@ -106,7 +145,7 @@ export default function Memberships() {
                 {/* Gradient Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-br from-teal-500/5 via-transparent to-stone-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-                <div className="relative p-8">
+                <div className="relative p-5 sm:p-8">
                   {/* Header */}
                   <div className="text-center mb-8">
                     <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-teal-50 to-teal-100 dark:from-teal-900/30 dark:to-teal-800/30 border border-teal-200/50 dark:border-teal-700/50 group-hover:scale-110 transition-transform duration-300">

@@ -30,7 +30,7 @@ export default function Vision() {
             <div className="mt-6 h-1 w-24 bg-gradient-to-r from-teal-500 to-teal-600 rounded-full mx-auto" />
           </ScrollReveal>
 
-          <div className="grid gap-8 lg:grid-cols-3">
+          <div className="grid gap-2 lg:gap-8 lg:grid-cols-3">
             {/* East Meets West */}
             <ScrollReveal delay={0.2}>
               <div className="relative overflow-hidden rounded-3xl bg-white/70 dark:bg-stone-900/70 backdrop-blur-sm border border-stone-200/50 dark:border-stone-700/50 shadow-xl shadow-stone-900/5 dark:shadow-stone-900/20 p-8 h-full">

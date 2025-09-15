@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import site from "@/content/site.json";
 import { motion } from "framer-motion";
@@ -9,6 +8,7 @@ import { motion } from "framer-motion";
 const NAV = [
   { label: "Home", href: "/" },
   { label: "What We Treat", href: "#conditions" },
+  { label: "Services", href: "#services" },
   { label: "Memberships", href: "#pricing" },
   { label: "FAQ", href: "#faq" },
   { label: "Contact", href: "#contact" },
@@ -57,121 +57,56 @@ interface HeaderProps {
   children?: React.ReactNode;
 }
 
-function getCookie(name: string): string | null {
-  if (typeof document === "undefined") return null;
-  const match = document.cookie.match(
-    new RegExp("(?:^|; )" + name + "=([^;]*)")
-  );
-  return match ? decodeURIComponent(match[1]) : null;
-}
-
-function setCookie(
-  name: string,
-  value: string,
-  maxAgeSeconds = 60 * 60 * 24 * 365
-) {
-  if (typeof document === "undefined") return;
-  const isSecure =
-    typeof location !== "undefined" && location.protocol === "https:";
-  const expires = new Date(Date.now() + maxAgeSeconds * 1000).toUTCString();
-  const cookie = `${name}=${encodeURIComponent(
-    value
-  )}; Path=/; Max-Age=${maxAgeSeconds}; Expires=${expires}; SameSite=Lax${
-    isSecure ? "; Secure" : ""
-  }`;
-  document.cookie = cookie;
-}
-
 export default function Header({ id, role, className, children }: HeaderProps) {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [hasAnimated, setHasAnimated] = useState(true); // Default to true to prevent animations
-  const router = useRouter();
+  const [hasAnimated, setHasAnimated] = useState(true);
 
-  // Load theme preference on mount: cookie -> localStorage -> system
+  // Simple theme handling - client-only
   useEffect(() => {
     // Check if header has already animated in this session
-    const headerAnimated =
-      typeof window !== "undefined"
-        ? localStorage.getItem("headerAnimated")
-        : null;
-
+    const headerAnimated = localStorage.getItem("headerAnimated");
     if (headerAnimated === "true") {
       setHasAnimated(true);
     } else {
       setHasAnimated(false);
-      // Mark as animated after initial load
       setTimeout(() => {
         setHasAnimated(true);
-        if (typeof window !== "undefined") {
-          localStorage.setItem("headerAnimated", "true");
-        }
+        localStorage.setItem("headerAnimated", "true");
       }, 1500);
     }
 
-    const cookieTheme = getCookie("theme");
-    if (cookieTheme === "dark" || cookieTheme === "light") {
-      const dark = cookieTheme === "dark";
-      setIsDarkMode(dark);
-      dark
-        ? document.documentElement.classList.add("dark")
-        : document.documentElement.classList.remove("dark");
-      return;
-    }
-    const savedTheme =
-      typeof window !== "undefined" ? localStorage.getItem("darkMode") : null;
+    // Simple theme detection
+    const savedTheme = localStorage.getItem("darkMode");
     if (savedTheme) {
       const darkMode = savedTheme === "true";
       setIsDarkMode(darkMode);
-      darkMode
-        ? document.documentElement.classList.add("dark")
-        : document.documentElement.classList.remove("dark");
+      if (darkMode) {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
     } else {
       const systemDark = window.matchMedia(
         "(prefers-color-scheme: dark)"
       ).matches;
       setIsDarkMode(systemDark);
-      if (systemDark) document.documentElement.classList.add("dark");
+      if (systemDark) {
+        document.documentElement.classList.add("dark");
+      }
     }
   }, []);
 
-  // Persist preference when dark mode changes
-  useEffect(() => {
-    // Cookie takes precedence for SSR and refreshes
-    setCookie("theme", isDarkMode ? "dark" : "light");
-    // Keep localStorage for backward compatibility
-    localStorage.setItem("darkMode", isDarkMode.toString());
+  const toggleDarkMode = () => {
+    const newDarkMode = !isDarkMode;
+    setIsDarkMode(newDarkMode);
+    localStorage.setItem("darkMode", newDarkMode.toString());
 
-    if (isDarkMode) {
+    if (newDarkMode) {
       document.documentElement.classList.add("dark");
     } else {
       document.documentElement.classList.remove("dark");
     }
-  }, [isDarkMode]);
-
-  const toggleDarkMode = async () => {
-    const next = !isDarkMode;
-    // Apply immediately so UI updates without waiting for effects
-    if (next) {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-    setCookie("theme", next ? "dark" : "light");
-    localStorage.setItem("darkMode", String(next));
-    // Also set cookie server-side so SSR picks it up reliably
-    try {
-      await fetch("/api/theme", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ theme: next ? "dark" : "light" }),
-        credentials: "same-origin",
-        cache: "no-store",
-      }).catch(() => {});
-      // Re-render server components so SSR uses the latest cookie
-      router.refresh();
-    } catch {}
-    setIsDarkMode(next);
   };
 
   const toggleMobileMenu = () => {

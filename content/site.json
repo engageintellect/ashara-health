@@ -64,6 +64,21 @@
       "name": "Follow-Up Visit",
       "note": "Ongoing support to refine your treatment plan",
       "price": "$99.00"
+    },
+    {
+      "name": "Telehealth Basic",
+      "note": "30 min virtual consultation",
+      "price": "$150.00"
+    },
+    {
+      "name": "Telehealth Premium",
+      "note": "60 min comprehensive virtual visit",
+      "price": "$275.00"
+    },
+    {
+      "name": "Telehealth Elite",
+      "note": "90 min in-depth virtual consultation with treatment plan",
+      "price": "$375.00"
     }
   ],
   "testimonials": [

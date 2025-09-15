@@ -72,13 +72,13 @@ export default function Services() {
         </ScrollReveal>
 
         <ScrollReveal
-          className="mt-20 grid gap-8 sm:grid-cols-2 lg:grid-cols-3"
+          className="mt-20 grid gap-2 sm:gap-5 sm:grid-cols-2 lg:grid-cols-4"
           delay={0.2}
         >
           {site.services.map((service, index) => (
             <div
               key={service}
-              className="group relative overflow-hidden rounded-3xl bg-white/70 dark:bg-stone-800/70 backdrop-blur-sm border border-stone-200/50 dark:border-stone-700/50 shadow-xl shadow-stone-900/5 dark:shadow-stone-900/20 hover:shadow-2xl hover:shadow-stone-900/10 dark:hover:shadow-stone-900/30 transition-all duration-500 hover:-translate-y-2"
+              className="group relative overflow-hidden rounded-3xl bg-white/70 dark:bg-stone-800/70 backdrop-blur-sm border border-stone-200/50 dark:border-stone-700/50 shadow-xl shadow-stone-900/5 dark:shadow-stone-900/20 hover:shadow-2xl hover:shadow-stone-900/10 dark:hover:shadow-stone-900/30 transition-all duration-500 lg:hover:-translate-y-2"
             >
               {/* Gradient Overlay */}
               <div className="absolute inset-0 bg-gradient-to-br from-teal-500/5 via-transparent to-stone-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -86,13 +86,13 @@ export default function Services() {
               {/* Subtle Border Glow */}
               <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-teal-500/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm" />
 
-              <a href="#contact" className="relative block p-8 h-72">
+              <a href="#contact" className="relative block p-5 sm:p-8 h-full">
                 {/* Icon Container */}
                 <div className="relative mb-6">
                   <div className="flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-teal-50 to-teal-100 dark:from-teal-900/30 dark:to-teal-800/30 border border-teal-200/50 dark:border-teal-700/50 group-hover:scale-110 transition-transform duration-300">
                     <Icon
                       icon={serviceIcons[service]}
-                      className="w-8 h-8 text-teal-600 dark:text-teal-400 group-hover:text-teal-700 dark:group-hover:text-teal-300 transition-colors duration-300"
+                      className="w-6 h-6 text-teal-600 dark:text-teal-400 group-hover:text-teal-700 dark:group-hover:text-teal-300 transition-colors duration-300"
                     />
                   </div>
                   {/* Pulse Effect */}

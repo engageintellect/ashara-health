@@ -18,26 +18,47 @@ const CustomMap = dynamic(() => import("@/components/CustomMap"), {
 
 export default function Clinic() {
   return (
-    <section className="relative py-24 sm:py-32 bg-gradient-to-br from-stone-50 via-white to-stone-100 dark:from-stone-950 dark:via-stone-900 dark:to-stone-800 overflow-hidden">
+    <section
+      // className="relative py-24 sm:py-32 bg-gradient-to-br from-stone-50 via-white to-stone-100 dark:from-stone-950 dark:via-stone-900 dark:to-stone-800 overflow-hidden"
+      className="relative isolate py-24 sm:py-32 overflow-hidden"
+    >
       {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-[0.02] dark:opacity-[0.05]">
+      {/* <div className="absolute inset-0 opacity-[0.02] dark:opacity-[0.05]">
         <div
           className="absolute inset-0"
           style={{
             backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='1'%3E%3Cpath d='M30 30m-2 0a2 2 0 1 1 4 0a2 2 0 1 1 -4 0'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
           }}
         />
-      </div>
+      </div> */}
+
+      {/* Video Background */}
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover -z-10"
+      >
+        {/* You can replace this with your desired video URL */}
+        <source
+          src="https://cdn.pixabay.com/video/2021/02/18/65562-515098354_large.mp4"
+          type="video/mp4"
+        />
+      </video>
+
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-br from-stone-950/50 via-stone-900/50 to-stone-800/50 -z-10" />
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <ScrollReveal className="mx-auto max-w-3xl text-center mb-16">
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-teal-500 to-teal-600 shadow-lg shadow-teal-500/25 mb-6">
             <Icon icon="mdi:map-marker" className="w-8 h-8 text-white" />
           </div>
-          <h2 className="text-4xl font-bold tracking-tight text-stone-900 dark:text-stone-100 sm:text-5xl mb-4">
+          <h2 className="text-4xl font-bold tracking-tight text-stone-100 dark:text-stone-100 sm:text-5xl mb-4">
             Visit Our Clinic
           </h2>
-          <p className="text-lg text-stone-600 dark:text-stone-400 font-medium">
+          <p className="text-lg text-stone-400 dark:text-stone-400 font-medium">
             Located in the heart of Laguna Beach, California
           </p>
           <div className="mt-6 h-1 w-24 bg-gradient-to-r from-teal-500 to-teal-600 rounded-full mx-auto" />
