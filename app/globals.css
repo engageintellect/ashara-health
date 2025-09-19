@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Leaflet CSS */
+@import 'leaflet/dist/leaflet.css';
+
 /* Add scroll padding to account for sticky navbar and smooth scrolling */
 html {
   scroll-behavior: smooth;
