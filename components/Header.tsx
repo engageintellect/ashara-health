@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
 import site from "@/content/site.json";
 import { motion } from "framer-motion";
@@ -58,55 +59,36 @@ interface HeaderProps {
 }
 
 export default function Header({ id, role, className, children }: HeaderProps) {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const { theme, setTheme } = useTheme();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [hasAnimated, setHasAnimated] = useState(true);
+  const [hasAnimated, setHasAnimated] = useState(() => {
+    // Initialize from localStorage on first render
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem("headerAnimated") === "true";
+    }
+    return false;
+  });
+  const [mounted, setMounted] = useState(false);
 
-  // Simple theme handling - client-only
+  // Handle hydration
   useEffect(() => {
-    // Check if header has already animated in this session
+    setMounted(true);
+    
+    // Only run animation logic once on mount
     const headerAnimated = localStorage.getItem("headerAnimated");
-    if (headerAnimated === "true") {
-      setHasAnimated(true);
-    } else {
+    if (headerAnimated !== "true") {
       setHasAnimated(false);
-      setTimeout(() => {
+      const timer = setTimeout(() => {
         setHasAnimated(true);
         localStorage.setItem("headerAnimated", "true");
       }, 1500);
-    }
-
-    // Simple theme detection
-    const savedTheme = localStorage.getItem("darkMode");
-    if (savedTheme) {
-      const darkMode = savedTheme === "true";
-      setIsDarkMode(darkMode);
-      if (darkMode) {
-        document.documentElement.classList.add("dark");
-      } else {
-        document.documentElement.classList.remove("dark");
-      }
-    } else {
-      const systemDark = window.matchMedia(
-        "(prefers-color-scheme: dark)"
-      ).matches;
-      setIsDarkMode(systemDark);
-      if (systemDark) {
-        document.documentElement.classList.add("dark");
-      }
+      
+      return () => clearTimeout(timer);
     }
   }, []);
 
   const toggleDarkMode = () => {
-    const newDarkMode = !isDarkMode;
-    setIsDarkMode(newDarkMode);
-    localStorage.setItem("darkMode", newDarkMode.toString());
-
-    if (newDarkMode) {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
+    setTheme(theme === 'dark' ? 'light' : 'dark');
   };
 
   const toggleMobileMenu = () => {
@@ -126,15 +108,9 @@ export default function Header({ id, role, className, children }: HeaderProps) {
         .filter(Boolean)
         .join(" ")}
     >
-      <motion.div
-        variants={containerVariants}
-        initial={hasAnimated ? "visible" : "hidden"}
-        animate="visible"
-        className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"
-      >
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
-          <motion.a
-            variants={navItemVariants}
+          <a
             href="/"
             aria-label={`${site.brand} — Home`}
             className="flex items-center gap-2 font-semibold tracking-tight text-stone-900 dark:text-stone-100"
@@ -143,34 +119,28 @@ export default function Header({ id, role, className, children }: HeaderProps) {
               A
             </span>
             <span className="text-lg">{site.brand.split(" ")[0]} Health</span>
-          </motion.a>
+          </a>
 
           {/* Desktop Navigation */}
-          <motion.nav
-            variants={containerVariants}
-            initial={hasAnimated ? "visible" : "hidden"}
-            animate="visible"
+          <nav
             className="hidden md:flex items-center gap-6"
             aria-label="Primary"
           >
-            {NAV.map((item, index) => (
-              <motion.a
+            {NAV.map((item) => (
+              <a
                 key={item.href}
-                variants={navItemVariants}
-                custom={index}
                 href={item.href}
                 className="text-sm font-medium text-stone-700 dark:text-stone-300 hover:text-stone-900 dark:hover:text-stone-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700 focus-visible:ring-offset-2 focus-visible:rounded"
               >
                 {item.label}
-              </motion.a>
+              </a>
             ))}
-            <motion.button
-              variants={navItemVariants}
+            <button
               onClick={toggleDarkMode}
               className="inline-flex items-center justify-center rounded-xl border border-stone-300 dark:border-stone-600 bg-white dark:bg-stone-800 px-3 py-2 text-sm font-semibold text-stone-900 dark:text-stone-100 hover:bg-stone-50 dark:hover:bg-stone-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700 focus-visible:ring-offset-2"
               aria-label="Toggle dark mode"
             >
-              {isDarkMode ? (
+              {mounted && theme === 'dark' ? (
                 <svg
                   className="h-4 w-4"
                   fill="none"
@@ -199,25 +169,23 @@ export default function Header({ id, role, className, children }: HeaderProps) {
                   />
                 </svg>
               )}
-            </motion.button>
-            <motion.a
-              variants={navItemVariants}
+            </button>
+            <a
               href="#contact"
               className="inline-flex items-center justify-center rounded-xl bg-teal-600 dark:bg-teal-700 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-teal-700 dark:hover:bg-teal-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700 focus-visible:ring-offset-2"
             >
               Start Journey
-            </motion.a>
-          </motion.nav>
+            </a>
+          </nav>
 
           {/* Mobile Menu Button */}
           <div className="md:hidden flex items-center gap-2">
-            <motion.button
-              variants={navItemVariants}
+            <button
               onClick={toggleDarkMode}
               className="inline-flex items-center justify-center rounded-xl border border-stone-300 dark:border-stone-600 bg-white dark:bg-stone-800 p-2 text-stone-900 dark:text-stone-100 hover:bg-stone-50 dark:hover:bg-stone-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700 focus-visible:ring-offset-2"
               aria-label="Toggle dark mode"
             >
-              {isDarkMode ? (
+              {mounted && theme === 'dark' ? (
                 <svg
                   className="h-4 w-4"
                   fill="none"
@@ -246,9 +214,8 @@ export default function Header({ id, role, className, children }: HeaderProps) {
                   />
                 </svg>
               )}
-            </motion.button>
-            <motion.button
-              variants={navItemVariants}
+            </button>
+            <button
               onClick={toggleMobileMenu}
               className="inline-flex items-center justify-center rounded-xl border border-stone-300 dark:border-stone-600 bg-white dark:bg-stone-800 p-2 text-stone-900 dark:text-stone-100 hover:bg-stone-50 dark:hover:bg-stone-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700 focus-visible:ring-offset-2"
               aria-label="Toggle mobile menu"
@@ -282,19 +249,13 @@ export default function Header({ id, role, className, children }: HeaderProps) {
                   />
                 </svg>
               )}
-            </motion.button>
+            </button>
           </div>
         </div>
 
         {/* Mobile Menu Dropdown */}
         {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3, ease: "easeOut" }}
-            className="md:hidden border-t border-stone-200 dark:border-stone-700 bg-white/95 dark:bg-stone-900/95 backdrop-blur-sm"
-          >
+          <div className="md:hidden border-t border-stone-200 dark:border-stone-700 bg-white/95 dark:bg-stone-900/95 backdrop-blur-sm">
             <nav className="px-4 py-4 space-y-3" aria-label="Mobile">
               {NAV.map((item) => (
                 <a
@@ -314,10 +275,10 @@ export default function Header({ id, role, className, children }: HeaderProps) {
                 Start Journey
               </a>
             </nav>
-          </motion.div>
+          </div>
         )}
         {children}
-      </motion.div>
+      </div>
     </header>
   );
 }

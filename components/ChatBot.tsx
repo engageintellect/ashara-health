@@ -1,21 +1,28 @@
-'use client';
+"use client";
 
-import { useState, useRef, useEffect } from 'react';
-import { useChat, type Message } from 'ai/react';
-import { Icon } from '@iconify/react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useRef, useEffect } from "react";
+import { useChat, type Message } from "ai/react";
+import { Icon } from "@iconify/react";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface ChatBotProps {
   className?: string;
 }
 
-export default function ChatBot({ className = '' }: ChatBotProps) {
+export default function ChatBot({ className = "" }: ChatBotProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  const { messages, input, handleInputChange, handleSubmit, isLoading, setMessages } = useChat({
-    api: '/api/chat',
+  const {
+    messages,
+    input,
+    handleInputChange,
+    handleSubmit,
+    isLoading,
+    setMessages,
+  } = useChat({
+    api: "/api/chat",
     onFinish: () => {
       // Save messages to localStorage after each response
       saveMessagesToStorage();
@@ -24,31 +31,31 @@ export default function ChatBot({ className = '' }: ChatBotProps) {
 
   // Load messages from localStorage on component mount
   useEffect(() => {
-    const savedMessages = localStorage.getItem('ashara-chat-messages');
+    const savedMessages = localStorage.getItem("ashara-chat-messages");
     if (savedMessages) {
       try {
         const parsedMessages = JSON.parse(savedMessages);
         setMessages(parsedMessages);
       } catch (error) {
-        console.error('Failed to load chat history:', error);
+        console.error("Failed to load chat history:", error);
       }
     }
   }, [setMessages]);
 
   // Save messages to localStorage
   const saveMessagesToStorage = () => {
-    localStorage.setItem('ashara-chat-messages', JSON.stringify(messages));
+    localStorage.setItem("ashara-chat-messages", JSON.stringify(messages));
   };
 
   // Auto-scroll to bottom when new messages arrive
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
   // Clear chat history
   const clearChat = () => {
     setMessages([]);
-    localStorage.removeItem('ashara-chat-messages');
+    localStorage.removeItem("ashara-chat-messages");
   };
 
   const toggleChat = () => {
@@ -78,9 +85,9 @@ export default function ChatBot({ className = '' }: ChatBotProps) {
             onClick={toggleChat}
             className="bg-teal-800 hover:bg-teal-700 text-white rounded-full p-4 shadow-lg hover:shadow-xl transition-all duration-200 group"
           >
-            <Icon 
-              icon="mdi:chat" 
-              className="w-6 h-6 group-hover:scale-110 transition-transform duration-200" 
+            <Icon
+              icon="mdi:chat"
+              className="w-6 h-6 group-hover:scale-110 transition-transform duration-200"
             />
           </motion.button>
         )}
@@ -91,24 +98,24 @@ export default function ChatBot({ className = '' }: ChatBotProps) {
         {isOpen && (
           <motion.div
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
-            animate={{ 
-              opacity: 1, 
-              y: 0, 
+            animate={{
+              opacity: 1,
+              y: 0,
               scale: 1,
-              height: isMinimized ? 'auto' : undefined 
+              height: isMinimized ? "auto" : undefined,
             }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            className={`bg-white dark:bg-stone-900 rounded-lg shadow-2xl border border-stone-200 dark:border-stone-700 overflow-hidden ${
-              isMinimized 
-                ? 'w-80' 
-                : 'w-80 sm:w-96 h-[500px] sm:h-[600px]'
+            className={`bg-white dark:bg-stone-900 rounded-2xl shadow-2xl border border-stone-200 dark:border-stone-700 overflow-hidden flex flex-col ${
+              isMinimized ? "w-80" : "w-80 sm:w-96 h-[500px] sm:h-[600px]"
             }`}
           >
             {/* Header */}
             <div className="bg-teal-800 text-white p-4 flex items-center justify-between">
               <div className="flex items-center space-x-2">
                 <Icon icon="mdi:medical-bag" className="w-5 h-5" />
-                <h3 className="font-semibold text-sm sm:text-base">Ashara Health Assistant</h3>
+                <h3 className="font-semibold text-sm sm:text-base">
+                  Ashara Health Assistant
+                </h3>
               </div>
               <div className="flex items-center space-x-2">
                 {!isMinimized && (
@@ -149,13 +156,16 @@ export default function ChatBot({ className = '' }: ChatBotProps) {
             {!isMinimized && (
               <>
                 {/* Messages */}
-                <div className="flex-1 overflow-y-auto p-4 space-y-4 h-80 sm:h-96">
+                <div className="flex-1 overflow-y-auto p-4 space-y-4">
                   {messages.length === 0 && (
                     <div className="text-center text-stone-500 dark:text-stone-400 py-8">
-                      <Icon icon="mdi:chat-outline" className="w-12 h-12 mx-auto mb-4 opacity-50" />
+                      <Icon
+                        icon="mdi:chat-outline"
+                        className="w-12 h-12 mx-auto mb-4 opacity-50"
+                      />
                       <p className="text-sm">
-                        Hi! I'm here to help with questions about Ashara Health & Wellness.
-                        How can I assist you today?
+                        Hi! I'm here to help with questions about Ashara Health
+                        & Wellness. How can I assist you today?
                       </p>
                     </div>
                   )}
@@ -164,17 +174,21 @@ export default function ChatBot({ className = '' }: ChatBotProps) {
                     <div
                       key={message.id}
                       className={`flex ${
-                        message.role === 'user' ? 'justify-end' : 'justify-start'
+                        message.role === "user"
+                          ? "justify-end"
+                          : "justify-start"
                       }`}
                     >
                       <div
                         className={`max-w-[80%] rounded-lg p-3 text-sm ${
-                          message.role === 'user'
-                            ? 'bg-teal-800 text-white'
-                            : 'bg-stone-100 dark:bg-stone-800 text-stone-900 dark:text-stone-100'
+                          message.role === "user"
+                            ? "bg-teal-800 text-white"
+                            : "bg-stone-100 dark:bg-stone-800 text-stone-900 dark:text-stone-100"
                         }`}
                       >
-                        <div className="whitespace-pre-wrap">{message.content}</div>
+                        <div className="whitespace-pre-wrap">
+                          {message.content}
+                        </div>
                       </div>
                     </div>
                   ))}
@@ -185,10 +199,18 @@ export default function ChatBot({ className = '' }: ChatBotProps) {
                         <div className="flex items-center space-x-2">
                           <div className="flex space-x-1">
                             <div className="w-2 h-2 bg-stone-400 rounded-full animate-bounce"></div>
-                            <div className="w-2 h-2 bg-stone-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-                            <div className="w-2 h-2 bg-stone-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                            <div
+                              className="w-2 h-2 bg-stone-400 rounded-full animate-bounce"
+                              style={{ animationDelay: "0.1s" }}
+                            ></div>
+                            <div
+                              className="w-2 h-2 bg-stone-400 rounded-full animate-bounce"
+                              style={{ animationDelay: "0.2s" }}
+                            ></div>
                           </div>
-                          <span className="text-stone-500 dark:text-stone-400">Typing...</span>
+                          <span className="text-stone-500 dark:text-stone-400">
+                            Typing...
+                          </span>
                         </div>
                       </div>
                     </div>
