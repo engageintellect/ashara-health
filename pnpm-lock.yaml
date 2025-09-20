@@ -19,7 +19,7 @@ importers:
         version: 1.2.3(@types/react@18.3.24)(react@18.3.1)
       ai:
         specifier: ^3.4.33
-        version: 3.4.33(openai@4.104.0(zod@3.25.76))(react@18.3.1)(sswr@2.2.0(svelte@5.39.2))(svelte@5.39.2)(vue@3.5.21(typescript@5.9.2))(zod@3.25.76)
+        version: 3.4.33(openai@4.104.0(zod@3.25.76))(react@18.3.1)(sswr@2.2.0(svelte@5.39.3))(svelte@5.39.3)(vue@3.5.21(typescript@5.9.2))(zod@3.25.76)
       class-variance-authority:
         specifier: ^0.7.0
         version: 0.7.1
@@ -2223,8 +2223,8 @@ packages:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
     engines: {node: '>= 0.4'}
 
-  svelte@5.39.2:
-    resolution: {integrity: sha512-x4Me4TgiNprpLugcXyKbcGQhHdjWpITZzSeegv3jjIyA4jObVKBhNchGGDv257Eeolg3vUUSa4n2HGFMYNaPvg==}
+  svelte@5.39.3:
+    resolution: {integrity: sha512-7Jwus6iXviGZAvhqbeYu3NNHA6LGyQ8EbmjdAhJUDade5rrW6g9VnBbRhUuYX4pMZLHozijsFolt88zvKPfsbQ==}
     engines: {node: '>=18'}
 
   swr@2.3.6:
@@ -2482,13 +2482,13 @@ snapshots:
     transitivePeerDependencies:
       - zod
 
-  '@ai-sdk/svelte@0.0.57(svelte@5.39.2)(zod@3.25.76)':
+  '@ai-sdk/svelte@0.0.57(svelte@5.39.3)(zod@3.25.76)':
     dependencies:
       '@ai-sdk/provider-utils': 1.0.22(zod@3.25.76)
       '@ai-sdk/ui-utils': 0.0.50(zod@3.25.76)
-      sswr: 2.2.0(svelte@5.39.2)
+      sswr: 2.2.0(svelte@5.39.3)
     optionalDependencies:
-      svelte: 5.39.2
+      svelte: 5.39.3
     transitivePeerDependencies:
       - zod
 
@@ -3042,13 +3042,13 @@ snapshots:
     dependencies:
       humanize-ms: 1.2.1
 
-  ai@3.4.33(openai@4.104.0(zod@3.25.76))(react@18.3.1)(sswr@2.2.0(svelte@5.39.2))(svelte@5.39.2)(vue@3.5.21(typescript@5.9.2))(zod@3.25.76):
+  ai@3.4.33(openai@4.104.0(zod@3.25.76))(react@18.3.1)(sswr@2.2.0(svelte@5.39.3))(svelte@5.39.3)(vue@3.5.21(typescript@5.9.2))(zod@3.25.76):
     dependencies:
       '@ai-sdk/provider': 0.0.26
       '@ai-sdk/provider-utils': 1.0.22(zod@3.25.76)
       '@ai-sdk/react': 0.0.70(react@18.3.1)(zod@3.25.76)
       '@ai-sdk/solid': 0.0.54(zod@3.25.76)
-      '@ai-sdk/svelte': 0.0.57(svelte@5.39.2)(zod@3.25.76)
+      '@ai-sdk/svelte': 0.0.57(svelte@5.39.3)(zod@3.25.76)
       '@ai-sdk/ui-utils': 0.0.50(zod@3.25.76)
       '@ai-sdk/vue': 0.0.59(vue@3.5.21(typescript@5.9.2))(zod@3.25.76)
       '@opentelemetry/api': 1.9.0
@@ -3060,8 +3060,8 @@ snapshots:
     optionalDependencies:
       openai: 4.104.0(zod@3.25.76)
       react: 18.3.1
-      sswr: 2.2.0(svelte@5.39.2)
-      svelte: 5.39.2
+      sswr: 2.2.0(svelte@5.39.3)
+      svelte: 5.39.3
       zod: 3.25.76
     transitivePeerDependencies:
       - solid-js
@@ -4685,9 +4685,9 @@ snapshots:
 
   source-map-js@1.2.1: {}
 
-  sswr@2.2.0(svelte@5.39.2):
+  sswr@2.2.0(svelte@5.39.3):
     dependencies:
-      svelte: 5.39.2
+      svelte: 5.39.3
       swrev: 4.0.0
 
   stable-hash@0.0.5: {}
@@ -4794,7 +4794,7 @@ snapshots:
 
   supports-preserve-symlinks-flag@1.0.0: {}
 
-  svelte@5.39.2:
+  svelte@5.39.3:
     dependencies:
       '@jridgewell/remapping': 2.3.5
       '@jridgewell/sourcemap-codec': 1.5.5
