@@ -1,6 +1,23 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+
+// Custom hook for media queries
+function useMediaQuery(query: string) {
+  const [matches, setMatches] = useState(false);
+
+  useEffect(() => {
+    const media = window.matchMedia(query);
+    if (media.matches !== matches) {
+      setMatches(media.matches);
+    }
+    const listener = () => setMatches(media.matches);
+    media.addListener(listener);
+    return () => media.removeListener(listener);
+  }, [matches, query]);
+
+  return matches;
+}
 import { useChat, type Message } from "ai/react";
 import { Icon } from "@iconify/react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -13,6 +30,7 @@ export default function ChatBot({ className = "" }: ChatBotProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const isDesktop = useMediaQuery("(min-width: 768px)");
 
   const {
     messages,
@@ -72,41 +90,54 @@ export default function ChatBot({ className = "" }: ChatBotProps) {
   };
 
   return (
-    <div className={`fixed bottom-4 right-4 z-50 ${className}`}>
-      {/* Chat Icon */}
-      <AnimatePresence>
-        {!isOpen && (
-          <motion.button
-            initial={{ scale: 0, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0, opacity: 0 }}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={toggleChat}
-            className="bg-teal-800 hover:bg-teal-700 text-white rounded-full p-4 shadow-lg hover:shadow-xl transition-all duration-200 group"
-          >
-            <Icon
-              icon="mdi:chat"
-              className="w-6 h-6 group-hover:scale-110 transition-transform duration-200"
-            />
-          </motion.button>
-        )}
-      </AnimatePresence>
+    <>
+      {/* Chat Icon - Fixed in bottom right */}
+      <div className={`fixed bottom-4 right-4 z-50 ${className}`}>
+        <AnimatePresence>
+          {!isOpen && (
+            <motion.button
+              initial={{ scale: 0, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0, opacity: 0 }}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={toggleChat}
+              className="bg-teal-800 hover:bg-teal-700 text-white rounded-full p-4 shadow-lg hover:shadow-xl transition-all duration-200 group"
+            >
+              <Icon
+                icon="mdi:chat"
+                className="w-6 h-6 group-hover:scale-110 transition-transform duration-200"
+              />
+            </motion.button>
+          )}
+        </AnimatePresence>
+      </div>
 
-      {/* Chat Window */}
+      {/* Chat Window - Responsive: Sidebar on desktop, bottom sheet on mobile */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: 20, scale: 0.95 }}
+            initial={{ 
+              opacity: 0, 
+              x: isDesktop ? "100%" : 0,
+              y: isDesktop ? 0 : "100%"
+            }}
             animate={{
               opacity: 1,
+              x: 0,
               y: 0,
-              scale: 1,
               height: isMinimized ? "auto" : undefined,
             }}
-            exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            className={`bg-white dark:bg-stone-900 rounded-2xl shadow-2xl border border-stone-200 dark:border-stone-700 overflow-hidden flex flex-col ${
-              isMinimized ? "w-80" : "w-80 sm:w-96 h-[500px] sm:h-[600px]"
+            exit={{ 
+              opacity: 0, 
+              x: isDesktop ? "100%" : 0,
+              y: isDesktop ? 0 : "100%"
+            }}
+            transition={{ type: "spring", damping: 25, stiffness: 300 }}
+            className={`fixed z-50 bg-white dark:bg-stone-900 shadow-2xl border border-stone-200 dark:border-stone-700 overflow-hidden flex flex-col
+              w-full h-[80vh] bottom-0 left-0 rounded-t-2xl
+              md:w-96 md:h-full md:top-0 md:right-0 md:bottom-auto md:left-auto md:rounded-none md:rounded-l-2xl
+              ${isMinimized ? "md:h-auto" : ""}
             }`}
           >
             {/* Header */}
@@ -254,6 +285,6 @@ export default function ChatBot({ className = "" }: ChatBotProps) {
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
+    </>
   );
 }
