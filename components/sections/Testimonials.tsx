@@ -2,10 +2,12 @@ import { Card, CardContent } from "@/components/ui/card";
 import site from "@/content/site.json";
 import ScrollReveal from "@/components/ScrollReveal";
 import { Icon } from "@iconify/react";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 export default function Testimonials() {
   const scrollerRef = useRef<HTMLDivElement>(null);
+  const [expandedCard, setExpandedCard] = useState<number | null>(null);
+  
   const scrollByAmount = (dir: "left" | "right") => {
     const el = scrollerRef.current;
     if (!el) return;
@@ -14,6 +16,10 @@ export default function Testimonials() {
       left: dir === "left" ? -amount : amount,
       behavior: "smooth",
     });
+  };
+
+  const toggleExpanded = (index: number) => {
+    setExpandedCard(expandedCard === index ? null : index);
   };
   return (
     <section className="relative py-24 sm:py-32 bg-gradient-to-br from-stone-50 via-white to-stone-100 dark:from-stone-950 dark:via-stone-900 dark:to-stone-800 overflow-hidden">
@@ -43,65 +49,82 @@ export default function Testimonials() {
 
         <ScrollReveal className="mt-2" delay={0.2}>
           <div className="relative">
-            {/* Horizontal scroller */}
+            {/* Horizontal scroller for all screen sizes */}
             <div
               ref={scrollerRef}
-              className="flex gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth py-4 -mx-4 px-4 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+              className="flex gap-4 lg:gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth py-4 -mx-4 px-4 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
               aria-label="Testimonials carousel"
             >
-              {site.testimonials.map((testimonial, index) => (
-                <div
-                  key={index}
-                  className="flex-none w-80 sm:w-[28rem] lg:w-[32rem] snap-start"
-                >
-                  <div className="group relative overflow-hidden rounded-3xl bg-white/70 dark:bg-stone-900/70 backdrop-blur-sm border border-stone-200/50 dark:border-stone-700/50 shadow-xl shadow-stone-900/5 dark:shadow-stone-900/20 hover:shadow-2xl hover:shadow-stone-900/10 dark:hover:shadow-stone-900/30 transition-all duration-500 lg:hover:-translate-y-2 h-full">
-                    {/* Gradient Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-teal-500/5 via-transparent to-stone-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              {site.testimonials.map((testimonial, index) => {
+                const isExpanded = expandedCard === index;
+                const isLongText = testimonial.text.length > 150;
+                
+                return (
+                  <div
+                    key={index}
+                    className="flex-none w-72 sm:w-80 lg:w-96 snap-start"
+                  >
+                    <div className={`bg-white dark:bg-stone-800 rounded-2xl shadow-lg overflow-hidden border border-stone-200/50 dark:border-stone-700/50 flex flex-col transition-all duration-300 ${
+                      isExpanded ? 'h-auto' : 'h-72'
+                    }`}>
+                      <div className="relative p-4 sm:p-5 lg:p-6 flex flex-col h-full">
+                        {/* Header: Stars and Quote Icon */}
+                        <div className="flex items-center justify-between mb-4 flex-shrink-0">
+                          <div className="flex items-center gap-1">
+                            {[...Array(5)].map((_, i) => (
+                              <Icon
+                                key={i}
+                                icon="mdi:star"
+                                className="w-4 h-4 text-yellow-400"
+                              />
+                            ))}
+                          </div>
+                          <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-teal-100 dark:bg-teal-900/30 border border-teal-200/50 dark:border-teal-700/50 flex items-center justify-center">
+                            <Icon
+                              icon="mdi:format-quote-open"
+                              className="w-4 h-4 lg:w-5 lg:h-5 text-teal-600 dark:text-teal-400"
+                            />
+                          </div>
+                        </div>
 
-                    <div className="relative p-8">
-                      {/* Quote Icon */}
-                      <div className="absolute top-6 right-6 w-12 h-12 rounded-full bg-gradient-to-br from-teal-50 to-teal-100 dark:from-teal-900/30 dark:to-teal-800/30 border border-teal-200/50 dark:border-teal-700/50 flex items-center justify-center opacity-60 group-hover:opacity-100 transition-opacity duration-300">
-                        <Icon
-                          icon="mdi:format-quote-open"
-                          className="w-6 h-6 text-teal-600 dark:text-teal-400"
-                        />
-                      </div>
+                        {/* Testimonial Text */}
+                        <div className="flex-1 mb-4 overflow-hidden">
+                          <blockquote className={`text-stone-700 dark:text-stone-300 leading-relaxed text-sm lg:text-base italic transition-all duration-300 ${
+                            isExpanded ? '' : 'line-clamp-4'
+                          }`}>
+                            "{testimonial.text}"
+                          </blockquote>
+                          
+                          {/* Read More/Less Button */}
+                          {isLongText && (
+                            <button
+                              onClick={() => toggleExpanded(index)}
+                              className="mt-3 text-teal-600 dark:text-teal-400 text-xs font-medium hover:text-teal-700 dark:hover:text-teal-300 transition-colors flex items-center gap-1"
+                            >
+                              <span>{isExpanded ? 'Read Less' : 'Read More'}</span>
+                              <Icon 
+                                icon={isExpanded ? "mdi:chevron-up" : "mdi:chevron-down"} 
+                                className="w-3 h-3"
+                              />
+                            </button>
+                          )}
+                        </div>
 
-                      {/* Star Rating */}
-                      <div className="flex items-center gap-1 mb-6">
-                        {[...Array(5)].map((_, i) => (
-                          <Icon
-                            key={i}
-                            icon="mdi:star"
-                            className="w-5 h-5 text-yellow-400 drop-shadow-sm"
-                          />
-                        ))}
-                      </div>
-
-                      {/* Testimonial Text */}
-                      <blockquote className="text-stone-700 dark:text-stone-300 mb-6 leading-relaxed text-sm font-medium italic">
-                        "{testimonial.text}"
-                      </blockquote>
-
-                      {/* Author Info */}
-                      <div className="flex items-center justify-between pt-4 border-t border-stone-200/50 dark:border-stone-700/50">
-                        <div>
-                          <cite className="font-bold text-stone-900 dark:text-stone-100 not-italic text-lg">
+                        {/* Author Info */}
+                        <div className="flex items-center justify-between pt-3 border-t border-stone-200/50 dark:border-stone-700/50 flex-shrink-0">
+                          <cite className="font-semibold text-stone-900 dark:text-stone-100 not-italic text-sm lg:text-base">
                             {testimonial.name}
                           </cite>
-                        </div>
-                        <div className="flex items-center gap-2 text-sm text-stone-500 dark:text-stone-400">
-                          <Icon icon="mdi:clock-outline" className="w-4 h-4" />
-                          <span>{testimonial.timeAgo}</span>
+                          <div className="flex items-center gap-1 text-xs text-stone-500 dark:text-stone-400">
+                            <Icon icon="mdi:clock-outline" className="w-3 h-3" />
+                            <span>{testimonial.timeAgo}</span>
+                          </div>
                         </div>
                       </div>
-
-                      {/* Hover Accent Line */}
-                      <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-teal-500 to-teal-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
                     </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
 
             {/* Navigation Arrows */}
