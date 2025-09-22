@@ -1,6 +1,6 @@
 # Ashara Health & Wellness
 
-A modern, responsive website for Ashara Health & Wellness - a naturopathic medicine practice in Laguna Beach, California. Built with Next.js 15, TypeScript, and Tailwind CSS, featuring glass morphism design, smooth animations, and a premium medical aesthetic.
+A modern, responsive website for Ashara Health & Wellness - a naturopathic medicine practice in Laguna Beach, California. Built with Next.js 15, TypeScript, and Tailwind CSS, featuring glass morphism design, smooth animations, AI-powered chat assistance, and a premium medical aesthetic.
 
 ## 🌟 Features
 
@@ -15,11 +15,15 @@ A modern, responsive website for Ashara Health & Wellness - a naturopathic medic
 ### 🏥 Healthcare-Focused Sections
 
 - **Hero section** with video background and compelling messaging
+- **Vision & approach** highlighting naturopathic philosophy
 - **Services showcase** with detailed descriptions of 12+ treatments
+- **Meet our team** with professional photo cards, bios, and specialties
 - **Conditions treated** with targeted, solution-focused descriptions
+- **Patient testimonials** with authentic reviews and ratings
 - **Membership plans** with modern pricing cards and "Most Popular" badges
+- **FAQ section** with comprehensive answers to common questions
 - **Interactive contact form** with validation and error handling
-- **Clinic information** with integrated map and business hours
+- **Clinic information** with custom Leaflet map integration and business hours
 
 ### ⚡ Performance & UX
 
@@ -33,22 +37,51 @@ A modern, responsive website for Ashara Health & Wellness - a naturopathic medic
 
 - **TypeScript** for type safety and better development experience
 - **Component-based architecture** with reusable UI components
+- **AI-powered chatbot** with OpenAI integration and healthcare context
 - **Custom hooks and utilities** for enhanced functionality
-- **Interactive map integration** with Leaflet
+- **Interactive map integration** with custom Leaflet implementation
+- **Responsive chat interface** with desktop sidebar and mobile bottom sheet
 - **Form validation** with real-time feedback
-- **API routes** for contact form submission
+- **API routes** for contact form and chat functionality
+- **Local storage** for chat history persistence
+- **Dark mode support** throughout all components
+
+### 🤖 AI Chat Assistant
+
+- **Healthcare-focused AI** trained on naturopathic medicine context
+- **Responsive design** with different layouts for mobile and desktop
+- **Chat history persistence** using localStorage
+- **Streaming responses** with typing indicators
+- **Minimize/restore functionality** for better UX
+- **Teal-themed interface** matching site branding
 
 ## 🚀 Tech Stack
 
+### Core Framework
 - **Framework:** Next.js 15 (App Router)
 - **Language:** TypeScript
+- **Package Manager:** pnpm
+
+### Styling & UI
 - **Styling:** Tailwind CSS
 - **Animations:** Framer Motion
-- **Icons:** Iconify React
-- **Maps:** Leaflet & React Leaflet
+- **Icons:** Iconify React + Lucide React
 - **UI Components:** Radix UI primitives
+- **Themes:** next-themes for dark mode
+
+### AI & Chat
+- **AI SDK:** Vercel AI SDK v5
+- **AI Provider:** OpenAI GPT-4
+- **Streaming:** Real-time chat responses
+
+### Maps & Location
+- **Maps:** Leaflet with custom markers
+- **Map Types:** @types/leaflet for TypeScript
+
+### Validation & Utils
 - **Validation:** Zod
-- **Package Manager:** pnpm
+- **Class Utils:** clsx, tailwind-merge
+- **Variants:** class-variance-authority
 
 ## 📦 Installation
 
@@ -65,13 +98,22 @@ A modern, responsive website for Ashara Health & Wellness - a naturopathic medic
    pnpm install
    ```
 
-3. **Start the development server**
+3. **Set up environment variables**
+
+   Create a `.env.local` file in the root directory:
+
+   ```bash
+   # OpenAI API Key for chat functionality
+   OPENAI_API_KEY=your_openai_api_key_here
+   ```
+
+4. **Start the development server**
 
    ```bash
    pnpm dev
    ```
 
-4. **Open your browser**
+5. **Open your browser**
    Navigate to [http://localhost:3000](http://localhost:3000)
 
 ## 🏗️ Project Structure
@@ -80,22 +122,33 @@ A modern, responsive website for Ashara Health & Wellness - a naturopathic medic
 ashara-health/
 ├── app/                    # Next.js App Router
 │   ├── api/               # API routes
+│   │   └── chat/          # AI chat endpoint
 │   ├── globals.css        # Global styles
-│   ├── layout.tsx         # Root layout
-│   └── page.tsx           # Home page
+│   ├── layout.tsx         # Root layout with ChatBot
+│   └── page.tsx           # Home page with all sections
 ├── components/            # React components
 │   ├── sections/          # Page sections
-│   │   ├── Hero.tsx
-│   │   ├── Services.tsx
-│   │   ├── Conditions.tsx
-│   │   ├── Memberships.tsx
-│   │   └── Contact.tsx
+│   │   ├── Hero.tsx       # Hero with video background
+│   │   ├── Vision.tsx     # Vision & philosophy
+│   │   ├── Conditions.tsx # Conditions treated
+│   │   ├── Approach.tsx   # Treatment approach
+│   │   ├── Services.tsx   # Services showcase
+│   │   ├── Team.tsx       # Meet our team (NEW)
+│   │   ├── Testimonials.tsx # Patient reviews
+│   │   ├── Memberships.tsx # Pricing plans
+│   │   ├── Faq.tsx        # FAQ section
+│   │   ├── Clinic.tsx     # Clinic info with map
+│   │   └── Contact.tsx    # Contact form
 │   ├── ui/                # Reusable UI components
-│   └── CustomMap.tsx      # Interactive map component
+│   ├── ChatBot.tsx        # AI chat assistant (NEW)
+│   ├── CustomMap.tsx      # Leaflet map with custom markers
+│   └── ScrollReveal.tsx   # Animation wrapper
 ├── content/               # Content configuration
 │   └── site.json          # Site data and configuration
 ├── lib/                   # Utilities and helpers
+│   └── utils.ts           # Utility functions
 └── public/                # Static assets
+    └── images/            # Image assets
 ```
 
 ## 🎨 Design System
@@ -175,6 +228,13 @@ pnpm start
 2. Add to main page in `app/page.tsx`
 3. Update navigation in `site.json` if needed
 
+### Setting Up AI Chat
+
+1. Get OpenAI API key from [OpenAI Platform](https://platform.openai.com)
+2. Add to `.env.local` as `OPENAI_API_KEY`
+3. Customize chat context in `app/api/chat/route.ts`
+4. Modify chat UI in `components/ChatBot.tsx`
+
 ### Customizing Animations
 
 - Modify `framer-motion` variants in components
@@ -200,6 +260,47 @@ className = "hover:shadow-2xl hover:-translate-y-2 transition-all duration-500";
 
 ```tsx
 className = "grid gap-8 sm:grid-cols-2 lg:grid-cols-3";
+```
+
+### AI Chat Integration
+
+```tsx
+// API Route (app/api/chat/route.ts)
+import { openai } from '@ai-sdk/openai';
+import { streamText } from 'ai';
+
+export async function POST(req: Request) {
+  const { messages } = await req.json();
+  
+  const result = await streamText({
+    model: openai('gpt-4'),
+    messages,
+    system: "You are a helpful assistant for Ashara Health & Wellness..."
+  });
+  
+  return result.toDataStreamResponse();
+}
+```
+
+### Custom Leaflet Map
+
+```tsx
+// Custom marker with theme colors
+const customIcon = L.divIcon({
+  html: `<svg>...</svg>`, // Custom SVG with teal branding
+  iconSize: [48, 60],
+  iconAnchor: [24, 60]
+});
+```
+
+### Responsive Chat Interface
+
+```tsx
+// Desktop: Right sidebar, Mobile: Bottom sheet
+const chatVariants = {
+  desktop: { x: 0, width: "384px" },
+  mobile: { y: 0, height: "80vh" }
+};
 ```
 
 ## 📞 Contact & Support
