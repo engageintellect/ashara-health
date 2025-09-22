@@ -78,7 +78,7 @@ export default function Clinic() {
                 {/* Clinic Info */}
                 <div className="space-y-6">
                   <div>
-                    <div className="flex items-center gap-3 mb-4">
+                    {/* <div className="flex items-center gap-3 mb-4">
                       <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-teal-50 to-teal-100 dark:from-teal-900/30 dark:to-teal-800/30 border border-teal-200/50 dark:border-teal-700/50 flex items-center justify-center">
                         <Icon
                           icon="mdi:hospital-building"
@@ -93,7 +93,7 @@ export default function Clinic() {
                           Naturopathic Medicine Practice
                         </p>
                       </div>
-                    </div>
+                    </div> */}
 
                     <div className="flex items-start gap-3 mb-4">
                       <Icon
