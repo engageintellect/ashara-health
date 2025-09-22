@@ -117,99 +117,198 @@ export default function Memberships() {
           <div className="mt-6 h-1 w-24 bg-gradient-to-r from-teal-500 to-teal-600 rounded-full mx-auto" />
         </ScrollReveal>
 
-        <ScrollReveal
-          className="mt-20 grid gap-2 sm:gap-5 lg:grid-cols-3"
-          delay={0.2}
-        >
-          {site.memberships.map((m, index) => {
-            const details =
-              membershipDetails[m.name as keyof typeof membershipDetails];
-
-            return (
+        <ScrollReveal className="mt-20" delay={0.2}>
+          <div className="relative">
+            {/* Mobile: Horizontal Scroller */}
+            <div className="lg:hidden">
               <div
-                key={m.name}
-                className={`relative group overflow-hidden rounded-3xl ${
-                  details?.popular
-                    ? "bg-gradient-to-br from-teal-50/80 to-teal-100/80 dark:from-teal-900/40 dark:to-teal-800/40 border-2 border-teal-200 dark:border-teal-700 shadow-xl shadow-teal-500/10"
-                    : "bg-white/70 dark:bg-stone-900/70 border border-stone-200/50 dark:border-stone-700/50 shadow-xl shadow-stone-900/5 dark:shadow-stone-900/20"
-                } backdrop-blur-sm hover:shadow-2xl lg:hover:-translate-y-1 transition-all duration-500`}
+                className="flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-smooth py-4 -mx-4 px-4 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+                aria-label="Membership plans carousel"
               >
-                {details?.popular && (
-                  <div className="absolute top-4 right-4 z-10">
-                    <span className="inline-flex items-center rounded-full bg-gradient-to-r from-teal-500 to-teal-600 px-3 py-1 text-xs font-semibold text-white shadow-lg">
-                      Most Popular
-                    </span>
-                  </div>
-                )}
+                {site.memberships.map((m, index) => {
+                  const details =
+                    membershipDetails[m.name as keyof typeof membershipDetails];
 
-                {/* Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-br from-teal-500/5 via-transparent to-stone-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  return (
+                    <div
+                      key={m.name}
+                      className="flex-none w-72 sm:w-80 snap-start"
+                    >
+                      <div className={`relative overflow-hidden rounded-2xl h-full ${
+                        details?.popular
+                          ? "bg-white dark:bg-stone-800 border-2 border-teal-500 shadow-lg shadow-teal-500/20"
+                          : "bg-white dark:bg-stone-800 border border-stone-200/50 dark:border-stone-700/50 shadow-lg"
+                      }`}>
+                        {details?.popular && (
+                          <div className="absolute top-3 right-3 z-10">
+                            <span className="inline-flex items-center rounded-full bg-gradient-to-r from-teal-500 to-teal-600 px-2 py-1 text-xs font-semibold text-white">
+                              Popular
+                            </span>
+                          </div>
+                        )}
 
-                <div className="relative p-5 sm:p-8">
-                  {/* Header */}
-                  <div className="text-center mb-8">
-                    <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-teal-50 to-teal-100 dark:from-teal-900/30 dark:to-teal-800/30 border border-teal-200/50 dark:border-teal-700/50 group-hover:scale-110 transition-transform duration-300">
-                      <Icon
-                        icon={details?.icon || "mdi:medical-bag"}
-                        className="h-8 w-8 text-teal-600 dark:text-teal-400 group-hover:text-teal-700 dark:group-hover:text-teal-300 transition-colors duration-300"
-                      />
+                        <div className="p-4">
+                          {/* Header */}
+                          <div className="text-center mb-4">
+                            <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-teal-100 dark:bg-teal-900/30 border border-teal-200/50 dark:border-teal-700/50">
+                              <Icon
+                                icon={details?.icon || "mdi:medical-bag"}
+                                className="h-6 w-6 text-teal-600 dark:text-teal-400"
+                              />
+                            </div>
+                            <h3 className="text-lg font-bold text-stone-900 dark:text-stone-100 mb-1">
+                              {details?.title || m.name}
+                            </h3>
+                            <p className="text-xs text-stone-600 dark:text-stone-400 line-clamp-2">
+                              {details?.note || m.note}
+                            </p>
+                          </div>
+
+                          {/* Price */}
+                          <div className="text-center mb-4">
+                            <div className="flex items-baseline justify-center mb-1">
+                              <span className="text-3xl font-bold text-stone-900 dark:text-stone-100">
+                                {details?.price || m.price}
+                              </span>
+                            </div>
+                            <p className="text-xs text-stone-500 dark:text-stone-500 uppercase tracking-wide">
+                              Per Session
+                            </p>
+                          </div>
+
+                          {/* Features - Compact */}
+                          <ul className="space-y-2 mb-4">
+                            {details?.features?.slice(0, 3).map((feature, featureIndex) => (
+                              <li key={featureIndex} className="flex items-start">
+                                <div className="flex-shrink-0 w-4 h-4 rounded-full bg-teal-500 flex items-center justify-center mt-0.5">
+                                  <Icon
+                                    icon="mdi:check"
+                                    className="h-2.5 w-2.5 text-white"
+                                  />
+                                </div>
+                                <span className="ml-2 text-xs text-stone-700 dark:text-stone-300 leading-relaxed">
+                                  {feature}
+                                </span>
+                              </li>
+                            ))}
+                            {details?.features && details.features.length > 3 && (
+                              <li className="text-xs text-stone-500 dark:text-stone-400 ml-6">
+                                +{details.features.length - 3} more features
+                              </li>
+                            )}
+                          </ul>
+
+                          {/* CTA Button */}
+                          <a href="#contact" className="block">
+                            <Button
+                              className={`w-full rounded-lg py-2 text-sm font-semibold ${
+                                details?.popular
+                                  ? "bg-gradient-to-r from-teal-500 to-teal-600 hover:from-teal-600 hover:to-teal-700 text-white"
+                                  : "bg-stone-100 hover:bg-stone-200 text-stone-900 dark:bg-stone-700 dark:hover:bg-stone-600 dark:text-stone-100"
+                              }`}
+                              variant={details?.popular ? "default" : "secondary"}
+                            >
+                              Get Started
+                            </Button>
+                          </a>
+                        </div>
+                      </div>
                     </div>
-                    <h3 className="text-2xl font-bold text-stone-900 dark:text-stone-100 mb-2">
-                      {details?.title || m.name}
-                    </h3>
-                    <p className="text-sm text-stone-600 dark:text-stone-400 font-medium">
-                      {details?.note || m.note}
-                    </p>
-                  </div>
+                  );
+                })}
+              </div>
+            </div>
 
-                  {/* Price */}
-                  <div className="text-center mb-8">
-                    <div className="flex items-baseline justify-center mb-2">
-                      <span className="text-5xl font-bold bg-gradient-to-r from-stone-900 to-stone-700 dark:from-stone-100 dark:to-stone-300 bg-clip-text text-transparent">
-                        {details?.price || m.price}
-                      </span>
-                    </div>
-                    <p className="text-xs text-stone-500 dark:text-stone-500 uppercase tracking-wide font-semibold">
-                      Per Session
-                    </p>
-                  </div>
+            {/* Desktop: Grid Layout */}
+            <div className="hidden lg:grid gap-5 grid-cols-3">
+              {site.memberships.map((m, index) => {
+                const details =
+                  membershipDetails[m.name as keyof typeof membershipDetails];
 
-                  {/* Features */}
-                  <ul className="space-y-4 mb-8">
-                    {details?.features?.map((feature, featureIndex) => (
-                      <li key={featureIndex} className="flex items-start">
-                        <div className="flex-shrink-0 w-5 h-5 rounded-full bg-gradient-to-r from-teal-500 to-teal-600 flex items-center justify-center mt-0.5">
+                return (
+                  <div
+                    key={m.name}
+                    className={`relative overflow-hidden rounded-2xl ${
+                      details?.popular
+                        ? "bg-white dark:bg-stone-800 border-2 border-teal-500 shadow-lg shadow-teal-500/20"
+                        : "bg-white dark:bg-stone-800 border border-stone-200/50 dark:border-stone-700/50 shadow-lg"
+                    }`}
+                  >
+                    {details?.popular && (
+                      <div className="absolute top-4 right-4 z-10">
+                        <span className="inline-flex items-center rounded-full bg-gradient-to-r from-teal-500 to-teal-600 px-3 py-1 text-xs font-semibold text-white shadow-lg">
+                          Most Popular
+                        </span>
+                      </div>
+                    )}
+
+                    <div className="relative p-6">
+                      {/* Header */}
+                      <div className="text-center mb-6">
+                        <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-teal-100 dark:bg-teal-900/30 border border-teal-200/50 dark:border-teal-700/50">
                           <Icon
-                            icon="mdi:check"
-                            className="h-3 w-3 text-white"
+                            icon={details?.icon || "mdi:medical-bag"}
+                            className="h-8 w-8 text-teal-600 dark:text-teal-400"
                           />
                         </div>
-                        <span className="ml-3 text-sm text-stone-700 dark:text-stone-300 leading-relaxed">
-                          {feature}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
+                        <h3 className="text-2xl font-bold text-stone-900 dark:text-stone-100 mb-2">
+                          {details?.title || m.name}
+                        </h3>
+                        <p className="text-sm text-stone-600 dark:text-stone-400 font-medium">
+                          {details?.note || m.note}
+                        </p>
+                      </div>
 
-                  {/* CTA Button */}
-                  <div>
-                    <a href="#contact" className="block">
-                      <Button
-                        className={`w-full rounded-xl py-3 font-semibold transition-all duration-300 ${
-                          details?.popular
-                            ? "bg-gradient-to-r from-teal-500 to-teal-600 hover:from-teal-600 hover:to-teal-700 text-white shadow-lg hover:shadow-xl"
-                            : "bg-stone-100 hover:bg-stone-200 text-stone-900 dark:bg-stone-800 dark:hover:bg-stone-700 dark:text-stone-100"
-                        }`}
-                        variant={details?.popular ? "default" : "secondary"}
-                      >
-                        Get Started
-                      </Button>
-                    </a>
+                      {/* Price */}
+                      <div className="text-center mb-6">
+                        <div className="flex items-baseline justify-center mb-2">
+                          <span className="text-4xl font-bold text-stone-900 dark:text-stone-100">
+                            {details?.price || m.price}
+                          </span>
+                        </div>
+                        <p className="text-xs text-stone-500 dark:text-stone-500 uppercase tracking-wide font-semibold">
+                          Per Session
+                        </p>
+                      </div>
+
+                      {/* Features */}
+                      <ul className="space-y-3 mb-6">
+                        {details?.features?.map((feature, featureIndex) => (
+                          <li key={featureIndex} className="flex items-start">
+                            <div className="flex-shrink-0 w-5 h-5 rounded-full bg-gradient-to-r from-teal-500 to-teal-600 flex items-center justify-center mt-0.5">
+                              <Icon
+                                icon="mdi:check"
+                                className="h-3 w-3 text-white"
+                              />
+                            </div>
+                            <span className="ml-3 text-sm text-stone-700 dark:text-stone-300 leading-relaxed">
+                              {feature}
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+
+                      {/* CTA Button */}
+                      <div>
+                        <a href="#contact" className="block">
+                          <Button
+                            className={`w-full rounded-xl py-3 font-semibold ${
+                              details?.popular
+                                ? "bg-gradient-to-r from-teal-500 to-teal-600 hover:from-teal-600 hover:to-teal-700 text-white shadow-lg hover:shadow-xl"
+                                : "bg-stone-100 hover:bg-stone-200 text-stone-900 dark:bg-stone-800 dark:hover:bg-stone-700 dark:text-stone-100"
+                            }`}
+                            variant={details?.popular ? "default" : "secondary"}
+                          >
+                            Get Started
+                          </Button>
+                        </a>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-            );
-          })}
+                );
+              })}
+            </div>
+          </div>
         </ScrollReveal>
 
         {/* Call to Action */}

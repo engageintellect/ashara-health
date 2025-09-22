@@ -41,6 +41,7 @@ const serviceDescriptions: Record<string, string> = {
 };
 
 export default function Services() {
+
   return (
     <section
       id="services"
@@ -71,55 +72,78 @@ export default function Services() {
           <div className="mt-6 h-1 w-24 bg-gradient-to-r from-teal-500 to-teal-600 rounded-full mx-auto" />
         </ScrollReveal>
 
-        <ScrollReveal
-          className="mt-20 grid gap-2 sm:gap-5 sm:grid-cols-2 lg:grid-cols-4"
-          delay={0.2}
-        >
-          {site.services.map((service, index) => (
-            <div
-              key={service}
-              className="group relative overflow-hidden rounded-3xl bg-white/70 dark:bg-stone-800/70 backdrop-blur-sm border border-stone-200/50 dark:border-stone-700/50 shadow-xl shadow-stone-900/5 dark:shadow-stone-900/20 hover:shadow-2xl hover:shadow-stone-900/10 dark:hover:shadow-stone-900/30 transition-all duration-500 lg:hover:-translate-y-2"
-            >
-              {/* Gradient Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-br from-teal-500/5 via-transparent to-stone-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+        <ScrollReveal className="mt-20" delay={0.2}>
+          <div className="relative">
+            {/* Mobile: Horizontal Scroller */}
+            <div className="lg:hidden">
+              <div
+                className="flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-smooth py-4 -mx-4 px-4 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+                aria-label="Services carousel"
+              >
+                {site.services.map((service, index) => (
+                  <div
+                    key={service}
+                    className="flex-none w-64 sm:w-72 snap-start"
+                  >
+                    <div className="bg-white dark:bg-stone-800 rounded-2xl shadow-lg overflow-hidden border border-stone-200/50 dark:border-stone-700/50 h-48">
+                      <a href="#contact" className="relative p-4 h-full flex flex-col">
+                        {/* Icon Container */}
+                        <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-teal-100 dark:bg-teal-900/30 border border-teal-200/50 dark:border-teal-700/50 mb-3 flex-shrink-0">
+                          <Icon
+                            icon={serviceIcons[service]}
+                            className="w-5 h-5 text-teal-600 dark:text-teal-400"
+                          />
+                        </div>
 
-              {/* Subtle Border Glow */}
-              <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-teal-500/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm" />
-
-              <a href="#contact" className="relative block p-5 sm:p-8 h-full">
-                {/* Icon Container */}
-                <div className="relative mb-6">
-                  <div className="flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-teal-50 to-teal-100 dark:from-teal-900/30 dark:to-teal-800/30 border border-teal-200/50 dark:border-teal-700/50 group-hover:scale-110 transition-transform duration-300">
-                    <Icon
-                      icon={serviceIcons[service]}
-                      className="w-6 h-6 text-teal-600 dark:text-teal-400 group-hover:text-teal-700 dark:group-hover:text-teal-300 transition-colors duration-300"
-                    />
+                        {/* Content */}
+                        <div className="flex-1 flex flex-col">
+                          <h3 className="text-base font-bold text-stone-900 dark:text-stone-100 leading-tight mb-2">
+                            {service}
+                          </h3>
+                          <p className="text-xs text-stone-600 dark:text-stone-400 leading-relaxed line-clamp-3 flex-1">
+                            {serviceDescriptions[service] ||
+                              "Evidence-based approach tailored to your needs"}
+                          </p>
+                        </div>
+                      </a>
+                    </div>
                   </div>
-                  {/* Pulse Effect */}
-                  <div className="absolute inset-0 rounded-2xl bg-teal-500/20 opacity-0 group-hover:opacity-100 group-hover:animate-ping" />
-                </div>
+                ))}
+              </div>
 
-                {/* Content */}
-                <div className="space-y-4">
-                  <h3 className="text-xl font-bold text-stone-900 dark:text-stone-100 leading-tight group-hover:text-teal-700 dark:group-hover:text-teal-300 transition-colors duration-300">
-                    {service}
-                  </h3>
-                  <p className="text-sm text-stone-600 dark:text-stone-400 leading-relaxed font-medium">
-                    {serviceDescriptions[service] ||
-                      "Evidence-based approach tailored to your needs"}
-                  </p>
-                </div>
-
-                {/* Arrow Indicator */}
-                <div className="absolute bottom-6 right-6 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-2 group-hover:translate-x-0">
-                  <Icon
-                    icon="mdi:arrow-right"
-                    className="w-5 h-5 text-teal-600 dark:text-teal-400"
-                  />
-                </div>
-              </a>
             </div>
-          ))}
+
+            {/* Desktop: Grid Layout */}
+            <div className="hidden lg:grid gap-5 grid-cols-4">
+              {site.services.map((service, index) => (
+                <div
+                  key={service}
+                  className="bg-white dark:bg-stone-800 rounded-2xl shadow-lg overflow-hidden border border-stone-200/50 dark:border-stone-700/50"
+                >
+                  <a href="#contact" className="relative block p-6 h-full">
+                    {/* Icon Container */}
+                    <div className="flex items-center justify-center w-16 h-16 rounded-2xl bg-teal-100 dark:bg-teal-900/30 border border-teal-200/50 dark:border-teal-700/50 mb-6">
+                      <Icon
+                        icon={serviceIcons[service]}
+                        className="w-6 h-6 text-teal-600 dark:text-teal-400"
+                      />
+                    </div>
+
+                    {/* Content */}
+                    <div className="space-y-4">
+                      <h3 className="text-xl font-bold text-stone-900 dark:text-stone-100 leading-tight">
+                        {service}
+                      </h3>
+                      <p className="text-sm text-stone-600 dark:text-stone-400 leading-relaxed font-medium">
+                        {serviceDescriptions[service] ||
+                          "Evidence-based approach tailored to your needs"}
+                      </p>
+                    </div>
+                  </a>
+                </div>
+              ))}
+            </div>
+          </div>
         </ScrollReveal>
 
         {/* Call to Action */}
