@@ -30,76 +30,64 @@ export default function Vision() {
             <div className="mt-6 h-1 w-24 bg-gradient-to-r from-teal-500 to-teal-600 rounded-full mx-auto" />
           </ScrollReveal>
 
-          <div className="grid gap-2 lg:gap-8 lg:grid-cols-3">
+          <div className="grid gap-4 sm:gap-6 lg:gap-8 lg:grid-cols-3">
             {/* East Meets West */}
             <ScrollReveal delay={0.2}>
-              <div className="relative overflow-hidden rounded-3xl bg-white/70 dark:bg-stone-900/70 backdrop-blur-sm border border-stone-200/50 dark:border-stone-700/50 shadow-xl shadow-stone-900/5 dark:shadow-stone-900/20 p-8 h-full">
-                <div className="absolute inset-0 bg-gradient-to-br from-teal-500/5 via-transparent to-stone-500/5" />
-
-                <div className="relative">
-                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-teal-50 to-teal-100 dark:from-teal-900/30 dark:to-teal-800/30 border border-teal-200/50 dark:border-teal-700/50 flex items-center justify-center mb-6">
-                    <Icon
-                      icon="mdi:yin-yang"
-                      className="w-7 h-7 text-teal-600 dark:text-teal-400"
-                    />
-                  </div>
-
-                  <h3 className="text-xl font-bold text-stone-900 dark:text-stone-100 mb-4">
-                    East Meets West
-                  </h3>
-                  <p className="text-stone-600 dark:text-stone-400 leading-relaxed">
-                    A harmonious blend integrating practices like Ayurveda and
-                    Chinese Medicine with modern therapies.
-                  </p>
+              <div className="relative overflow-hidden rounded-2xl bg-white dark:bg-stone-800 border border-stone-200/50 dark:border-stone-700/50 shadow-lg p-4 sm:p-6 lg:p-8 h-full">
+                <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-teal-100 dark:bg-teal-900/30 border border-teal-200/50 dark:border-teal-700/50 flex items-center justify-center mb-4 sm:mb-6">
+                  <Icon
+                    icon="mdi:yin-yang"
+                    className="w-5 h-5 sm:w-7 sm:h-7 text-teal-600 dark:text-teal-400"
+                  />
                 </div>
+
+                <h3 className="text-lg sm:text-xl font-bold text-stone-900 dark:text-stone-100 mb-3 sm:mb-4">
+                  East Meets West
+                </h3>
+                <p className="text-sm sm:text-base text-stone-600 dark:text-stone-400 leading-relaxed">
+                  A harmonious blend integrating practices like Ayurveda and
+                  Chinese Medicine with modern therapies.
+                </p>
               </div>
             </ScrollReveal>
 
             {/* Unique Beings */}
             <ScrollReveal delay={0.3}>
-              <div className="relative overflow-hidden rounded-3xl bg-white/70 dark:bg-stone-900/70 backdrop-blur-sm border border-stone-200/50 dark:border-stone-700/50 shadow-xl shadow-stone-900/5 dark:shadow-stone-900/20 p-8 h-full">
-                <div className="absolute inset-0 bg-gradient-to-br from-teal-500/5 via-transparent to-stone-500/5" />
-
-                <div className="relative">
-                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-teal-50 to-teal-100 dark:from-teal-900/30 dark:to-teal-800/30 border border-teal-200/50 dark:border-teal-700/50 flex items-center justify-center mb-6">
-                    <Icon
-                      icon="mdi:account-heart"
-                      className="w-7 h-7 text-teal-600 dark:text-teal-400"
-                    />
-                  </div>
-
-                  <h3 className="text-xl font-bold text-stone-900 dark:text-stone-100 mb-4">
-                    Unique Beings
-                  </h3>
-                  <p className="text-stone-600 dark:text-stone-400 leading-relaxed">
-                    We recognize clients as unique individuals, not just
-                    cases—honoring your personal healing journey.
-                  </p>
+              <div className="relative overflow-hidden rounded-2xl bg-white dark:bg-stone-800 border border-stone-200/50 dark:border-stone-700/50 shadow-lg p-4 sm:p-6 lg:p-8 h-full">
+                <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-teal-100 dark:bg-teal-900/30 border border-teal-200/50 dark:border-teal-700/50 flex items-center justify-center mb-4 sm:mb-6">
+                  <Icon
+                    icon="mdi:account-heart"
+                    className="w-5 h-5 sm:w-7 sm:h-7 text-teal-600 dark:text-teal-400"
+                  />
                 </div>
+
+                <h3 className="text-lg sm:text-xl font-bold text-stone-900 dark:text-stone-100 mb-3 sm:mb-4">
+                  Unique Beings
+                </h3>
+                <p className="text-sm sm:text-base text-stone-600 dark:text-stone-400 leading-relaxed">
+                  We recognize clients as unique individuals, not just
+                  cases—honoring your personal healing journey.
+                </p>
               </div>
             </ScrollReveal>
 
             {/* Mobile Sanctuary */}
             <ScrollReveal delay={0.4}>
-              <div className="relative overflow-hidden rounded-3xl bg-white/70 dark:bg-stone-900/70 backdrop-blur-sm border border-stone-200/50 dark:border-stone-700/50 shadow-xl shadow-stone-900/5 dark:shadow-stone-900/20 p-8 h-full">
-                <div className="absolute inset-0 bg-gradient-to-br from-teal-500/5 via-transparent to-stone-500/5" />
-
-                <div className="relative">
-                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-teal-50 to-teal-100 dark:from-teal-900/30 dark:to-teal-800/30 border border-teal-200/50 dark:border-teal-700/50 flex items-center justify-center mb-6">
-                    <Icon
-                      icon="mdi:home-variant-outline"
-                      className="w-7 h-7 text-teal-600 dark:text-teal-400"
-                    />
-                  </div>
-
-                  <h3 className="text-xl font-bold text-stone-900 dark:text-stone-100 mb-4">
-                    Mobile Sanctuary
-                  </h3>
-                  <p className="text-stone-600 dark:text-stone-400 leading-relaxed">
-                    Bringing healing directly to where you are—creating sacred
-                    space in your preferred environment.
-                  </p>
+              <div className="relative overflow-hidden rounded-2xl bg-white dark:bg-stone-800 border border-stone-200/50 dark:border-stone-700/50 shadow-lg p-4 sm:p-6 lg:p-8 h-full">
+                <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-teal-100 dark:bg-teal-900/30 border border-teal-200/50 dark:border-teal-700/50 flex items-center justify-center mb-4 sm:mb-6">
+                  <Icon
+                    icon="mdi:home-variant-outline"
+                    className="w-5 h-5 sm:w-7 sm:h-7 text-teal-600 dark:text-teal-400"
+                  />
                 </div>
+
+                <h3 className="text-lg sm:text-xl font-bold text-stone-900 dark:text-stone-100 mb-3 sm:mb-4">
+                  Mobile Sanctuary
+                </h3>
+                <p className="text-sm sm:text-base text-stone-600 dark:text-stone-400 leading-relaxed">
+                  Bringing healing directly to where you are—creating sacred
+                  space in your preferred environment.
+                </p>
               </div>
             </ScrollReveal>
           </div>

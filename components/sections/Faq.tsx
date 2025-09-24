@@ -55,35 +55,30 @@ export default function Faq() {
           <div className="mt-6 h-1 w-24 bg-gradient-to-r from-teal-500 to-teal-600 rounded-full mx-auto" />
         </ScrollReveal>
 
-        <div className="mt-20 grid gap-2 sm:gap-5 md:grid-cols-2">
+        <div className="mt-20 grid gap-4 sm:gap-6 md:grid-cols-2">
           {items.map((item, index) => (
             <ScrollReveal key={item.q} delay={index * 0.1} direction="up">
-              <div className="group relative overflow-hidden rounded-3xl bg-white/70 dark:bg-stone-900/70 backdrop-blur-sm border border-stone-200/50 dark:border-stone-700/50 shadow-xl shadow-stone-900/5 dark:shadow-stone-900/20 hover:shadow-2xl lg:hover:-translate-y-1 transition-all duration-500 p-8 h-full">
-                {/* Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-br from-teal-500/5 via-transparent to-stone-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-                <div className="relative">
-                  <div className="flex items-start gap-4 mb-6">
-                    <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-teal-50 to-teal-100 dark:from-teal-900/30 dark:to-teal-800/30 border border-teal-200/50 dark:border-teal-700/50 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                      <Icon
-                        icon={item.icon}
-                        className="w-6 h-6 text-teal-600 dark:text-teal-400 group-hover:text-teal-700 dark:group-hover:text-teal-300 transition-colors duration-300"
-                      />
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="text-xl font-bold text-stone-900 dark:text-stone-100 mb-3 group-hover:text-teal-700 dark:group-hover:text-teal-300 transition-colors duration-300">
-                        {item.q}
-                      </h3>
-                    </div>
+              <div className="bg-white dark:bg-stone-800 rounded-2xl border border-stone-200/50 dark:border-stone-700/50 shadow-lg p-4 sm:p-6 lg:p-8 h-full">
+                <div className="flex items-start gap-3 sm:gap-4 mb-4 sm:mb-6">
+                  <div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-teal-100 dark:bg-teal-900/30 border border-teal-200/50 dark:border-teal-700/50 flex items-center justify-center">
+                    <Icon
+                      icon={item.icon}
+                      className="w-5 h-5 sm:w-6 sm:h-6 text-teal-600 dark:text-teal-400"
+                    />
                   </div>
+                  <div className="flex-1">
+                    <h3 className="text-lg sm:text-xl font-bold text-stone-900 dark:text-stone-100 mb-2 sm:mb-3">
+                      {item.q}
+                    </h3>
+                  </div>
+                </div>
 
-                  <div className="pl-16">
-                    <div className="relative">
-                      <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-gradient-to-b from-teal-500 to-teal-600 rounded-full" />
-                      <p className="text-stone-600 dark:text-stone-400 leading-relaxed pl-6">
-                        {item.a}
-                      </p>
-                    </div>
+                <div className="pl-10 sm:pl-16">
+                  <div className="relative">
+                    <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-gradient-to-b from-teal-500 to-teal-600 rounded-full" />
+                    <p className="text-sm sm:text-base text-stone-600 dark:text-stone-400 leading-relaxed pl-4 sm:pl-6">
+                      {item.a}
+                    </p>
                   </div>
                 </div>
               </div>

@@ -30,62 +30,59 @@ export default function Approach() {
             <div className="mt-6 h-1 w-24 bg-gradient-to-r from-teal-500 to-teal-600 rounded-full mx-auto" />
           </ScrollReveal>
 
-          <div className="grid gap-8 lg:grid-cols-2 items-center">
+          <div className="grid gap-6 lg:gap-8 lg:grid-cols-2 items-center">
             {/* Content Card */}
             <ScrollReveal delay={0.2}>
-              <div className="relative overflow-hidden rounded-3xl bg-white/70 dark:bg-stone-900/70 backdrop-blur-sm border border-stone-200/50 dark:border-stone-700/50 shadow-xl shadow-stone-900/5 dark:shadow-stone-900/20 p-8">
-                {/* Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-br from-teal-500/5 via-transparent to-stone-500/5" />
-
-                <div className="relative space-y-6">
-                  <div className="flex items-start gap-4">
-                    <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-teal-50 to-teal-100 dark:from-teal-900/30 dark:to-teal-800/30 border border-teal-200/50 dark:border-teal-700/50 flex items-center justify-center">
+              <div className="bg-white dark:bg-stone-800 rounded-2xl border border-stone-200/50 dark:border-stone-700/50 shadow-lg p-4 sm:p-6 lg:p-8">
+                <div className="space-y-4 sm:space-y-6">
+                  <div className="flex items-start gap-3 sm:gap-4">
+                    <div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-teal-100 dark:bg-teal-900/30 border border-teal-200/50 dark:border-teal-700/50 flex items-center justify-center">
                       <Icon
                         icon="mdi:ear-hearing"
-                        className="w-6 h-6 text-teal-600 dark:text-teal-400"
+                        className="w-5 h-5 sm:w-6 sm:h-6 text-teal-600 dark:text-teal-400"
                       />
                     </div>
                     <div>
-                      <h3 className="text-xl font-bold text-stone-900 dark:text-stone-100 mb-2">
+                      <h3 className="text-lg sm:text-xl font-bold text-stone-900 dark:text-stone-100 mb-2">
                         We listen to your body
                       </h3>
-                      <p className="text-stone-600 dark:text-stone-400 leading-relaxed">
+                      <p className="text-sm sm:text-base text-stone-600 dark:text-stone-400 leading-relaxed">
                         At Ashara, we don't silence your symptoms—we understand
                         them as your body's wisdom speaking.
                       </p>
                     </div>
                   </div>
 
-                  <div className="flex items-start gap-4">
-                    <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-teal-50 to-teal-100 dark:from-teal-900/30 dark:to-teal-800/30 border border-teal-200/50 dark:border-teal-700/50 flex items-center justify-center">
+                  <div className="flex items-start gap-3 sm:gap-4">
+                    <div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-teal-100 dark:bg-teal-900/30 border border-teal-200/50 dark:border-teal-700/50 flex items-center justify-center">
                       <Icon
                         icon="mdi:spa"
-                        className="w-6 h-6 text-teal-600 dark:text-teal-400"
+                        className="w-5 h-5 sm:w-6 sm:h-6 text-teal-600 dark:text-teal-400"
                       />
                     </div>
                     <div>
-                      <h3 className="text-xl font-bold text-stone-900 dark:text-stone-100 mb-2">
+                      <h3 className="text-lg sm:text-xl font-bold text-stone-900 dark:text-stone-100 mb-2">
                         Integrative approach
                       </h3>
-                      <p className="text-stone-600 dark:text-stone-400 leading-relaxed">
+                      <p className="text-sm sm:text-base text-stone-600 dark:text-stone-400 leading-relaxed">
                         Blending regenerative therapies, advanced diagnostics,
                         and ancient healing rituals.
                       </p>
                     </div>
                   </div>
 
-                  <div className="flex items-start gap-4">
-                    <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-teal-50 to-teal-100 dark:from-teal-900/30 dark:to-teal-800/30 border border-teal-200/50 dark:border-teal-700/50 flex items-center justify-center">
+                  <div className="flex items-start gap-3 sm:gap-4">
+                    <div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-teal-100 dark:bg-teal-900/30 border border-teal-200/50 dark:border-teal-700/50 flex items-center justify-center">
                       <Icon
                         icon="mdi:home-heart"
-                        className="w-6 h-6 text-teal-600 dark:text-teal-400"
+                        className="w-5 h-5 sm:w-6 sm:h-6 text-teal-600 dark:text-teal-400"
                       />
                     </div>
                     <div>
-                      <h3 className="text-xl font-bold text-stone-900 dark:text-stone-100 mb-2">
+                      <h3 className="text-lg sm:text-xl font-bold text-stone-900 dark:text-stone-100 mb-2">
                         Delivered wherever you are
                       </h3>
-                      <p className="text-stone-600 dark:text-stone-400 leading-relaxed">
+                      <p className="text-sm sm:text-base text-stone-600 dark:text-stone-400 leading-relaxed">
                         Our concierge wellness model brings personalized care to
                         your preferred setting.
                       </p>
@@ -97,31 +94,22 @@ export default function Approach() {
 
             {/* Quote Card */}
             <ScrollReveal delay={0.4}>
-              <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-teal-50 to-teal-100 dark:from-teal-900/30 dark:to-teal-800/30 border border-teal-200/50 dark:border-teal-700/50 shadow-xl shadow-teal-500/10 p-8">
-                {/* <div className="absolute top-6 left-6 w-12 h-12 rounded-full bg-teal-500/20 flex items-center justify-center">
-                  <Icon
-                    icon="mdi:format-quote-open"
-                    className="w-6 h-6 text-teal-600 dark:text-teal-400"
-                  />
-                </div> */}
+              <div className="bg-gradient-to-br from-teal-50 to-teal-100 dark:from-teal-900/30 dark:to-teal-800/30 border border-teal-200/50 dark:border-teal-700/50 rounded-2xl shadow-lg p-4 sm:p-6 lg:p-8">
+                <blockquote className="text-lg sm:text-xl font-medium text-stone-900 dark:text-stone-100 leading-relaxed italic mb-4 sm:mb-6">
+                  "Whole-body restoration—rooted in precision, guided by
+                  presence."
+                </blockquote>
 
-                <div className="">
-                  <blockquote className="text-xl font-medium text-stone-900 dark:text-stone-100 leading-relaxed italic mb-6">
-                    "Whole-body restoration—rooted in precision, guided by
-                    presence."
-                  </blockquote>
-
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-teal-500 to-teal-600 flex items-center justify-center">
-                      <span className="text-white font-bold text-sm">A</span>
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-teal-500 to-teal-600 flex items-center justify-center">
+                    <span className="text-white font-bold text-xs sm:text-sm">A</span>
+                  </div>
+                  <div>
+                    <div className="font-semibold text-stone-900 dark:text-stone-100 text-sm sm:text-base">
+                      Ashara Health
                     </div>
-                    <div>
-                      <div className="font-semibold text-stone-900 dark:text-stone-100">
-                        Ashara Health
-                      </div>
-                      <div className="text-sm text-stone-600 dark:text-stone-400">
-                        Naturopathic Medicine
-                      </div>
+                    <div className="text-xs sm:text-sm text-stone-600 dark:text-stone-400">
+                      Naturopathic Medicine
                     </div>
                   </div>
                 </div>
