@@ -120,26 +120,44 @@ export default function Conditions() {
               {site.conditions.map((condition, index) => (
                 <div
                   key={condition}
-                  className="bg-white/90 dark:bg-stone-900/90 backdrop-blur-sm rounded-2xl shadow-lg overflow-hidden border border-stone-200/50 dark:border-stone-700/50"
+                  className="group relative overflow-hidden rounded-2xl bg-white/70 dark:bg-stone-900/70 backdrop-blur-sm border border-stone-200/50 dark:border-stone-700/50 shadow-xl shadow-stone-900/5 dark:shadow-stone-900/20 hover:shadow-2xl hover:shadow-stone-900/10 dark:hover:shadow-stone-900/30 transition-all duration-500"
                 >
+                  {/* Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-teal-500/5 via-transparent to-stone-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                  {/* Subtle Border Glow */}
+                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-teal-500/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm" />
+
                   <a href="#contact" className="relative block p-6 h-64">
                     {/* Icon Container */}
-                    <div className="flex items-center justify-center w-14 h-14 rounded-2xl bg-teal-100 dark:bg-teal-900/30 border border-teal-200/50 dark:border-teal-700/50 mb-6">
-                      <Icon
-                        icon={conditionIcons[condition]}
-                        className="w-7 h-7 text-teal-600 dark:text-teal-400"
-                      />
+                    <div className="relative mb-6">
+                      <div className="flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-teal-50 to-teal-100 dark:from-teal-900/30 dark:to-teal-800/30 border border-teal-200/50 dark:border-teal-700/50 group-hover:scale-110 transition-transform duration-300">
+                        <Icon
+                          icon={conditionIcons[condition]}
+                          className="w-7 h-7 text-teal-600 dark:text-teal-400 group-hover:text-teal-700 dark:group-hover:text-teal-300 transition-colors duration-300"
+                        />
+                      </div>
+                      {/* Pulse Effect */}
+                      <div className="absolute inset-0 rounded-2xl bg-teal-500/20 opacity-0 group-hover:opacity-100 group-hover:animate-ping" />
                     </div>
 
                     {/* Content */}
                     <div className="space-y-3">
-                      <h3 className="text-xl font-bold text-stone-900 dark:text-stone-100 leading-tight">
+                      <h3 className="text-xl font-bold text-stone-900 dark:text-stone-100 leading-tight group-hover:text-teal-700 dark:group-hover:text-teal-300 transition-colors duration-300">
                         {condition}
                       </h3>
                       <p className="text-sm text-stone-600 dark:text-stone-400 leading-relaxed font-medium">
                         {conditionDescriptions[condition] ||
                           "Personalized treatment approach"}
                       </p>
+                    </div>
+
+                    {/* Arrow Indicator */}
+                    <div className="absolute bottom-6 right-6 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-2 group-hover:translate-x-0">
+                      <Icon
+                        icon="mdi:arrow-right"
+                        className="w-5 h-5 text-teal-600 dark:text-teal-400"
+                      />
                     </div>
                   </a>
                 </div>

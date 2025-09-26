@@ -228,11 +228,11 @@ export default function Memberships() {
                 return (
                   <div
                     key={m.name}
-                    className={`relative overflow-hidden rounded-2xl ${
+                    className={`group relative overflow-hidden rounded-2xl ${
                       details?.popular
-                        ? "bg-white dark:bg-stone-800 border-2 border-teal-500 shadow-lg shadow-teal-500/20"
-                        : "bg-white dark:bg-stone-800 border border-stone-200/50 dark:border-stone-700/50 shadow-lg"
-                    }`}
+                        ? "bg-gradient-to-br from-teal-50/80 to-teal-100/80 dark:from-teal-900/40 dark:to-teal-800/40 border-2 border-teal-200 dark:border-teal-700 shadow-xl shadow-teal-500/10"
+                        : "bg-white/70 dark:bg-stone-900/70 border border-stone-200/50 dark:border-stone-700/50 shadow-xl shadow-stone-900/5 dark:shadow-stone-900/20"
+                    } backdrop-blur-sm hover:shadow-2xl transition-all duration-500`}
                   >
                     {details?.popular && (
                       <div className="absolute top-4 right-4 z-10">
@@ -242,13 +242,16 @@ export default function Memberships() {
                       </div>
                     )}
 
+                    {/* Gradient Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-teal-500/5 via-transparent to-stone-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
                     <div className="relative p-6">
                       {/* Header */}
                       <div className="text-center mb-6">
-                        <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-teal-100 dark:bg-teal-900/30 border border-teal-200/50 dark:border-teal-700/50">
+                        <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-teal-50 to-teal-100 dark:from-teal-900/30 dark:to-teal-800/30 border border-teal-200/50 dark:border-teal-700/50 group-hover:scale-110 transition-transform duration-300">
                           <Icon
                             icon={details?.icon || "mdi:medical-bag"}
-                            className="h-8 w-8 text-teal-600 dark:text-teal-400"
+                            className="h-8 w-8 text-teal-600 dark:text-teal-400 group-hover:text-teal-700 dark:group-hover:text-teal-300 transition-colors duration-300"
                           />
                         </div>
                         <h3 className="text-2xl font-bold text-stone-900 dark:text-stone-100 mb-2">
@@ -262,7 +265,7 @@ export default function Memberships() {
                       {/* Price */}
                       <div className="text-center mb-6">
                         <div className="flex items-baseline justify-center mb-2">
-                          <span className="text-4xl font-bold text-stone-900 dark:text-stone-100">
+                          <span className="text-5xl font-bold bg-gradient-to-r from-stone-900 to-stone-700 dark:from-stone-100 dark:to-stone-300 bg-clip-text text-transparent">
                             {details?.price || m.price}
                           </span>
                         </div>
@@ -272,7 +275,7 @@ export default function Memberships() {
                       </div>
 
                       {/* Features */}
-                      <ul className="space-y-3 mb-6">
+                      <ul className="space-y-4 mb-8">
                         {details?.features?.map((feature, featureIndex) => (
                           <li key={featureIndex} className="flex items-start">
                             <div className="flex-shrink-0 w-5 h-5 rounded-full bg-gradient-to-r from-teal-500 to-teal-600 flex items-center justify-center mt-0.5">
@@ -292,7 +295,7 @@ export default function Memberships() {
                       <div>
                         <a href="#contact" className="block">
                           <Button
-                            className={`w-full rounded-xl py-3 font-semibold ${
+                            className={`w-full rounded-xl py-3 font-semibold transition-all duration-300 ${
                               details?.popular
                                 ? "bg-gradient-to-r from-teal-500 to-teal-600 hover:from-teal-600 hover:to-teal-700 text-white shadow-lg hover:shadow-xl"
                                 : "bg-stone-100 hover:bg-stone-200 text-stone-900 dark:bg-stone-800 dark:hover:bg-stone-700 dark:text-stone-100"
